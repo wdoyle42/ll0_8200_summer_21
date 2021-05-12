@@ -8,7 +8,7 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 *Note: When new async videos are available, they will be linked under the appropriate week. *
 
-1. Welcome to Data Science: Tools of the Trade 
+1. Welcome to Data Science: Tools of the Trade [Lecture Notes]()
 
 2. Analyzing Data: Conditional Means [Lecture Notes]()
 
