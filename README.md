@@ -30,37 +30,37 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 ### Assignments and Due Dates
 
-1
+Assignment 1, Due Midnight May 18
 
-2
+Assignment 2, Due Midnight May 25
 
-3
+Assignment 3, Due Midnight June 1
 
-4
+Assignment 4, Due Midnight June 8
 
-5
+Assignment 5, Due Midnight June 22
 
-6
+Assignment 6, Due Midnight Jun 29
 
-7
+Assignment 7, Due Midnight July 13
 
-8
+Assignment 8, Due Midnight July 27
 
-9
+Assignment 9, Due Midnight August 3
 
-10
+Assignment 10, Due Midnight August 10
 
 ### Final Project Information
 
-Progress Report 1
+Progress Report 1: Due Midnight, 
 
-Progress Report 2
+Progress Report 2: Due Midnight, 
 
-Progress Report 3
+Progress Report 3: Due Midnight, 
 
-Progress Report 4
+Progress Report 4: Due Midnight, 
 
-Final Project
+Final Project: 
 
 Rubric for Final Project
 
