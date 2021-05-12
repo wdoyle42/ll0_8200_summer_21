@@ -1,9 +1,7 @@
 ---
 title: "Conditional Means"
 output:
-  word_document: default
   html_document: default
-always_allow_html: yes
 ---
 
 # Analyzing Data: Conditional Means
@@ -193,39 +191,6 @@ rmse_control_degree_region
 ```
 
 This is a much better RMSE than what we started with. Is it good enough? Who knows? Again this depends on the context. But we can imagine the high school senior would have much more accurate information with which to make their decision.
-
-```{r}
-df%>%
-  group_by(stabbr)%>%
-  summarize(mean_debt_state=mean(grad_debt_mdn,na.rm=TRUE))%>%
-  arrange(mean_debt_state)%>%
-  ggplot(aes(x=fct_reorder(as_factor(stabbr),mean_debt_state),
-                           y=mean_debt_state,fill=stabbr))+
-  geom_bar(stat="identity")+
-  coord_flip()+
-  theme(legend.position="none")
-
-```
-
-```{r}
-df<-df%>%
-  group_by(stabbr,control,preddeg)%>%
-  mutate(mean_debt_state=mean(grad_debt_mdn,na.rm=TRUE))%>%
-  ungroup()
-```
-
-```{r}
-rmse_state<-df%>%rmse(grad_debt_mdn,mean_debt_state)
-rmse_state
-```
-
-
-```{r}
-df<-df%>%
-  select(-mean_debt_state)
-```
-
-
 
 ## Applications of the Conditional Mean
 
