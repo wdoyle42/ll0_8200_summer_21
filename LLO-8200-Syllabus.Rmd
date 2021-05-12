@@ -223,7 +223,7 @@ Problem Set 7 due 24 hours before Topic 9 live sessions begin
 
 Synchronous Session: Classification, classifying behavior via text analysis: random acts of pizza
 
-##Topic 9. Presenting Data: Plots and Tables for Classification
+## Topic 9. Presenting Data: Plots and Tables for Classification
 
 Wednesday, July 28, 2021
 
