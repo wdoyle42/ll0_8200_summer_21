@@ -12,7 +12,7 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 1. Welcome to Data Science: Tools of the Trade [Lecture Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-intro.Rmd)
 
-2. Analyzing Data: Conditional Means [Lecture Notes]() and [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/sc_debt.Rds)
+2. Analyzing Data: Conditional Means [Lecture Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/02-conditional_means.Rmd) and [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/sc_debt.Rds)
 
   [Updated Async Video Part 1](https://youtu.be/NQtvxw9CNCU)
   
