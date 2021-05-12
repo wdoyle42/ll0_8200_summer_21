@@ -12,9 +12,9 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 2. Analyzing Data: Conditional Means
 
-  Updated Async Video Part 1
+  [Updated Async Video Part 1](https://youtu.be/NQtvxw9CNCU)
   
-  Update Async Video Part 2
+  [Update Async Video Part 2](https://youtu.be/K3f-5fb-lL0)
 
 3. Presenting Data: Descriptive Plots
 
