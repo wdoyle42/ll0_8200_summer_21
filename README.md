@@ -6,26 +6,25 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 ### Code for Each Topic
 
-1
+1. Welcome to Data Science: Tools of the Trade
 
-2
+2. Analyzing Data: Conditional Means
 
-3
+3. Presenting Data: Descriptive Plots
 
-4
+4. Getting Data: Flat Files and “Tidy Data”
 
-5
+5. Analyzing Data: Linear Regression
 
-6
+6. Presenting Data: Scatterplots
 
-7
+7. Getting Data: Web Sources
 
-8
+8. Analyzing Data: Classification
 
-9
+9. Presenting Data: Plots and Tables for Classification
 
-10
-
+10. Cross Validation
 
 ### Assignments and Due Dates
 
