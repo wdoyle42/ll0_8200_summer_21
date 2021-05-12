@@ -1,4 +1,4 @@
-## LLO 8200, Introduction to Data Science
+# LLO 8200, Introduction to Data Science
 
 ### Syllabus
 
