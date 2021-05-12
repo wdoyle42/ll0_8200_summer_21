@@ -8,11 +8,11 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 *Note: When new async videos are available, they will be linked under the appropriate week. *
 
-*To access lecture notes use ctrl+click on a mac or right click on a pc, then click "save link as" and save to the class directory on your computer.*
+*To access lecture notes and/or data sets use ctrl+click on a mac or right click on a pc, then click "save link as" and save to the class directory on your computer.*
 
 1. Welcome to Data Science: Tools of the Trade [Lecture Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-intro.Rmd)
 
-2. Analyzing Data: Conditional Means [Lecture Notes]()
+2. Analyzing Data: Conditional Means [Lecture Notes]() and [Data Set]()
 
   [Updated Async Video Part 1](https://youtu.be/NQtvxw9CNCU)
   
@@ -36,7 +36,7 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 ### Assignments and Due Dates
 
-Assignment 1, Due Midnight May 18
+[Assignment 1, Due Midnight May 18](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-assignment.Rmd)
 
 Assignment 2, Due Midnight May 25
 
