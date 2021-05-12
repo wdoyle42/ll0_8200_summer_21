@@ -68,7 +68,7 @@ The other text is Nate Silver's Signal and the Noise:
 Silver, N. (2012). The signal and the noise: Why so many predictions fail—but some don’t. New York, NY: Penguin.
 
 ## Software
-
+ 
 We will use only free, open-source software in this course.
 
 We will use R, an open-source data analytic platform for all analysis. R appears to be the most widely used data analysis software in data science. We will utilize RStudio as our integrated development environment (IDE) for R.
@@ -177,12 +177,20 @@ Synchronous Session: Using linear regression, training, and testing models
 
 Wednesday, June 23, 2021
 
-Resources
+*Resources*
+
 Wickham: Data Visualization, Graphics for Communication Tufte, Visual Display Chapters 4 and 5
+
 Tufte, Envisioning Information, Chapter 2
-Lecture Notes
+
+*Lecture Notes*
+
 Chapter 6, Scatterplots 06-scatterplots.Rmd Problem Sets
-Problem Set 5 due 24 hours before Topic 7 live session Final Project
+
+Problem Set 5 due 24 hours before Topic 7 live session 
+
+*Final Project*
+
 Second progress report due 24 hours before live session
 
 Synchronous Session: Presenting data via scatterplots
@@ -195,10 +203,19 @@ Wednesday, July 7, 2021
 
 Resources
 Rvest Vignette: https://cran.r- project.org/web/packages/rvest/vignettes/selectorgadget.html
+
 Reed College rvest Introduction
+
 rvest Tutorial
+
 Lecture Notes
-Chapter 7, Web Scraping and APIs, 07-webscrape.Rmd Problem Sets
+
+Chapter 7, Web Scraping and APIs,
+
+07-webscrape.Rmd
+
+Problem Sets
+
 Problem Set 6 due 24 hours before Topic 8 live session Synchronous Session: Accessing data from the web
 
 
