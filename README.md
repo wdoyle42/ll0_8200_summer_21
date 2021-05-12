@@ -4,9 +4,11 @@
 
 Please find the syllabus (updated frequently) [at this link](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/LLO-8200-Syllabus.html)
 
-### Code for Each Topic
+### Code for Each Topic 
 
-1. Welcome to Data Science: Tools of the Trade
+*Note: When new async videos are available, they will be linked under the appropriate week. *
+
+1. Welcome to Data Science: Tools of the Trade 
 
 2. Analyzing Data: Conditional Means
 
