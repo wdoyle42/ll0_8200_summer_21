@@ -36,6 +36,8 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 ### Assignments and Due Dates
 
+*To access assignments use ctrl+click on a mac or right click on a pc, then click "save link as" and save to the class directory on your computer.*
+
 [Assignment 1, Due Midnight May 18](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-assignment.Rmd)
 
 Assignment 2, Due Midnight May 25
