@@ -6,11 +6,64 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 ### Code for Each Topic
 
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
 
 
 ### Assignments and Due Dates
 
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
 ### Final Project Information
+
+Progress Report 1
+
+Progress Report 2
+
+Progress Report 3
+
+Progress Report 4
+
+Final Project
+
+Rubric for Final Project
+
+Example Final Project
 
 
 
