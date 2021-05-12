@@ -6,7 +6,7 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 ### Code for Each Topic 
 
-*Note: When new async videos are available, they will be linked under the appropriate week. *
+*Note: When new async videos are available, they will be linked under the appropriate week.*
 
 *To access lecture notes and/or data sets use ctrl+click on a mac or right click on a pc, then click "save link as" and save to the class directory on your computer.*
 
