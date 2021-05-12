@@ -10,7 +10,7 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 1. Welcome to Data Science: Tools of the Trade 
 
-2. Analyzing Data: Conditional Means
+2. Analyzing Data: Conditional Means [Lecture Notes]()
 
   [Updated Async Video Part 1](https://youtu.be/NQtvxw9CNCU)
   
