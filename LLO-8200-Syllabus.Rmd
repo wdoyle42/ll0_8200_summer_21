@@ -1,0 +1,252 @@
+---
+title: "LLO 8200 Syllabus"
+author: "Will Doyle"
+date: "5/12/2021"
+output: html_document
+---
+
+## Introduction to Data Science
+
+We have entered a time in which vast amounts of data are more widely available than ever before. At the same time, a new set of tools has been developed to analyze this data and provide decision makers with information to help them accomplish their goals. Those who engage with data and interpret it for organizational leaders have taken to calling themselves data scientists, and their craft data science. Other terms that have come into vogue are big data, predictive analytics, and data mining. These can seem to be mysterious domains. The point of this class is to demystify much of this endeavor for individuals who will be organizational leaders.
+The class is structured around developing students' skills in three areas: getting data, analyzing data to make predictions, and presenting the results of analysis. For each area, the subtopics are as follows:
+
+## Getting Data Topics
+
+- Tools of the trade: R and RStudio
+- Working with pre-processed data and flat files
+- Getting data from the web: webscraping, using forms, using application programming interfaces
+- Using databases
+
+## Analyzing Data Topics
+
+- Descriptives and conditional means
+- Regression
+- Supervised learning: classification
+- Unsupervised learning: K-means and nearest neighbors clustering
+- Cross validation
+
+## Presenting Data Analysis Topics
+- Descriptives: histograms, density plots, bar plots, dot plots
+- Scatterplots
+- Lattice graphics and small multiples
+- Interactive graphics
+- Communicating results effectively
+
+## Evaluation
+Students will be evaluated based on two areas: weekly problem sets and the final project.
+
+- Problem sets 65%: Each week students will be assigned a problem set to complete. The problem sets will be due 24 hours prior to the following week’s live session. For example, the Week 1 problem set will be due 24 hours prior to the Week 2 live session. Each problem set will be graded on a 100-point scale. Your lowest grade will be dropped.
+
+There will be 13 assigned problem sets, with each problem set worth 100 points. The lowest grade will be dropped, meaning that you will be graded on 12 of these problem sets. The grading standards will be as follows:
+
+50 = turned in problem set, did not attempt most of the problems
+
+75 = turned in problem set, attempted most of the problems
+
+100 = turned in problem set, attempted all of the problems
+
+Note that your grade on problem sets does not depend on your being correct on all problems but simply making a serious attempt to answer all of the problems.
+
+- Final Project 35%: During the course of the semester you will work on a final assignment utilizing your skills as a data analyst.
+– Progress reports (4 total) 17.5%: 100 points each
+– Final Product 17.5%: 100 points
+
+There will be four progress reports for the final project, each worth 100 points. The progress reports will be due 24 hours prior to the week’s live session. No late progress reports will be accepted. Students will be given the steps to complete each progress report.
+
+There will be a final product asking the student to complete a data analysis. No late final products will be accepted. A rubric containing the relevant grading information for this final product will be supplied.
+
+Texts
+
+## Required Texts
+
+We will have two texts for the course. The first is Hadley Wickham's book, R for Data Science:
+
+Wickham, H., & Grolemund, G. (2016). R for data science: Import, tidy, transform, visualize, and model data. San Francisco, CA: O'Reilly Media, Inc.
+
+The other text is Nate Silver's Signal and the Noise:
+
+Silver, N. (2012). The signal and the noise: Why so many predictions fail—but some don’t. New York, NY: Penguin.
+
+## Software
+
+We will use only free, open-source software in this course.
+
+We will use R, an open-source data analytic platform for all analysis. R appears to be the most widely used data analysis software in data science. We will utilize RStudio as our integrated development environment (IDE) for R.
+
+## Honor Code Statement
+
+All assignments for this class, including weekly problem sets and the final project, are to be conducted under the obligations set out in Vanderbilt's Honor Code. Please click here to review the Honor Code.
+There will be two quite different standards for completing the problem sets and the final project.
+Problem sets. You may collaborate with anyone, and you may utilize any resource you wish to complete these problem sets.
+
+Final Project. All of the work on the final assignment must be your own. Anyone's work that you reference should be cited as usual. All data that you do not personally collect must be cited, as with any other resource.
+
+If you have any questions at all about the Honor Code or how it will be applied, ask me right away.
+
+*Schedule*
+
+
+## Week 1. Welcome to Data Science: Tools of the Trade
+
+Wednesday, May 12, 2021
+
+*Resources*
+
+Wickham: Introduction; Explore: Introduction; Workflow: Basics; Workflow: Projects Silver, Chapters 1–4
+
+R Introduction and Resources
+
+Download R
+
+R Basics
+
+Download RStudio You want the Desktop version, free license
+
+RStudio Introduction and Resources
+
+*Lesson Notes*
+
+Chapter 1, Introduction: 01-intro.Rmd
+
+Synchronous Session: R basics, "verbs" of data wrangling
+
+## Week 2. Analyzing Data: Conditional Means
+
+Wednesday, May 19, 2021
+
+Resources
+
+Wickham: Data Transformation
+
+
+Silver, Chapters 5–9, 12–13
+
+Lecture Notes
+
+Chapter 2, Conditional Means: 02-conditional_means.Rmd Problem Sets
+
+Problem Set 1 due 24 hours before Week 3 live session 
+
+Synchronous Session: Conditional means
+
+## Topic 3. Presenting Data: Descriptive Plots
+
+Wednesday, May 26, 2021
+
+Resources
+
+Wickham: Data Visualization
+
+Data Transformation
+
+Cookbook for R:Bar and Line Graphs Cookbook for R: Plotting Distributions Lecture Notes
+
+Chapter 3, Plotting Distributions and Conditional Means: 03-plot_means.Rmd Problem Sets
+
+Problem Set 2 due 24 hours before Topic 4 live session
+
+Final Project
+
+First progress report due 24 hours before live session
+Synchronous Session: Presenting results in graphical format: bar plots, density plots, dot plots, histograms
+
+## Topic 4. Getting Data: Flat Files and "Tidy Data"
+
+Wednesday, June 2, 2021
+
+Resources
+Wickham: Data Import; Tidy Data Lecture Notes
+Chapter 4, Flat Data 04-flat_data.Rmd Problem Sets
+Problem Set 3 due 24 hours before Topic 5 live session Synchronous Session: Working with various data formats
+
+
+## Topic 5. Analyzing Data: Linear Regression
+
+Wednesday, June 9, 2021
+
+Wednesday, June 16, 2021
+
+Resources
+Wickham: Model: Introduction; Model Basics; Model Building Lecture Notes
+Chapter 5, Linear Regression 05-regression.Rmd
+Problem Sets
+Problem Set 4 due 24 hours before Topic 6 live session
+Synchronous Session: Using linear regression, training, and testing models
+
+## Topic 6. Presenting Data: Scatterplots
+
+Wednesday, June 23, 2021
+
+Resources
+Wickham: Data Visualization, Graphics for Communication Tufte, Visual Display Chapters 4 and 5
+Tufte, Envisioning Information, Chapter 2
+Lecture Notes
+Chapter 6, Scatterplots 06-scatterplots.Rmd Problem Sets
+Problem Set 5 due 24 hours before Topic 7 live session Final Project
+Second progress report due 24 hours before live session
+
+Synchronous Session: Presenting data via scatterplots
+
+## Topic 7. Getting Data: Web Sources
+
+Wednesday, June 30, 2021
+
+Wednesday, July 7, 2021
+
+Resources
+Rvest Vignette: https://cran.r- project.org/web/packages/rvest/vignettes/selectorgadget.html
+Reed College rvest Introduction
+rvest Tutorial
+Lecture Notes
+Chapter 7, Web Scraping and APIs, 07-webscrape.Rmd Problem Sets
+Problem Set 6 due 24 hours before Topic 8 live session Synchronous Session: Accessing data from the web
+
+
+## Topic 8. Analyzing Data: Classification
+
+Wednesday, July 14, 2021
+
+Wednesday, July 21, 2021
+
+Resources
+James, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). An introduction to statistical
+learning (Vol. 6). New York, NY: Springer. Chapter 4 , Chapter 4 Lab R Code
+Althoff, T., Danescu-Niculescu-Mizil, C., & Jurafsky, D. (2014, May). How to ask for a favor: A case study on the success of altruistic requests. In ICWSM. Available at http://www.aaai.org/ocs/index.php/ICWSM/ICWSM14/paper/download/8106/8101
+Lecture Notes
+
+Chapter 8, Classification, 
+
+08-classification.Rmd
+Problem Sets
+
+Problem Set 7 due 24 hours before Topic 9 live sessions begin
+
+Synchronous Session: Classification, classifying behavior via text analysis: random acts of pizza
+
+##Topic 9. Presenting Data: Plots and Tables for Classification
+
+Wednesday, July 28, 2021
+
+Resources
+Problem Sets
+Problem Set 8 due 24 hours before Topic 10 live session
+
+Final Project
+Third progress report due 24 hours before live session
+Lecture Notes
+Chapter 9, Plots and Tables for Classification 09-plotting_classification.Rmd Synchronous Session: Presenting data, plots, and tables for classification
+
+## Week 10. Cross Validation
+
+Wednesday, August 4, 2021
+
+Wednesday, August 11, 2021
+
+*Resources*
+Wickham Many Models
+Problem Sets
+Problem Set 9 due 24 hours before Week 11 live session Lecture Notes
+Chapter 10, cross_validation.Rmd
+Synchronous Session: Cross validating results
+
+
