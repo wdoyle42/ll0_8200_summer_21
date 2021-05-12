@@ -33,11 +33,12 @@ The class is structured around developing students' skills in three areas: getti
 - Communicating results effectively
 
 ## Evaluation
+
 Students will be evaluated based on two areas: weekly problem sets and the final project.
 
 - Problem sets 65%: Each week students will be assigned a problem set to complete. The problem sets will be due 24 hours prior to the following week’s live session. For example, the Week 1 problem set will be due 24 hours prior to the Week 2 live session. Each problem set will be graded on a 100-point scale. Your lowest grade will be dropped.
 
-There will be 13 assigned problem sets, with each problem set worth 100 points. The lowest grade will be dropped, meaning that you will be graded on 12 of these problem sets. The grading standards will be as follows:
+There will be 10 assigned problem sets, with each problem set worth 100 points. The lowest grade will be dropped, meaning that you will be graded on 9 of these problem sets. The grading standards will be as follows:
 
 50 = turned in problem set, did not attempt most of the problems
 
@@ -51,7 +52,7 @@ Note that your grade on problem sets does not depend on your being correct on al
 – Progress reports (4 total) 17.5%: 100 points each
 – Final Product 17.5%: 100 points
 
-There will be four progress reports for the final project, each worth 100 points. The progress reports will be due 24 hours prior to the week’s live session. No late progress reports will be accepted. Students will be given the steps to complete each progress report.
+There will be four progress reports for the final project, each worth 100 points. The progress reports will be due 24 hours prior to the week’s live session.  Students will be given the steps to complete each progress report.
 
 There will be a final product asking the student to complete a data analysis. No late final products will be accepted. A rubric containing the relevant grading information for this final product will be supplied.
 
@@ -75,8 +76,10 @@ We will use R, an open-source data analytic platform for all analysis. R appears
 
 ## Honor Code Statement
 
-All assignments for this class, including weekly problem sets and the final project, are to be conducted under the obligations set out in Vanderbilt's Honor Code. Please click here to review the Honor Code.
+All assignments for this class, including weekly problem sets and the final project, are to be conducted under the obligations set out in Vanderbilt's Honor Code. [Please click here to review the Honor Code](https://www.vanderbilt.edu/student_handbook/the-honor-system/).
+
 There will be two quite different standards for completing the problem sets and the final project.
+
 Problem sets. You may collaborate with anyone, and you may utilize any resource you wish to complete these problem sets.
 
 Final Project. All of the work on the final assignment must be your own. Anyone's work that you reference should be cited as usual. All data that you do not personally collect must be cited, as with any other resource.
@@ -85,14 +88,15 @@ If you have any questions at all about the Honor Code or how it will be applied,
 
 *Schedule*
 
-
 ## Week 1. Welcome to Data Science: Tools of the Trade
 
 Wednesday, May 12, 2021
 
 *Resources*
 
-Wickham: Introduction; Explore: Introduction; Workflow: Basics; Workflow: Projects Silver, Chapters 1–4
+Wickham: [Introduction](https://r4ds.had.co.nz/introduction.html); [Explore: Introduction;](https://r4ds.had.co.nz/explore-intro.html) [Workflow: Basics](https://r4ds.had.co.nz/workflow-basics.html); [Workflow: Projects](https://r4ds.had.co.nz/workflow-projects.html) 
+
+Silver, Chapters 1–4
 
 R Introduction and Resources
 
@@ -106,7 +110,7 @@ RStudio Introduction and Resources
 
 *Lesson Notes*
 
-Chapter 1, Introduction: 01-intro.Rmd
+Chapter 1, Introduction: [01-intro.Rmd](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-intro.Rmd)
 
 Synchronous Session: R basics, "verbs" of data wrangling
 
@@ -116,16 +120,17 @@ Wednesday, May 19, 2021
 
 Resources
 
-Wickham: Data Transformation
-
+Wickham: [Explore:Data Transformation](https://r4ds.had.co.nz/transform.html)
 
 Silver, Chapters 5–9, 12–13
 
-Lecture Notes
+*Lecture Notes*
 
-Chapter 2, Conditional Means: 02-conditional_means.Rmd Problem Sets
+Chapter 2, Conditional Means: [02-conditional_means.Rmd](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/02-conditional_means.Rmd) 
 
-Problem Set 1 due 24 hours before Week 3 live session 
+Problem Sets
+
+[Problem Set 1](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-assignment.Rmd) due 24 hours before Week 3 live session 
 
 Synchronous Session: Conditional means
 
@@ -135,11 +140,11 @@ Wednesday, May 26, 2021
 
 Resources
 
-Wickham: Data Visualization
+Wickham: [Data Visualization](https://r4ds.had.co.nz/data-visualisation.html); [Data Transformation](https://r4ds.had.co.nz/transform.html)
 
-Data Transformation
+Cookbook for R:Bar and Line Graphs Cookbook for R: Plotting Distributions 
 
-Cookbook for R:Bar and Line Graphs Cookbook for R: Plotting Distributions Lecture Notes
+Lecture Notes
 
 Chapter 3, Plotting Distributions and Conditional Means: 03-plot_means.Rmd Problem Sets
 
