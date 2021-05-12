@@ -12,6 +12,10 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 2. Analyzing Data: Conditional Means
 
+  Updated Async Video Part 1
+  
+  Update Async Video Part 2
+
 3. Presenting Data: Descriptive Plots
 
 4. Getting Data: Flat Files and “Tidy Data”
@@ -52,13 +56,13 @@ Assignment 10, Due Midnight August 10
 
 ### Final Project Information
 
-Progress Report 1: Due Midnight, 
+Progress Report 1: Due Midnight, May 25
 
-Progress Report 2: Due Midnight, 
+Progress Report 2: Due Midnight, June 22
 
-Progress Report 3: Due Midnight, 
+Progress Report 3: Due Midnight, July 13
 
-Progress Report 4: Due Midnight, 
+Progress Report 4: Due Midnight, July 27
 
 Final Project: 
 
