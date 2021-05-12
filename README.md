@@ -8,7 +8,9 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 *Note: When new async videos are available, they will be linked under the appropriate week. *
 
-1. Welcome to Data Science: Tools of the Trade [Lecture Notes]()
+*To access lecture notes use ctrl+click on a mac or right click on a pc, then click "save link as" and save to the class directory on your computer.*
+
+1. Welcome to Data Science: Tools of the Trade [Lecture Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-intro.Rmd)
 
 2. Analyzing Data: Conditional Means [Lecture Notes]()
 
