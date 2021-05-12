@@ -8,9 +8,9 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 *To access lecture notes and/or data sets use ctrl+click on a mac or right click on a pc, then click "save link as" and save to the class directory on your computer.*
 
-1. Welcome to Data Science: Tools of the Trade [Lecture Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-intro.Rmd)
+1\. Welcome to Data Science: Tools of the Trade [Lecture Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-intro.Rmd)  
 
-2. Analyzing Data: Conditional Means [Lecture Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/02-conditional_means.Rmd) and [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/sc_debt.Rds)
+2\. Analyzing Data: Conditional Means [Lecture Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/02-conditional_means.Rmd) and [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/sc_debt.Rds)  
 
 [Updated Async Video Part 1](https://youtu.be/NQtvxw9CNCU)
 
@@ -18,21 +18,21 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 <!---->
 
-3. Presenting Data: Descriptive Plots
+3\. Presenting Data: Descriptive Plots  
 
-4. Getting Data: Flat Files and “Tidy Data”
+4\. Getting Data: Flat Files and “Tidy Data”  
 
-5. Analyzing Data: Linear Regression
+5\. Analyzing Data: Linear Regression  
 
-6. Presenting Data: Scatterplots
+6\. Presenting Data: Scatterplots  
 
-7. Getting Data: Web Sources
+7\. Getting Data: Web Sources  
 
-8. Analyzing Data: Classification
+8\. Analyzing Data: Classification  
 
-9. Presenting Data: Plots and Tables for Classification
+9\. Presenting Data: Plots and Tables for Classification  
 
-10. Cross Validation
+10\. Cross Validation  
 
 ### Assignments and Due Dates
 
