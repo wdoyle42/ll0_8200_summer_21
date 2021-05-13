@@ -94,15 +94,11 @@ Wickham: [Introduction](https://r4ds.had.co.nz/introduction.html); [Explore: Int
 
 Silver, Chapters 1–4
 
-R Introduction and Resources
+[Download R](https://cran.r-project.org/)
 
-Download R
+[Download RStudio](https://www.rstudio.com/products/rstudio/download/) You want the Desktop version, free license
 
-R Basics
-
-Download RStudio You want the Desktop version, free license
-
-RStudio Introduction and Resources
+[RStudio Introduction and Resources](https://education.rstudio.com/learn/beginner/)
 
 *Lesson Notes*
 
@@ -114,7 +110,7 @@ Synchronous Session: R basics, "verbs" of data wrangling
 
 Wednesday, May 19, 2021
 
-Resources
+*Resources*
 
 Wickham: [Explore:Data Transformation](https://r4ds.had.co.nz/transform.html)
 
@@ -124,7 +120,7 @@ Silver, Chapters 5–9, 12–13
 
 Chapter 2, Conditional Means: [02-conditional_means.Rmd](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/02-conditional_means.Rmd) 
 
-Problem Sets
+*Problem Sets*
 
 [Problem Set 1](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-assignment.Rmd) due 24 hours before Week 3 live session 
 
@@ -138,19 +134,19 @@ Wednesday, May 26, 2021
 
 Wickham: [Data Visualization](https://r4ds.had.co.nz/data-visualisation.html); [Data Transformation](https://r4ds.had.co.nz/transform.html)
 
-[Cookbook for R:Bar and Line Graphs]() 
+[Cookbook for R:Bar and Line Graphs](http://www.cookbook-r.com/Graphs/Bar_and_line_graphs_(ggplot2)/) 
 
-[Cookbook for R: Plotting Distributions]() 
+[Cookbook for R: Plotting Distributions](http://www.cookbook-r.com/Graphs/Plotting_distributions_(ggplot2)/) 
 
 *Lecture Notes*
 
 Chapter 3, Plotting Distributions and Conditional Means: 
 
-03-plot_means.Rmd 
+[03-plot_means.Rmd]((https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/03-plot_means.Rmd) 
 
 *Problem Sets*
 
-Problem Set 2 due 24 hours before Topic 4 live session
+[Problem Set 2](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/02-assignment.Rmd) due 24 hours before Topic 4 live session
 
 *Final Project*
 
@@ -164,21 +160,19 @@ Wednesday, June 2, 2021
 
 *Resources*
 
-Wickham: Data Import; Tidy Data 
+Wickham: [Data Import](https://r4ds.had.co.nz/data-import.html); [Tidy Data](https://r4ds.had.co.nz/tidy-data.html) 
 
 *Lecture Notes*
 
 Chapter 4, Flat Data 
 
-04-flat_data.Rmd 
+[04-flat_data.Rmd](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-flat_data.Rmd) 
 
 *Problem Sets*
 
-Problem Set 3 due 24 hours before Topic 5 live session 
-
+[Problem Set 3](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/03-assignment.Rmd) due 24 hours before Topic 4 live session 
 
 Synchronous Session: Working with various data formats
-
 
 ## Topic 5. Analyzing Data: Linear Regression
 
@@ -188,14 +182,15 @@ Wednesday, June 16, 2021
 
 *Resources*
 
+Wickham: Model: Introduction; Model Basics; Model Building 
 
-Wickham: Model: Introduction; Model Basics; Model Building Lecture Notes
+*Lecture Notes*
 
 Chapter 5, Linear Regression 05-regression.Rmd
 
-Problem Sets
+*Problem Sets*
 
-Problem Set 4 due 24 hours before Topic 6 live session
+Problem Set 4 due 24 hours before Topic 5 live session
 
 Synchronous Session: Using linear regression, training, and testing models
 
@@ -217,7 +212,7 @@ Chapter 6, Scatterplots 06-scatterplots.Rmd P
 
 *Problem Sets*
 
-Problem Set 5 due 24 hours before Topic 7 live session 
+Problem Set 5 due 24 hours before Topic 6 live session 
 
 *Final Project*
 
@@ -231,7 +226,7 @@ Wednesday, June 30, 2021
 
 Wednesday, July 7, 2021
 
-Resources
+*Resources*
 
 Rvest Vignette: https://cran.r- project.org/web/packages/rvest/vignettes/selectorgadget.html
 
@@ -239,16 +234,17 @@ Reed College rvest Introduction
 
 rvest Tutorial
 
-Lecture Notes
+*Lecture Notes*
 
 Chapter 7, Web Scraping and APIs,
 
 07-webscrape.Rmd
 
-Problem Sets
+*Problem Sets*
 
-Problem Set 6 due 24 hours before Topic 8 live session Synchronous Session: Accessing data from the web
+Problem Set 6 due 24 hours before Topic 7 live session 
 
+Synchronous Session: Accessing data from the web
 
 ## Topic 8. Analyzing Data: Classification
 
@@ -256,18 +252,26 @@ Wednesday, July 14, 2021
 
 Wednesday, July 21, 2021
 
-Resources
+*Resources*
+
 James, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). An introduction to statistical
 learning (Vol. 6). New York, NY: Springer. Chapter 4 , Chapter 4 Lab R Code
+
+
 Althoff, T., Danescu-Niculescu-Mizil, C., & Jurafsky, D. (2014, May). How to ask for a favor: A case study on the success of altruistic requests. In ICWSM. Available at http://www.aaai.org/ocs/index.php/ICWSM/ICWSM14/paper/download/8106/8101
-Lecture Notes
+
+*Lecture Notes*
 
 Chapter 8, Classification, 
 
 08-classification.Rmd
-Problem Sets
+
+*Problem Sets*
 
 Problem Set 7 due 24 hours before Topic 9 live sessions begin
+
+*Final Project*
+Third progress report due 24 hours before live session
 
 Synchronous Session: Classification, classifying behavior via text analysis: random acts of pizza
 
@@ -275,14 +279,23 @@ Synchronous Session: Classification, classifying behavior via text analysis: ran
 
 Wednesday, July 28, 2021
 
-Resources
-Problem Sets
+*Resources*
+
+*Problem Sets*
+
 Problem Set 8 due 24 hours before Topic 10 live session
 
-Final Project
-Third progress report due 24 hours before live session
-Lecture Notes
-Chapter 9, Plots and Tables for Classification 09-plotting_classification.Rmd Synchronous Session: Presenting data, plots, and tables for classification
+*Lecture Notes*
+
+Chapter 9, Plots and Tables for Classification
+
+09-plotting_classification.Rmd 
+
+*Final Project*
+Third progress report due 24 hours before live session August 4
+
+
+Synchronous Session: Presenting data, plots, and tables for classification
 
 ## Week 10. Cross Validation
 
@@ -292,9 +305,14 @@ Wednesday, August 11, 2021
 
 *Resources*
 Wickham Many Models
-Problem Sets
-Problem Set 9 due 24 hours before Week 11 live session Lecture Notes
-Chapter 10, cross_validation.Rmd
-Synchronous Session: Cross validating results
 
+Problem Sets
+
+Problem Set 9 due 24 hours before Week 11 live session 
+
+*Lecture Notes*
+
+Chapter 10, cross_validation.Rmd
+
+Synchronous Session: Cross validating results
 
