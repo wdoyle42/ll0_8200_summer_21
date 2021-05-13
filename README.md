@@ -44,9 +44,9 @@ Please watch async on LMS for this week.
 
 [Assignment 1, Due Midnight May 18](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-assignment.Rmd)
 
-[Assignment 2, Due Midnight May 25]()
+[Assignment 2, Due Midnight May 25](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/02-assignment.Rmd)
 
-Assignment 3, Due Midnight June 1
+[Assignment 3, Due Midnight June 1](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/03-assignment.Rmd)
 
 Assignment 4, Due Midnight June 8
 
@@ -64,9 +64,9 @@ Assignment 10, Due Midnight August 10
 
 ### Final Project Information
 
-[Progress Report 1](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/01-progress-report.Rmd): Due Midnight, May 25
+[Progress Report 1: Due  Midnight, May 25](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/01-progress-report.Rmd)
 
-Progress Report 2: Due Midnight, June 22
+[Progress Report 2: Due Midnight, June 22]()
 
 Progress Report 3: Due Midnight, July 13
 
