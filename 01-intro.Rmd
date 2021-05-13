@@ -63,6 +63,8 @@ To run the code below in R, you can:
 
 
 
+
+
 ```{r scorecard} 
 ## Clear environment
 rm(list=ls())
@@ -154,7 +156,7 @@ We can summarize data by giving commands to the summarize operator. For instance
 
 ```{r summarize}
 ## What's the average median debt?
-sc%>%summarize(mean_debt=mean(debt_mdn,na.rm=TRUE))
+sc%>%summarize( mean_debt=mean(debt_mdn,na.rm=TRUE) )
 ```
 
 *Combining Commands*

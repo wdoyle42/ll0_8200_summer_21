@@ -16,11 +16,13 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 [Update Async Video Part 2](https://youtu.be/K3f-5fb-lL0)
 
-<!---->
+3\. Presenting Data: Descriptive Plots [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/03-plot_means.Rmd) [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/attrition.Rdata)  
 
-3\. Presenting Data: Descriptive Plots  
+Please watch async on LMS for this week. 
 
-4\. Getting Data: Flat Files and “Tidy Data”  
+4\. Getting Data: Flat Files and “Tidy Data”  [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-flat_data.Rmd) 
+
+Please watch async on LMS for this week. 
 
 5\. Analyzing Data: Linear Regression  
 
