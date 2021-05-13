@@ -72,7 +72,7 @@ Progress Report 4: Due Midnight, July 27
 
 Final Project: 
 
-Rubric for Final Project
+[Rubric for Final Project](https://github.com/wdoyle42/ll0_8200_summer_21/blob/main/final_project_rubric.md)
 
 Example Final Project [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/example_report.Rmd)  ["Knitted" Report](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/example_report.html)
 
