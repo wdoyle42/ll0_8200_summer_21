@@ -15,14 +15,12 @@ The class is structured around developing students' skills in three areas: getti
 - Tools of the trade: R and RStudio
 - Working with pre-processed data and flat files
 - Getting data from the web: webscraping, using forms, using application programming interfaces
-- Using databases
 
 ## Analyzing Data Topics
 
 - Descriptives and conditional means
 - Regression
 - Supervised learning: classification
-- Unsupervised learning: K-means and nearest neighbors clustering
 - Cross validation
 
 ## Presenting Data Analysis Topics
