@@ -72,7 +72,7 @@ Assignment 10, Due Midnight August 10
 
 [Progress Report 3: Due Midnight, July 13](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/03-progress-report.Rmd)
 
-[Progress Report 4: Due Midnight, July 27]()
+[Progress Report 4: Due Midnight, July 27](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-progress-report.Rmd)
 
 *Final Project Rubric and Examples*: 
 
