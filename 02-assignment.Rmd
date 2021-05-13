@@ -5,6 +5,15 @@ output: github_document
 
 For this assignment, you'll be working with the `sc_debt.Rds` to predict earnings levels of college graduates using conditional means. You'll need to select the college-level characteristics that you think might be related to earnings levels. Please complete the following steps:
 
+```{r}
+library(tidyverse)
+```
+
+```{r}
+sc<-readRDS("sc_debt.Rds")
+```
+
+
 1. Calculate the mean of the outcome `md_earn_wne_p6`
 
 2. Use your mean as a prediction: Create a new variable that consists of the mean of the outcome.
