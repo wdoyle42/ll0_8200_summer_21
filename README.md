@@ -62,7 +62,7 @@ Assignment 10, Due Midnight August 10
 
 ### Final Project Information
 
-Progress Report 1: Due Midnight, May 25
+[Progress Report 1](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/01-progress-report.Rmd): Due Midnight, May 25
 
 Progress Report 2: Due Midnight, June 22
 
@@ -74,7 +74,7 @@ Final Project:
 
 Rubric for Final Project
 
-Example Final Project
+Example Final Project [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/example_report.Rmd)  ["Knitted" Report](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/example_report.html)
 
 
 
