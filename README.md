@@ -64,19 +64,19 @@ Assignment 10, Due Midnight August 10
 
 ### Final Project Information
 
+*Progres Reports*
+
 [Progress Report 1: Due  Midnight, May 25](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/01-progress-report.Rmd)
 
-[Progress Report 2: Due Midnight, June 22]()
+[Progress Report 2: Due Midnight, June 22](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/02-progress-report.Rmd)
 
-Progress Report 3: Due Midnight, July 13
+[Progress Report 3: Due Midnight, July 13]()
 
-Progress Report 4: Due Midnight, July 27
+[Progress Report 4: Due Midnight, July 27]()
 
-Final Project: 
+*Final Project Rubric and Examples*: 
 
 [Rubric for Final Project](https://github.com/wdoyle42/ll0_8200_summer_21/blob/main/final_project_rubric.md)
 
 Example Final Project [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/example_report.Rmd)  ["Knitted" Report](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/example_report.html)
-
-
 

@@ -14,7 +14,7 @@ library(ggplot2)
 library(dplyr)
 library(stargazer)
 # Data
-load('../lessons/cex.RData')
+load('cex.RData')
 ```
 
 
