@@ -190,7 +190,7 @@ Chapter 5, Linear Regression 05-regression.Rmd
 
 *Problem Sets*
 
-Problem Set 4 due 24 hours before Topic 5 live session
+[Problem Set 4](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-assignment.Rmd) due 24 hours before Topic 5 live session
 
 Synchronous Session: Using linear regression, training, and testing models
 
@@ -228,11 +228,9 @@ Wednesday, July 7, 2021
 
 *Resources*
 
-Rvest Vignette: https://cran.r- project.org/web/packages/rvest/vignettes/selectorgadget.html
+[Reed College `rvest` Introduction] (https://www.reed.edu/data-at-reed/resources/R/from-internet.html)
 
-Reed College rvest Introduction
-
-rvest Tutorial
+`rvest` Tutorial
 
 *Lecture Notes*
 
