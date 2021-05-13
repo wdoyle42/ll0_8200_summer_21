@@ -134,31 +134,50 @@ Synchronous Session: Conditional means
 
 Wednesday, May 26, 2021
 
-Resources
+*Resources*
 
 Wickham: [Data Visualization](https://r4ds.had.co.nz/data-visualisation.html); [Data Transformation](https://r4ds.had.co.nz/transform.html)
 
-Cookbook for R:Bar and Line Graphs Cookbook for R: Plotting Distributions 
+[Cookbook for R:Bar and Line Graphs]() 
 
-Lecture Notes
+[Cookbook for R: Plotting Distributions]() 
 
-Chapter 3, Plotting Distributions and Conditional Means: 03-plot_means.Rmd Problem Sets
+*Lecture Notes*
+
+Chapter 3, Plotting Distributions and Conditional Means: 
+
+03-plot_means.Rmd 
+
+*Problem Sets*
 
 Problem Set 2 due 24 hours before Topic 4 live session
 
-Final Project
+*Final Project*
 
 First progress report due 24 hours before live session
+
 Synchronous Session: Presenting results in graphical format: bar plots, density plots, dot plots, histograms
 
 ## Topic 4. Getting Data: Flat Files and "Tidy Data"
 
 Wednesday, June 2, 2021
 
-Resources
-Wickham: Data Import; Tidy Data Lecture Notes
-Chapter 4, Flat Data 04-flat_data.Rmd Problem Sets
-Problem Set 3 due 24 hours before Topic 5 live session Synchronous Session: Working with various data formats
+*Resources*
+
+Wickham: Data Import; Tidy Data 
+
+*Lecture Notes*
+
+Chapter 4, Flat Data 
+
+04-flat_data.Rmd 
+
+*Problem Sets*
+
+Problem Set 3 due 24 hours before Topic 5 live session 
+
+
+Synchronous Session: Working with various data formats
 
 
 ## Topic 5. Analyzing Data: Linear Regression
@@ -167,11 +186,17 @@ Wednesday, June 9, 2021
 
 Wednesday, June 16, 2021
 
-Resources
+*Resources*
+
+
 Wickham: Model: Introduction; Model Basics; Model Building Lecture Notes
+
 Chapter 5, Linear Regression 05-regression.Rmd
+
 Problem Sets
+
 Problem Set 4 due 24 hours before Topic 6 live session
+
 Synchronous Session: Using linear regression, training, and testing models
 
 ## Topic 6. Presenting Data: Scatterplots
@@ -180,13 +205,17 @@ Wednesday, June 23, 2021
 
 *Resources*
 
-Wickham: Data Visualization, Graphics for Communication Tufte, Visual Display Chapters 4 and 5
+Wickham: Data Visualization, Graphics for Communication 
+
+Tufte, Visual Display Chapters 4 and 5
 
 Tufte, Envisioning Information, Chapter 2
 
 *Lecture Notes*
 
-Chapter 6, Scatterplots 06-scatterplots.Rmd Problem Sets
+Chapter 6, Scatterplots 06-scatterplots.Rmd P
+
+*Problem Sets*
 
 Problem Set 5 due 24 hours before Topic 7 live session 
 
@@ -203,6 +232,7 @@ Wednesday, June 30, 2021
 Wednesday, July 7, 2021
 
 Resources
+
 Rvest Vignette: https://cran.r- project.org/web/packages/rvest/vignettes/selectorgadget.html
 
 Reed College rvest Introduction
