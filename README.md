@@ -48,7 +48,7 @@ Please watch async on LMS for this week.
 
 [Assignment 3, Due Midnight June 1](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/03-assignment.Rmd)
 
-[Assignment 4, Due Midnight June 8]()
+[Assignment 4, Due Midnight June 8](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-assignment.Rmd)
 
 Assignment 5, Due Midnight June 22
 
