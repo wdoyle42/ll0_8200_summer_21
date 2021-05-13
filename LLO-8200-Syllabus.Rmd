@@ -56,8 +56,6 @@ There will be four progress reports for the final project, each worth 100 points
 
 There will be a final product asking the student to complete a data analysis. No late final products will be accepted. A rubric containing the relevant grading information for this final product will be supplied.
 
-Texts
-
 ## Required Texts
 
 We will have two texts for the course. The first is Hadley Wickham's book, R for Data Science:
