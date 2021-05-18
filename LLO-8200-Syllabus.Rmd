@@ -118,11 +118,13 @@ Silver, Chapters 5–9, 12–13
 
 *Lecture Notes*
 
-Chapter 2, Conditional Means: [02-conditional_means.Rmd](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/02-conditional_means.Rmd) 
+Chapter 2, Conditional Means:
+
+[02-conditional_means.Rmd](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/02-conditional_means.Rmd) 
 
 *Problem Sets*
 
-[Problem Set 1](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-assignment.Rmd) due 24 hours before Week 3 live session 
+[Problem Set 1](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-assignment.Rmd) due 24 hours before Topic 2 live session 
 
 Synchronous Session: Conditional means
 
@@ -142,11 +144,11 @@ Wickham: [Data Visualization](https://r4ds.had.co.nz/data-visualisation.html); [
 
 Chapter 3, Plotting Distributions and Conditional Means: 
 
-[03-plot_means.Rmd]((https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/03-plot_means.Rmd) 
+[03-plot_means.Rmd](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/03-plot_means.Rmd) 
 
 *Problem Sets*
 
-[Problem Set 2](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/02-assignment.Rmd) due 24 hours before Topic 4 live session
+[Problem Set 2](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/02-assignment.Rmd) due 24 hours before Topic 3 live session
 
 *Final Project*
 
@@ -186,7 +188,9 @@ Wickham: Model: Introduction; Model Basics; Model Building
 
 *Lecture Notes*
 
-Chapter 5, Linear Regression 05-regression.Rmd
+Chapter 5, Linear Regression: 
+
+05-regression.Rmd
 
 *Problem Sets*
 
@@ -208,7 +212,9 @@ Tufte, Envisioning Information, Chapter 2
 
 *Lecture Notes*
 
-Chapter 6, Scatterplots 06-scatterplots.Rmd P
+Chapter 6, Scatterplots:
+
+06-scatterplots.Rmd 
 
 *Problem Sets*
 
@@ -234,7 +240,7 @@ Wednesday, July 7, 2021
 
 *Lecture Notes*
 
-Chapter 7, Web Scraping and APIs,
+Chapter 7, Web Scraping and APIs:
 
 07-webscrape.Rmd
 
@@ -260,7 +266,7 @@ Althoff, T., Danescu-Niculescu-Mizil, C., & Jurafsky, D. (2014, May). How to ask
 
 *Lecture Notes*
 
-Chapter 8, Classification, 
+Chapter 8, Classification
 
 08-classification.Rmd
 
@@ -281,7 +287,7 @@ Wednesday, July 28, 2021
 
 *Problem Sets*
 
-Problem Set 8 due 24 hours before Topic 10 live session
+Problem Set 8 due 24 hours before Topic 9 live session
 
 *Lecture Notes*
 
@@ -290,8 +296,7 @@ Chapter 9, Plots and Tables for Classification
 09-plotting_classification.Rmd 
 
 *Final Project*
-Third progress report due 24 hours before live session August 4
-
+Third progress report due 24 hours before Topic 9 live session
 
 Synchronous Session: Presenting data, plots, and tables for classification
 
@@ -306,11 +311,17 @@ Wickham Many Models
 
 Problem Sets
 
-Problem Set 9 due 24 hours before Week 11 live session 
+Problem Set 9 due 24 hours before first Week 10 live session 
+
+Problem Set 10 due 24 hours before second Topic 10 live session
 
 *Lecture Notes*
 
 Chapter 10, cross_validation.Rmd
 
 Synchronous Session: Cross validating results
+
+## Additional Due Dates
+
+
 
