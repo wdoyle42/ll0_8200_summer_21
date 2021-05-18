@@ -152,7 +152,7 @@ Chapter 3, Plotting Distributions and Conditional Means:
 
 *Final Project*
 
-First progress report due 24 hours before live session
+[First progress report](https://raw.githubusercontent.com/wdoyle42/ll0_8200_summer_21/main/01-progress-report.Rmd) due 24 hours before live session
 
 Synchronous Session: Presenting results in graphical format: bar plots, density plots, dot plots, histograms
 
@@ -222,7 +222,7 @@ Problem Set 5 due 24 hours before Topic 6 live session
 
 *Final Project*
 
-Second progress report due 24 hours before live session
+[Second progress report](https://raw.githubusercontent.com/wdoyle42/ll0_8200_summer_21/main/02-progress-report.Rmd) due 24 hours before live session
 
 Synchronous Session: Presenting data via scatterplots
 
@@ -275,7 +275,7 @@ Chapter 8, Classification
 Problem Set 7 due 24 hours before Topic 9 live sessions begin
 
 *Final Project*
-Third progress report due 24 hours before live session
+[Third progress](https://raw.githubusercontent.com/wdoyle42/ll0_8200_summer_21/main/03-progress-report.Rmd) report due 24 hours before live session
 
 Synchronous Session: Classification, classifying behavior via text analysis: random acts of pizza
 
@@ -296,7 +296,7 @@ Chapter 9, Plots and Tables for Classification
 09-plotting_classification.Rmd 
 
 *Final Project*
-Third progress report due 24 hours before Topic 9 live session
+[Fourth progress report](https://raw.githubusercontent.com/wdoyle42/ll0_8200_summer_21/main/04-progress-report.Rmd) due 24 hours before Topic 9 live session
 
 Synchronous Session: Presenting data, plots, and tables for classification
 
