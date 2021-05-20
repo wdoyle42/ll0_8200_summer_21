@@ -34,12 +34,12 @@ For your first assignment, I want you to create a file called `01-assignment_<la
 
 1. A sentence that says "Hello, World." This should be outside of a code chunk. (Yes, just write hello world)
 
+Hello world.
 
-
-2. R output that summarizes one of the variables in the `college.Rds` dataset
+2. R output that summarizes one of the variables in the `college.Rdata` dataset
 
 ```{r}
-
+sc%>%summarize(mean_cost=mean(costt4_a,na.rm=TRUE))
 ```
 
 
@@ -52,8 +52,47 @@ If you have extra time, you can do the following:
 
 1. Calculate the average debt level for individuals at the most selective colleges, then compare that with individuals at the least selective colleges in the dataset. 
 
+```{r}
+
+sc%>%
+  filter(adm_rate<.1)%>%
+  summarize(avg_debt=mean(md_earn_wne_p6,na.rm=TRUE))
+
+sc%>%
+  filter(adm_rate>.3)%>%
+  summarize(avg_debt=mean(md_earn_wne_p6,na.rm=TRUE))
+
+
+```
+
+
+
 2. Find a way to determine whether colleges with very high SAT scores tend to be larger or smaller than colleges with low SAT scores. 
+
+```{r}
+sc%>%filter(sat_avg>1400)%>%summarize(mean_enroll=mean(ugds,na.rm=TRUE))
+
+sc%>%filter(sat_avg<1000)%>%summarize(mean_enroll=mean(ugds,na.rm=TRUE))
+
+```
+
 
 3. Plot the relationship between cost and debt. What do you see? Does this surprise you? 
 
+```{r}
+sc%>%
+  ggplot(aes(x=costt4_a,y=debt_mdn))+
+  geom_point()
+
+```
+
+
 4. Now, provide separate plots for cost and debt by control of the institution. 
+
+```{r}
+sc%>%
+  ggplot(aes(x=costt4_a,y=debt_mdn))+
+  geom_point()+
+  facet_wrap(~control)
+```
+

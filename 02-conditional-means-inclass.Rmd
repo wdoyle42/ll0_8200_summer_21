@@ -7,6 +7,7 @@ output: html_document
 
 ```{r}
 library(tidyverse)
+library(yardstick)
 ```
 
 
@@ -30,12 +31,82 @@ The California School data has the following elements
 | chartr   | Charter (1=yes,0=no)  |
 
 
+
 1. Calculate the mean of api scores for all schools
+
+```{r}
+ca%>%summarize(mean_api=mean(api,na.rm=TRUE))
+```
+
+```{r}
+mean(ca$api,na.rm=TRUE)
+```
+
+
 
 2. Calculate the conditional mean of api scores by school type
 
+```{r}
+ca%>%
+  group_by(stype)%>%
+  summarize(mean_api=mean(api,na.rm=TRUE))
+```
+
+
 3. Calculate the root mean squared error if school type is used to predict api scores. What does this tell you?
+
+```{r}
+ca<-ca%>%
+   group_by(stype)%>%
+  mutate(mean_api=mean(api,na.rm=TRUE))%>%
+  ungroup()
+
+ca%>%rmse(api,mean_api)
+```
+
+
 
 4. Calculate the conditional mean of api scores by school type and another variable. 
 
+```{r}
+ca%>%
+   group_by(stype,chartr)%>%
+   summarize(mean_api=mean(api,na.rm=TRUE))
+```
+
+
 5. Calculate the root mean squared error of your prediction when using two variables. 
+
+```{r}
+ca<-ca%>%
+   group_by(stype,chartr)%>%
+  mutate(mean_api=mean(api,na.rm=TRUE))%>%
+  ungroup()
+
+ca%>%rmse(api,mean_api)
+```
+
+
+
+
+```{r}
+ca%>%
+  filter(stype=="E")%>%
+  mutate(class_size_level=ntile(acs_k3,4))%>%
+  group_by(class_size_level)%>%
+  summarize(mean_api=mean(api,na.rm=TRUE))
+
+ca_elem<-ca%>%
+  filter(stype=="E")%>%
+  mutate(class_size_level=ntile(acs_k3,4))%>%
+  group_by(class_size_level)%>%
+  mutate(mean_api=mean(api,na.rm=TRUE))%>%
+  ungroup()
+
+ca_elem%>%select(class_size_level,mean_api,api)
+
+ca_elem%>%rmse(api,mean_api)
+
+
+```
+
