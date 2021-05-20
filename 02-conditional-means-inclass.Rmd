@@ -19,7 +19,7 @@ The California School data has the following elements
 | Name  | Description  |
 |---|---|
 | id   | School Id  |
-| stype  | School Type   |
+| stype  | School Type (E=elem, M=middle, H=HS)  |
 | sname  | School Name   |
 | dname  | District Name   |
 | cname  |  County Name |
