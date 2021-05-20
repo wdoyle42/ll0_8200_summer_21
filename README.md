@@ -16,7 +16,7 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 [Update Async Video Part 2](https://youtu.be/K3f-5fb-lL0)
 
-In Class Work: [html](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/02-conditional_means.html) [rmd](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/02-conditional-means-inclass.Rmd) [dataset](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/caschool.rdata)
+In Class Work: [html](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/02-conditional-means-inclass.html) [rmd](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/02-conditional-means-inclass.Rmd) [dataset](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/caschool.rdata)
 
 3\. Presenting Data: Descriptive Plots [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/03-plot_means.Rmd) [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/attrition.Rdata)  
 
