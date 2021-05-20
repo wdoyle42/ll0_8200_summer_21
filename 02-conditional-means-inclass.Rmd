@@ -1,0 +1,41 @@
+---
+title: 'Conditional Means: In Class'
+author: "Will Doyle"
+date: "5/19/2021"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+load("caschool.rdata")
+```
+
+The California School data has the following elements
+
+| Name  | Description  |
+|---|---|
+| id   | School Id  |
+| stype  | School Type   |
+| sname  | School Name   |
+| dname  | District Name   |
+| cname  |  County Name |
+| api  | Academic Performance Index Score   |
+| yr_rnd  | Year Round School? (No/Yes)   |
+| acs_k3  | Average Class Size K-3   |
+| acs_46   | Average Class Size 4-6   |
+| chartr   | Charter (1=yes,0=no)  |
+
+
+1. Calculate the mean of api scores for all schools
+
+2. Calculate the conditional mean of api scores by school type
+
+3. Calculate the root mean squared error if school type is used to predict api scores. What does this tell you?
+
+4. Calculate the conditional mean of api scores by school type and another variable. 
+
+5. Calculate the root mean squared error of your prediction when using two variables. 
