@@ -180,6 +180,14 @@ pre code {
 <pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(yardstick)</code></pre>
+<pre><code>## For binary classification, the first factor level is assumed to be the event.
+## Use the argument `event_level = &quot;second&quot;` to alter this as needed.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;yardstick&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:readr&#39;:
+## 
+##     spec</code></pre>
 <pre class="r"><code>load(&quot;caschool.rdata&quot;)</code></pre>
 <p>The California School data has the following elements</p>
 <table>
@@ -233,12 +241,110 @@ pre code {
 </tbody>
 </table>
 <ol style="list-style-type: decimal">
-<li><p>Calculate the mean of api scores for all schools</p></li>
-<li><p>Calculate the conditional mean of api scores by school type</p></li>
-<li><p>Calculate the root mean squared error if school type is used to predict api scores. What does this tell you?</p></li>
-<li><p>Calculate the conditional mean of api scores by school type and another variable.</p></li>
-<li><p>Calculate the root mean squared error of your prediction when using two variables.</p></li>
+<li>Calculate the mean of api scores for all schools</li>
 </ol>
+<pre class="r"><code>ca%&gt;%summarize(mean_api=mean(api,na.rm=TRUE))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   mean_api
+##      &lt;dbl&gt;
+## 1     787.</code></pre>
+<pre class="r"><code>mean(ca$api,na.rm=TRUE)</code></pre>
+<pre><code>## [1] 787.0076</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Calculate the conditional mean of api scores by school type</li>
+</ol>
+<pre class="r"><code>ca%&gt;%
+  group_by(stype)%&gt;%
+  summarize(mean_api=mean(api,na.rm=TRUE))</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   stype mean_api
+##   &lt;chr&gt;    &lt;dbl&gt;
+## 1 E         819.
+## 2 H         690.
+## 3 M         802.</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Calculate the root mean squared error if school type is used to predict api scores. What does this tell you?</li>
+</ol>
+<pre class="r"><code>ca&lt;-ca%&gt;%
+   group_by(stype)%&gt;%
+  mutate(mean_api=mean(api,na.rm=TRUE))%&gt;%
+  ungroup()
+
+ca%&gt;%rmse(api,mean_api)</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 rmse    standard        91.4</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Calculate the conditional mean of api scores by school type and another variable.</li>
+</ol>
+<pre class="r"><code>ca%&gt;%
+   group_by(stype,chartr)%&gt;%
+   summarize(mean_api=mean(api,na.rm=TRUE))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;stype&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 6 x 3
+## # Groups:   stype [3]
+##   stype chartr mean_api
+##   &lt;chr&gt;  &lt;dbl&gt;    &lt;dbl&gt;
+## 1 E          0     818.
+## 2 E          1     823.
+## 3 H          0     685.
+## 4 H          1     713.
+## 5 M          0     802.
+## 6 M          1     804.</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Calculate the root mean squared error of your prediction when using two variables.</li>
+</ol>
+<pre class="r"><code>ca&lt;-ca%&gt;%
+   group_by(stype,chartr)%&gt;%
+  mutate(mean_api=mean(api,na.rm=TRUE))%&gt;%
+  ungroup()
+
+ca%&gt;%rmse(api,mean_api)</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 rmse    standard        91.3</code></pre>
+<pre class="r"><code>ca%&gt;%
+  filter(stype==&quot;E&quot;)%&gt;%
+  mutate(class_size_level=ntile(acs_k3,4))%&gt;%
+  group_by(class_size_level)%&gt;%
+  summarize(mean_api=mean(api,na.rm=TRUE))</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   class_size_level mean_api
+##              &lt;int&gt;    &lt;dbl&gt;
+## 1                1     801.
+## 2                2     828.
+## 3                3     834.
+## 4                4     813.
+## 5               NA     804.</code></pre>
+<pre class="r"><code>ca_elem&lt;-ca%&gt;%
+  filter(stype==&quot;E&quot;)%&gt;%
+  mutate(class_size_level=ntile(acs_k3,4))%&gt;%
+  group_by(class_size_level)%&gt;%
+  mutate(mean_api=mean(api,na.rm=TRUE))%&gt;%
+  ungroup()
+
+ca_elem%&gt;%select(class_size_level,mean_api,api)</code></pre>
+<pre><code>## # A tibble: 5,981 x 3
+##    class_size_level mean_api   api
+##               &lt;int&gt;    &lt;dbl&gt; &lt;dbl&gt;
+##  1                1     801.   771
+##  2                1     801.   726
+##  3                3     834.    NA
+##  4                2     828.   754
+##  5               NA     804.   523
+##  6                2     828.   835
+##  7                4     813.   840
+##  8                3     834.   894
+##  9                2     828.   942
+## 10                3     834.   906
+## # … with 5,971 more rows</code></pre>
+<pre class="r"><code>ca_elem%&gt;%rmse(api,mean_api)</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##   .metric .estimator .estimate
+##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
+## 1 rmse    standard        74.4</code></pre>
 
 
 
