@@ -7,6 +7,7 @@ For this assignment, you'll be working with the `sc_debt.Rds` to predict earning
 
 ```{r}
 library(tidyverse)
+library(yardstick)
 ```
 
 ```{r}
@@ -16,16 +17,83 @@ sc<-readRDS("sc_debt.Rds")
 
 1. Calculate the mean of the outcome `md_earn_wne_p6`
 
+```{r}
+sc%>%summarize(mean_earnings=mean(md_earn_wne_p6,na.rm=TRUE))
+```
+
+
 2. Use your mean as a prediction: Create a new variable that consists of the mean of the outcome.
+
+```{r}
+sc<-sc%>%
+  mutate(mean_earnings=mean(md_earn_wne_p6,na.rm=TRUE))
+
+```
+
 
 3. Calculate a summary measure of the errors for each observation---the difference between your prediction and the outcome.
 
+```{r}
+sc%>%rmse(md_earn_wne_p6,mean_earnings)
+```
+
+
 4. Calculate the mean of the outcome at levels of a predictor variable. 
+
+```{r}
+sc%>%
+  group_by(region)%>%
+  summarize(mean_earnings_region=mean(md_earn_wne_p6,na.rm=TRUE))%>%
+  arrange(-mean_earnings_region)
+```
+
+
 5. Use these conditional means as a prediction: for every college, use the conditional mean to provide a ''best guess'' as to that college's level of the outcome.  
 
+```{r}
+sc<-sc%>%
+  group_by(region)%>%
+  mutate(mean_earnings_region=mean(md_earn_wne_p6,na.rm=TRUE))%>%
+  ungroup()
+
+```
+
+
 6. Calculate a summary measure of the error in your predictions.
+```{r}
+sc%>%rmse(md_earn_wne_p6,mean_earnings_region)
+```
+
+
+```{r}
+sc%>%
+  ggplot(aes(x=fct_reorder(region,mean_earnings_region),y=md_earn_wne_p6))+
+  geom_point(size=.5,alpha=.5)+
+  geom_point(aes(x=region,y=mean_earnings_region),color="blue")
+```
+
 
 7. Repeat the above process using the tool of conditional means, try to find 3-4 combined variables that predict the outcome with better (closer to 0) summary measures of error. Report the summary measures of error and the variables (as text in your `.Rmd` file).
+
+```{r}
+sc%>%
+  mutate(sat_level=ntile(sat_avg,4))%>%
+  group_by(sat_level)%>%
+  summarize(mean_sat=mean(md_earn_wne_p6,na.rm=TRUE),count=n())
+```
+
+```{r}
+sc<-sc%>%
+  mutate(sat_level=ntile(sat_avg,4))%>%
+  group_by(region,control,preddeg,sat_level)%>%
+  mutate(mean_earnings_lots_of_predictors=mean(md_earn_wne_p6,na.rm=TRUE))%>%
+  ungroup()
+
+sc%>%rmse(md_earn_wne_p6,mean_earnings_lots_of_predictors)
+
+```
+
+
 
 Submit your assignment as `02-assignment-<yourlastname>.Rmd`, where `<yourlastname>` is your last name. (By the way, any time you see this: `<sometext>`, that indicates that you need to substitute something in, so if I were to submit the above assignment, it would be as: `02-assignment-doyle.Rmd`)
 
