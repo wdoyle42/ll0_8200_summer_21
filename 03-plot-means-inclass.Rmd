@@ -71,20 +71,42 @@ df_sum%>%
 
 4. Change the color scheme of the above plot. 
 
-Using RColorBrewer
 ```{r}
+mypal=c("lightblue","orange")
+
+
+df_sum%>%
+  ggplot(aes(x=fct_reorder(region,mean_sat),y=mean_sat,fill=preddeg))+
+  geom_bar(stat="identity",position="dodge")+
+  scale_fill_manual(values=mypal)+
+  ylab("Earnings")+xlab("Region")
+
+
 
 ```
 
 
-
-```{r}
-
-```
 
 
 5. Calculate and plot SAT scores by region and predominant degree with a separate plot (hint:facet_wrap) for public and private institutions.  
+
+## NB: everything's the same except for facet_wrap
 ```{r}
+
+
+df_sum<-sc%>%
+  group_by(region,preddeg,control)%>%
+  summarize(mean_sat=mean(sat_avg,na.rm=TRUE))
+
+
+df_sum%>%
+  ggplot(aes(x=fct_reorder(region,mean_sat),y=mean_sat,fill=preddeg))+
+  geom_bar(stat="identity",position="dodge")+
+  scale_fill_manual(values=mypal)+
+  ylab("Earnings")+xlab("Region")+
+  facet_wrap(~control)
+
+
 
 ```
 
