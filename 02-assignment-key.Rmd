@@ -80,6 +80,11 @@ sc%>%
   mutate(sat_level=ntile(sat_avg,4))%>%
   group_by(sat_level)%>%
   summarize(mean_sat=mean(md_earn_wne_p6,na.rm=TRUE),count=n())
+
+sc%>%
+  group_by(region)%>%
+  summarize(count=n())
+
 ```
 
 ```{r}

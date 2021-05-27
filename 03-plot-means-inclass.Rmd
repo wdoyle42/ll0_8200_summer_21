@@ -21,6 +21,17 @@ df<-readRDS("sc_debt.Rds")
 
 ```{r}
 
+
+df_sum<-sc%>%
+  group_by(region)%>%
+  summarize(mean_sat=mean(sat_avg,na.rm=TRUE))
+
+df_sum%>%
+  ggplot(aes(x=fct_reorder(region,mean_sat),y=mean_sat))+
+  geom_bar(stat = "identity",fill="lightblue")+
+  xlab("Region")+ylab("Mean SAT Scores")
+
+
 ```
 
 
@@ -28,6 +39,12 @@ df<-readRDS("sc_debt.Rds")
 
 
 ```{r}
+
+df_sum%>%
+  ggplot(aes(x=fct_reorder(region,mean_sat),y=mean_sat))+
+  geom_point()+
+  xlab("Region")+ylab("Mean SAT Scores")+
+  coord_flip()
 
 ```
 
@@ -37,6 +54,18 @@ df<-readRDS("sc_debt.Rds")
 
 
 ```{r}
+
+df_sum<-sc%>%
+  group_by(region,preddeg)%>%
+  summarize(mean_sat=mean(sat_avg,na.rm=TRUE))
+
+df_sum%>%
+  ggplot(aes(x=fct_reorder(region,mean_sat),y=mean_sat,fill=preddeg))+
+  geom_bar(stat="identity",position="dodge")+
+  ylab("Earnings")+xlab("Region")
+
+  
+
 ```
 
 

@@ -60,6 +60,8 @@ gg<-gg+geom_histogram(binwidth = 1,fill="lightblue")
 gg
 ``` 
 
+
+
 Density plots provide a continous graphic of the distribution of a variable:
 ```{r}
 gg<-ggplot(at,aes(x=DistanceFromHome))
@@ -83,6 +85,9 @@ at_sum<-at%>%
   summarize(attr_avg=mean(attrit))
 
 at_sum
+
+at%>%
+  mutate(mean_income_group=ntile(MonthlyIncome,n=4))
 
 ```
 
