@@ -164,7 +164,7 @@ First, let's git rid of unwanted columns by selecting a list of things we don't 
 free2<-free[ ,-(c(3,6,9,12,15,18))]
 
 #Get rid of unwanted rows
-free2<-free2%>%filter(is.na(X__1)==FALSE)
+free2<-free2%>%filter(is.na(`...1`)==FALSE)
 ```
 
 Now we're going to select some things we DO want, by using the `number_1:number_x` setup. 
