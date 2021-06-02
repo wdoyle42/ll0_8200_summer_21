@@ -28,15 +28,30 @@ In Class Work: [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/ma
 
 Please watch async on LMS for this week. 
 
-5\. Analyzing Data: Linear Regression  
+5\. Analyzing Data: Linear Regression [Leture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression.Rmd)
+[Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/area_data.Rds)
 
-6\. Presenting Data: Scatterplots  
+Watch lecture 5.1: Introduction: From Conditional Means to Linear Regression on LMS
+New lecture 5.2: bivariate regression [here]()
+New lecture 5.3: multiplpe regression [here]()
+Watch lecture 5.5: Training and Testing on LMS
 
-7\. Getting Data: Web Sources  
+6\. Presenting Data: Scatterplots  [Lecture Notes]() 
+[Data Set]()
+
+Please watch async on LMS for this week
+
+7\. Getting Data: Web Sources  [Lecture Notes]()
+
+Watch lectures 7.1-7.3 Please watch async on LMS for this week
+
+Updated 7.4 is [here](https://www.youtube.com/watch?v=NHbs55PTb-g)
 
 8\. Analyzing Data: Classification  
 
+
 9\. Presenting Data: Plots and Tables for Classification  
+
 
 10\. Cross Validation  
 
@@ -55,6 +70,8 @@ Please watch async on LMS for this week.
 [Assignment 2 Key](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/02-assignment-key.Rmd)
 
 [Assignment 3, Due Midnight June 1](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/03-assignment.Rmd)
+
+[Assignment 3 Key](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/03-assignment-key.Rmd)
 
 [Assignment 4, Due Midnight June 8](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-assignment.Rmd)
 
