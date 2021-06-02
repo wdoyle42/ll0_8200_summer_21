@@ -5,75 +5,216 @@ output: html_document
 
 ## Overview
 
-So far, we've been using just the simple mean to make predictions. Today, we'll continue using the simple mean to make predictions, but now in a complicated way. Before, when we calculated conditional means, we did so in certain "groupings" of variables. When we run linear regression, we no longer need to do so. Instead, linear regression allows us to calculate the conditional mean of the outcome at _every_ value of the predictor. If the predictor takes on just a few values, then that's the number of conditional means that will be calculated. If the predictor is continuous and takes on a large number of values, we'statll still be able to calculate the conditional mean at every one of those values. 
+So far, we've been using just the simple mean to make predictions. Today, we'll continue using the simple mean to make predictions, but now in a complicated way. Before, when we calculated conditional means, we did so in certain "groupings" of variables. When we run linear regression, we no longer need to do so. Instead, linear regression allows us to calculate the conditional mean of the outcome at _every_ value of the predictor. If the predictor takes on just a few values, then that's the number of conditional means that will be calculated. If the predictor is continuous and takes on a large number of values, we'll still be able to calculate the conditional mean at every one of those values. 
 
 The model we posit for regression is as follows:
 
 $$Y=\beta_0+\beta_1 x_1 +\beta_2 x_2+ ... \beta_k x_k + \epsilon$$
 
-It's just a linear, additive model. Y increases or decreases as a function of x, with multiple x's included. $\epsilon$ is the extent to which an individual value is above or below the line created. 
-
-Let's say that you've got some student data and you want to target those students that may struggle in math. The intervention could be targeted based on what we know about students, much of which reflects broader inequalities in our education system, such as the relationship between SES and parental education and test scores. By intervening early we may help to reduce those inequalities. 
-
-We're going to be working with data on high school students from the Educational Longitudinal Study. Our goal will be to predict their math scores based on student characteristics. 
+It's just a linear, additive model. Y increases or decreases as a function of x, with multiple x's included. $\epsilon$ is the extent to which an individual value is above or below the line created. $\beta$ is the amount that $Y$ increases or decreases for a one unit change in $x$.  
 
 ```{r,echo=FALSE}
-rm(list=ls())
 library(tidyverse)
-library(forcats)
-library(ModelMetrics)
-library(modelr)
+library(tidymodels)
+library(plotly)
 ```
 
-The ELS dataset is called `els_train`. I'll explain the "train" part in a bit-- it refers to a "training" dataset.
+
+
+
+
+## The Data
+
 
 ```{r}
-load("els_train.RData")
+ad<-readRDS("area_data.Rds")
+ad
 ```
 
-## Bivariate regression
+This data comes from the American Community Survey of 2019. It covers all of the [metro or micro
+statistical areas](https://www.census.gov/programs-surveys/metro-micro/about.html#:~:text=The%20general%20concept%20of%20a,social%20integration%20with%20that%20core.) in the United States. It includes characteristics of these areas, include education, income, home ownership and others as described below.  
 
-Our dependent variable will be math scores, stored in this dataset as `bynels2m`. Let's take a look at this variable
+| Name  | Description   |
+|---|---|
+| name   | Name of Micro/Metro Area   |
+| college_educ   | Percent of population with at least a bachelor's degree   |
+| perc_commute_30p   | Percent of population with commute to work of 30 minutes or more   |
+| perc_insured  | Percent of population with health insurance   |
+| perc_homeown  | Percent of housing units owned by occupier]   |
+| income_75  | Percent of population with income over 75,000   |
+| perc_moved_in   | Percent of population that moved from another state in last year   |
+|  perc_in_labor force  | Percent of population in labor force   |
+
+
+## Dependent Variable
+
+Our dependent variable will be the percent of the population that has a yearly income over $75,000.  Let's take a look at this variable.
 
 ```{r}
-els_train%>%summarize(mean(bynels2m,na.rm=TRUE))
-
-gg<-ggplot(els_train,aes(x=bynels2m))
-gg<-gg+geom_histogram()
-gg
-```
-
-```{r}
-gg<-ggplot(els_train,aes(x=bynels2m))
-gg<-gg+geom_density()
-gg
+ad%>%
+  ggplot(aes(x=income_75))+
+  geom_density()
 ```
 
 
 This variable has a nice symmetric distribution. It looks approximately normal, which will help in interpreting the results. 
 
+## Testing and Training
+
+The essence of prediction is discovering the extent to which our models can predict outcomes for data that *does not come from our sample*. Many times this process is temporal. We fit a model to data from one time period, then take predictors from a subsequent time period to come up with a prediction in the future. For instance, we might use data on team performance to predict the likely winners and losers for upcoming soccer games. 
+
+This process does not have to be temporal. We can also have data that is out of sample because it hadn't yet been collected when our first data was collected, or we can also have data that is out of sample because we designated it as out of sample.
+
+The data that is used to generate our predictions is known as 
+*training* data. The idea is that this is the data used to train our model, to let it know what the relationship is between our predictors and our outcome. So far, we have only worked with training data. 
+
+That data that is used to validate our predictions is known as *testing* data. With testing data, we take our trained model and see how good it is at predicting outcomes using out of sample data. 
+
+One very simple approach to this would be to cut our data in half. We could then train our model on half the data, then test it on the other half. This would tell us whether our measure of model fit (e.g. rmse) is similar or different when we apply our model to out of sample data. That's what we've done today: we have only been working with half of our data-- the training half. 
+
+The testing data (which is a random half of the original dataset) is stored as `ad_test`.
+
+
+## Training and Testing Data
 ```{r}
+set.seed(35202)
 
-#Model 1: simple bivariate regression
+split_data<-ad%>%initial_split(prop=.5)
 
-mod1<-lm(bynels2m~byses1,data=els_train) #outcome on left, predictor on right 
+ad_train<-training(split_data)
 
-summary(mod1)
-confint(mod1)
-
-g1<-ggplot(els_train, aes(x=byses1,y=bynels2m))+ #specify data and x and y
-           geom_point(shape=1)+ #specify points
-           geom_smooth(method=lm) #ask for lm line
-g1
-
-els_train<-els_train%>%add_predictions(mod1)%>%rename(pred1=pred) #predict using data in memory
- 
-## RMSE
-rmse_1<-modelr::rmse(mod1,els_train);rmse_1
+ad_test<-testing(split_data)
 
 ```
 
-What this shows is that as socio-economic status increases, math scores are predicted to increase. For every one unit increase in SES, math scores are predicted to increase by \$`r prettyNum(mod1$coefficients[2],digits=0)`. The rmse of `r  prettyNum(rmse_1,digits=2)` gives us a sense of how wrong the model tends to be when using just this one predictor. 
+
+
+
+## Set Formula
+```{r}
+income_formula<-as.formula("income_75~college_educ")
+```
+
+Our first formula will have the percent of the population with incomes over 75000 as the dependent variablke.
+
+## Visualizing the Relationship
+```{r}
+ad%>%
+  ggplot(aes(x=college_educ,y=income_75))+
+  geom_point()+
+  geom_smooth(method="lm")
+
+```
+
+The scatterplot
+
+## An Interactive Approach
+```{r}
+gg<-ad%>%
+  ggplot(aes(x=college_educ,y=income_75,label=name))+
+  geom_point()+
+  geom_smooth(method="lm")
+
+  ggplotly(gg)
+
+```
+
+
+By using the `plotly` command, we can identify the individual units. Try it out, seeing which units have high or low incomes or higher or lower percentages of the population with a bachelor's degree. 
+
+## Define model
+```{r}
+lm_fit <- 
+  linear_reg() %>% 
+  set_engine("lm")%>%
+  set_mode("regression")
+```
+
+## Fit Model to the Ddata
+```{r}
+lm_results<-
+  lm_fit%>%
+  fit(income_formula,data=ad_train)
+
+```
+
+
+## Look at the results
+```{r}
+summary(lm_results$fit)
+```
+
+## Predict using the testing dataset
+
+```{r}
+ad_test<-lm_results%>%
+  predict(new_data=ad_test)%>%
+  rename(pred1=.pred)%>% 
+  bind_cols(ad_test)
+```
+
+## Calculate RMSE
+```{r}
+rmse(ad_test,
+     truth=income_75,
+     estimate=pred1)
+```
+
+
+## Set Formula
+```{r}
+income_formula<-as.formula("income_75~college_educ+perc_homeown")
+```
+
+
+## Define model
+```{r}
+lm_fit <- 
+  linear_reg() %>% 
+  set_engine("lm")%>%
+  set_mode("regression")
+```
+
+## Fit Model to the Ddata
+```{r}
+lm_results<-
+  lm_fit%>%
+  fit(income_formula,data=ad_train)
+
+```
+
+
+## Look at the results
+```{r}
+summary(lm_results$fit)
+```
+
+
+What this shows is that as the percent of the population with a bachelor's degree  increases, the percent of the population with incomes over 75,000 is  predicted to increase. For every one unit increase in the percent of the population with a college degree, the percent of the population with incomes over 75,000 is predicted to increasse by `r prettyNum(lm_results$fit$coefficients[2],digits=2)`. 
+
+
+## Predict using the testing dataset
+
+```{r}
+ad_test<-lm_results%>%
+  predict(new_data=ad_test)%>%
+  rename(pred2=.pred)%>%
+  bind_cols(ad_test)
+```
+
+## Calculate RMSE
+```{r}
+rmse_1<-rmse(ad_test,
+     truth=income_75,
+     estimate=pred2)
+
+rmse_1
+```
+
+
+
+
+The rmse of `r  prettyNum(rmse_1,digits=2)` gives us a sense of how wrong the model tends to be when using just this one predictor. 
 
 _Quick Exercise_ Run a regression using a different predictor. Calculate rmse and see if you can beat my score. 
 

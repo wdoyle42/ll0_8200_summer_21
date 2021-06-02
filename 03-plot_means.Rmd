@@ -143,6 +143,11 @@ at_sum<-at%>%
   group_by(BusinessTravel)%>%
   summarize(attr_avg=mean(attrit))
 
+mean(at$attrit[at$BusinessTravel=="Non-Travel"])
+mean(at$attrit[at$BusinessTravel=="Travel_Frequently"])
+mean(at$attrit[at$BusinessTravel=="Travel_Rarely"])
+
+
 at_sum
 ## Now a dot plot
 gg<-ggplot(at_sum,aes(x=reorder(BusinessTravel,-attr_avg),y=attr_avg))
