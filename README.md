@@ -33,7 +33,7 @@ Please watch async on LMS for this week.
 
 Watch lecture 5.1: Introduction: From Conditional Means to Linear Regression on LMS
 New lecture 5.2: bivariate regression [here]()
-New lecture 5.3: multiplpe regression [here]()
+New lecture 5.3 & 5.4 : multiple regression [here]()
 Watch lecture 5.5: Training and Testing on LMS
 
 6\. Presenting Data: Scatterplots  [Lecture Notes]() 

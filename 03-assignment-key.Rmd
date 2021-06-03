@@ -1,0 +1,22 @@
+---
+title: "Assignment 3"
+output: github_document
+---
+
+Use the `sc_debt.Rds` dataset to answer the following questions. As always, your assignment must be turned in as a .Rmd file. 
+
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+df<-readRDS("sc_debt.Rds")
+```
+
+
+1. Create a graph that shows the distribution of grads' income `md_earn_wne_p6`
+2. Create a graph that shows the average level of income by region.
+3. Create another graph that shows average level of income by region and selectivity. 
+4. Create a graph that shows average levels ofincome by region, selectivity, and predominant degree. 
+5. Create a graph that shows average levels of income by region, selectivity, and predominant degree and control. 
