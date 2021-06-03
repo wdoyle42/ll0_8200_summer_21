@@ -30,7 +30,7 @@ Please watch async on LMS for this week.
 
 In  Class Work [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-flat-data-inclass.Rmd)
 
-5\. Analyzing Data: Linear Regression [Leture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression.Rmd)
+5\. Analyzing Data: Linear Regression [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression.Rmd)
 [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/area_data.Rds)
 
 Watch lecture 5.1: Introduction: From Conditional Means to Linear Regression on LMS
