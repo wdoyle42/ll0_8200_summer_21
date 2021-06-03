@@ -19,7 +19,6 @@ https://data.ca.gov/group/transportation
 https://www.kaggle.com/c/stumbleupon/data 
 
 
-
 * NCES data on Average Daily Attendance (*This data needs to be converted to be tidy*): http://nces.ed.gov/programs/digest/d13/tables/dt13_203.90.asp
 
 
