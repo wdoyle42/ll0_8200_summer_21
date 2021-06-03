@@ -34,8 +34,11 @@ In  Class Work [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/ma
 [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/area_data.Rds)
 
 Watch lecture 5.1: Introduction: From Conditional Means to Linear Regression on LMS
+
 New lecture 5.2: bivariate regression [here](https://youtu.be/8P5CLj5Vy70)
+
 New lecture 5.3 & 5.4 : multiple regression [here](https://youtu.be/6s5__DICHDg)
+
 Watch lecture 5.5: Training and Testing on LMS
 
 6\. Presenting Data: Scatterplots  [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-scatterplots.Rmd) 
