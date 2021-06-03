@@ -16,7 +16,102 @@ df<-readRDS("sc_debt.Rds")
 
 
 1. Create a graph that shows the distribution of grads' income `md_earn_wne_p6`
+
+```{r}
+
+## Option 1: histogram
+df%>%
+  ggplot(aes(x=md_earn_wne_p6))+
+  geom_histogram(fill="lightblue")+
+  xlab("Median Earnings")+ylab("Count")+
+  theme_minimal()
+
+## Option 2: density plot
+df%>%
+  ggplot(aes(x=md_earn_wne_p6))+
+  geom_density()
+
+```
+
+```{r}
+df<-df%>%
+  mutate(region=ifelse(region=="Soutwest","Southeast",region))
+```
+
+
+
 2. Create a graph that shows the average level of income by region.
+
+```{r}
+df_sum<-df%>%
+  group_by(region)%>%
+  summarize(mean_income=mean(md_earn_wne_p6,na.rm=TRUE))
+
+df_sum%>%
+  ggplot(aes(x=fct_reorder(region,mean_income),y=mean_income,fill=mean_income))+
+  geom_bar(stat="identity")+
+  xlab("")+ylab("Mean Income")+
+  coord_flip()+
+  theme(legend.position = "none")
+```
+
+
 3. Create another graph that shows average level of income by region and selectivity. 
-4. Create a graph that shows average levels ofincome by region, selectivity, and predominant degree. 
+
+
+```{r}
+df_sum<-df%>%
+  mutate(selective=ifelse(selective==1,"Selective","Not Selective"))%>%
+  mutate(selective=ifelse(is.na(selective),"Not Selective",selective))%>%
+  group_by(region,selective)%>%
+  summarize(mean_income=mean(md_earn_wne_p6,na.rm=TRUE))
+
+df_sum%>%
+  ggplot(aes(x=fct_reorder(region,mean_income),y=mean_income,fill=selective))+
+  geom_bar(stat="identity",position="dodge")+
+  xlab("")+ylab("Mean Income")+
+  coord_flip()+
+  theme(legend.position = "none")+
+  theme_minimal()
+```
+
+
+4. Create a graph that shows average levels of income by region, selectivity, and predominant degree. 
+
+
+```{r}
+df_sum<-df%>%
+  mutate(selective=ifelse(selective==1,"Selective","Not Selective"))%>%
+  mutate(selective=ifelse(is.na(selective),"Not Selective",selective))%>%
+  group_by(region,selective,preddeg)%>%
+  summarize(mean_income=mean(md_earn_wne_p6,na.rm=TRUE))
+
+df_sum%>%
+  ggplot(aes(x=fct_reorder(region,mean_income),y=mean_income,fill=selective))+
+  geom_bar(stat="identity",position="dodge")+
+  xlab("")+ylab("Mean Income")+
+  coord_flip()+
+  theme(legend.position = "none")+
+  facet_wrap(~preddeg)+
+  theme_minimal()
+```
+
+
 5. Create a graph that shows average levels of income by region, selectivity, and predominant degree and control. 
+
+```{r}
+df_sum<-df%>%
+  mutate(selective=ifelse(selective==1,"Selective","Not Selective"))%>%
+  mutate(selective=ifelse(is.na(selective),"Not Selective",selective))%>%
+  group_by(region,selective,preddeg,control)%>%
+  summarize(mean_income=mean(md_earn_wne_p6,na.rm=TRUE))
+
+df_sum%>%
+  ggplot(aes(x=fct_reorder(region,mean_income),y=mean_income,fill=selective))+
+  geom_bar(stat="identity",position="dodge")+
+  xlab("")+ylab("Mean Income")+
+  coord_flip()+
+  theme(legend.position = "none")+
+  facet_wrap(control~preddeg)+
+  theme_minimal()
+```

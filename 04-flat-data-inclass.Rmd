@@ -7,16 +7,38 @@ Listed below are a series of data files stored on the web. Figure out which type
 
 https://data.cityofnewyork.us/api/views/f9bf-2cp4/rows.csv?accessType=DOWNLOAD
 
+```{r}
+nyc<-read_csv("https://data.cityofnewyork.us/api/views/f9bf-2cp4/rows.csv?accessType=DOWNLOAD")
+
+save(nyc,file="nyc.Rdata")
+
+load("nyc.Rdata")
+
+write_rds(nyc,file="nyc.Rds")
+
+nyc<-read_rds("nyc.Rds")
+
+```
+
+
+
+
 * Survey of veterans data from Angrist (1993) "The Effect of Veterans Benefits on Education and Earnings"
 
 https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/CAQYME
+
+
 
 * Vehicle Fuel Type Count 
 
 https://data.ca.gov/group/transportation
 
+
+
 * Stumbleupon Kaggle challenge (get the train.tsv file):
 https://www.kaggle.com/c/stumbleupon/data 
+
+
 
 
 * NCES data on Average Daily Attendance (*This data needs to be converted to be tidy*): http://nces.ed.gov/programs/digest/d13/tables/dt13_203.90.asp
