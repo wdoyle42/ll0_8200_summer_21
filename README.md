@@ -38,8 +38,8 @@ New lecture 5.2: bivariate regression [here]()
 New lecture 5.3 & 5.4 : multiple regression [here]()
 Watch lecture 5.5: Training and Testing on LMS
 
-6\. Presenting Data: Scatterplots  [Lecture Notes]() 
-[Data Set]()
+6\. Presenting Data: Scatterplots  [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-scatterplots.Rmd) 
+[Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/blob/main/els.Rdata)
 
 Please watch async on LMS for this week
 
