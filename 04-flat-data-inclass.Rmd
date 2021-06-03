@@ -12,12 +12,6 @@ nyc<-read_csv("https://data.cityofnewyork.us/api/views/f9bf-2cp4/rows.csv?access
 
 save(nyc,file="nyc.Rdata")
 
-load("nyc.Rdata")
-
-write_rds(nyc,file="nyc.Rds")
-
-nyc<-read_rds("nyc.Rds")
-
 ```
 
 
@@ -29,9 +23,24 @@ https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/CAQYME
 
 
 
+```{r}
+sov<-read_dta("soviii_ang93b.dta")
+
+save(sov,file="sov.Rdata")
+```
+
+
 * Vehicle Fuel Type Count 
 
 https://data.ca.gov/group/transportation
+
+```{r}
+fuel<-read_csv("https://data.ca.gov/dataset/15179472-adeb-4df6-920a-20640d02b08c/resource/d304108a-06c1-462f-a144-981dd0109900/download/vehicle-fuel-type-count-by-zip-code.csv")
+
+save(fuel,file="fuel.Rdata")
+
+```
+
 
 
 
