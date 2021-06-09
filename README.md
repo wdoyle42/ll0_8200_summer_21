@@ -28,7 +28,7 @@ In Class Work: [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/ma
 
 Please watch async on LMS for this week. 
 
-In  Class Work [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-flat-data-inclass.Rmd)
+In Class Work [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-flat-data-inclass.Rmd)
 
 5\. Analyzing Data: Linear Regression [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression.Rmd)
 [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/area_data.Rds)
@@ -40,6 +40,8 @@ New lecture 5.2: bivariate regression [here](https://youtu.be/8P5CLj5Vy70)
 New lecture 5.3 & 5.4 : multiple regression [here](https://youtu.be/6s5__DICHDg)
 
 Watch lecture 5.5: Training and Testing on LMS
+
+In Class Work [.Rmd file](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression-inclass-1.Rmd)
 
 6\. Presenting Data: Scatterplots  [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-scatterplots.Rmd) 
 [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/els.Rdata)
@@ -90,7 +92,7 @@ Watch lecture 7.5 on LMS
 
 [Assignment 4, Due Midnight June 8](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-assignment.Rmd)
 
-[Assignment 5, Due Midnight June 22]()
+[Assignment 5, Due Midnight June 22](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-assignment.Rmd)
 
 Assignment 6, Due Midnight Jun 29
 
