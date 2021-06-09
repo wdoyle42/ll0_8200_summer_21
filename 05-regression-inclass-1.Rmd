@@ -1,0 +1,24 @@
+---
+title: "Regression: In Class Work"
+author: "Will Doyle"
+---
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+```
+
+```{r}
+ad<-read_rds("area_data.Rds")
+```
+
+
+1. Plot home ownership `perc_homeown` as a function of college education `college_educ` and comment on what you see.
+
+2. Run a regression of home ownership on college education (home ownership is the dependent variable, percent college educated is the independent variable). 
+
+3. Summarize the relationship between home ownership and college education in a sentence.
+
+4. Calculate a summary of the fit of the above model and comment on what it means.
+
+5. Add the variable for income to the above regression and repeat steps 1-4. 
