@@ -42,15 +42,24 @@ New lecture 5.3 & 5.4 : multiple regression [here](https://youtu.be/6s5__DICHDg)
 Watch lecture 5.5: Training and Testing on LMS
 
 6\. Presenting Data: Scatterplots  [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-scatterplots.Rmd) 
-[Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/blob/main/els.Rdata)
+[Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/els.Rdata)
 
 Please watch async on LMS for this week
 
-7\. Getting Data: Web Sources  [Lecture Notes]()
+7\. Getting Data: Web Sources 
 
-Watch lectures 7.1-7.3 Please watch async on LMS for this week
 
-Updated 7.4 is [here](https://www.youtube.com/watch?v=NHbs55PTb-g)
+[Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/07-webscraping.Rmd)
+
+[Education Variables (if needed)](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/educ_vars.Rdata)
+
+[Income Variables (if needed)](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/income_vars.Rdata)
+
+Watch lectures 7.1-7.3 Please watch on async. 
+
+[Watch updated 7.4 here](https://www.youtube.com/watch?v=NHbs55PTb-g)
+
+Watch lecture 7.5 on LMS
 
 8\. Analyzing Data: Classification  
 
@@ -59,6 +68,7 @@ Updated 7.4 is [here](https://www.youtube.com/watch?v=NHbs55PTb-g)
 
 
 10\. Cross Validation  
+
 
 ### Assignments and Due Dates
 
@@ -80,7 +90,7 @@ Updated 7.4 is [here](https://www.youtube.com/watch?v=NHbs55PTb-g)
 
 [Assignment 4, Due Midnight June 8](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-assignment.Rmd)
 
-Assignment 5, Due Midnight June 22
+[Assignment 5, Due Midnight June 22]()
 
 Assignment 6, Due Midnight Jun 29
 

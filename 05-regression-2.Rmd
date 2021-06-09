@@ -26,8 +26,10 @@ ad<-readRDS("area_data.Rds")
 ```
 
 
-
 ## Training and Testing Data
+
+As before, I'm going to split the data into training and testing versions. 
+
 ```{r}
 set.seed(35202)
 
@@ -41,6 +43,8 @@ ad_test<-testing(split_data)
 
 ## Set Model
 
+We're going to use the same linear model as last time, so I'll specify that here. 
+
 ```{r}
 lm_fit <- 
   linear_reg() %>% 
@@ -52,16 +56,17 @@ lm_fit <-
 
 ## Begin Workflow
 
+Now I start my workflow. A workflow is pretty much what it sounds like. It's a set of steps in a modeling process. Right now, it just contains the model. 
+
 ```{r}
 income_wf<-workflow()%>%
   add_model(lm_fit)
 ```
 
 
-
 ## Regression with a binary variable
 
-The next variable I want to include is `metro`, which is a binary variable set to "Yes" if the area is a metropolitan area and "No" if it is not a metropolitan area. The code below shows the number of 
+The next variable I want to include is `metro`, which is a binary variable set to "Yes" if the area is a metropolitan area and "No" if it is not a metropolitan area. The code below shows the number of metropolitan and non-metropolitan areas in the dataset. 
 
 ```{r}
 ad%>%
@@ -70,9 +75,12 @@ ad%>%
   mutate(`Proportion`=`Number of Areas`/sum(`Number of Areas`))
 ```
 
-This shows that about 58% of areas are not metro areas, while 42% are. 
+This shows that about 58% of areas are not metro areas, while 42% are metro areas. 
 
 ## Set Formula
+
+Next, I add the variable `metro` to the formula. 
+
 ```{r}
 income_formula<-as.formula("income_75~college_educ+perc_homeown+metro")
 ```
@@ -85,17 +93,20 @@ income_rec<-recipe(income_formula,data=ad)%>%
   step_dummy(metro)
 ```
 
-The `recipe` function allows us to get the data ready for analysis, a step that is called [pre-processing](https://towardsdatascience.com/data-preprocessing-concepts-fa946d11c825).
+The `recipe` function allows us to get the data ready for analysis, a step that is called [pre-processing](https://towardsdatascience.com/data-preprocessing-concepts-fa946d11c825). In the code above, I create a recipe from the formula and the dataset, then add a pre-processing step, `step_dummy`. This tells R that I want the metro variable to be understood as 0/1 variable. 
 
 ## Add recipe to workflow
+
+We can now add the recipe to the previously existing workflow. 
+
 ```{r}
 income_wf<-income_wf%>%
   add_recipe(income_rec)
 ```
 
-
 ## Fit to training data
 
+Now we can fit the processed data to the training dataset and take a look at the results. 
 
 ```{r}
 lm_results<-fit(income_wf,ad_train)
@@ -103,8 +114,14 @@ lm_results<-fit(income_wf,ad_train)
 tidy(lm_results)
 ```
 
+The `tidy` command allows us to see the coefficients from the model fit to the training data. 
+
+The results show that the percent of individuals with incomes about $75,000 is `r tidy(lm_results)[4,2]` higher in metro areas than non-metro areas. This is really important: we always interpret binary variables as a comparison between the group that is set to 1 (metropolitan areas in this case) and the group that is set to 0 (non-metropolitan areas). 
 
 ## Predict on testing data and calculate rmse
+
+We can add predictions to the testing dataset in the same way we did before. 
+
 ```{r}
 ad_test<-
   predict(lm_results,ad_test)%>%
@@ -113,13 +130,19 @@ ad_test<-
 ```
 
 ## Calculate RMSE
+
+Calculating rmse works the same as well. 
+
 ```{r}
 rmse_1<-ad_test%>%rmse(truth=income_75,estimate=pred1)  
 rmse_1
 ```
 
+So, what we've done at this point is to include a new kind of predictor-- a binary variable-- and include it in a workflow that has both pre-processing and model fitting. 
 
 ## Regression with a categorical variable
+
+We can also include caegorical variables in our model using much the same process. 
 
 ## Set Formula
 ```{r}
