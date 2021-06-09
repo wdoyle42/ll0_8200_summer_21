@@ -1,0 +1,186 @@
+---
+title: Regression, Part 2
+author: Will Doyle
+output: html_document
+---
+
+## Introduction
+
+In this section we're going to continue fitting regression to the training data and
+testing the predictions against the testing data. We're also going to add some new elements.
+We'll be using independent variables or predictor variables that are binary or categorical. In addition, we'll start using `workflows` that put the various steps of our modeling workflow together. 
+
+We'll need the same libraries as last week:
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(plotly)
+```
+
+
+And the same dataset, which includes data on a variety of metropolitan and micropolitan areas in the United States. 
+
+```{r}
+ad<-readRDS("area_data.Rds")
+```
+
+
+
+## Training and Testing Data
+```{r}
+set.seed(35202)
+
+
+split_data<-ad%>%initial_split(prop=.5)
+
+ad_train<-training(split_data)
+
+ad_test<-testing(split_data)
+```
+
+## Set Model
+
+```{r}
+lm_fit <- 
+  linear_reg() %>% 
+  set_engine("lm")%>%
+  set_mode("regression")
+```
+
+
+
+## Begin Workflow
+
+```{r}
+income_wf<-workflow()%>%
+  add_model(lm_fit)
+```
+
+
+
+## Regression with a binary variable
+
+The next variable I want to include is `metro`, which is a binary variable set to "Yes" if the area is a metropolitan area and "No" if it is not a metropolitan area. The code below shows the number of 
+
+```{r}
+ad%>%
+  group_by(metro)%>%
+  summarise("Number of Areas"=n())%>%
+  mutate(`Proportion`=`Number of Areas`/sum(`Number of Areas`))
+```
+
+This shows that about 58% of areas are not metro areas, while 42% are. 
+
+## Set Formula
+```{r}
+income_formula<-as.formula("income_75~college_educ+perc_homeown+metro")
+```
+
+The variable `metro` is now added to our formula. But we need to tell the model how to handle this variable, since it is a binary variable. 
+
+## Set Recipe
+```{r}
+income_rec<-recipe(income_formula,data=ad)%>%
+  step_dummy(metro)
+```
+
+The `recipe` function allows us to get the data ready for analysis, a step that is called [pre-processing](https://towardsdatascience.com/data-preprocessing-concepts-fa946d11c825).
+
+## Add recipe to workflow
+```{r}
+income_wf<-income_wf%>%
+  add_recipe(income_rec)
+```
+
+
+## Fit to training data
+
+
+```{r}
+lm_results<-fit(income_wf,ad_train)
+
+tidy(lm_results)
+```
+
+
+## Predict on testing data and calculate rmse
+```{r}
+ad_test<-
+  predict(lm_results,ad_test)%>%
+  rename(pred1=.pred)%>%
+  bind_cols(ad_test)
+```
+
+## Calculate RMSE
+```{r}
+rmse_1<-ad_test%>%rmse(truth=income_75,estimate=pred1)  
+rmse_1
+```
+
+
+## Regression with a categorical variable
+
+## Set Formula
+```{r}
+income_formula<-as.formula("income_75~college_educ+perc_homeown+metro+region")
+```
+
+
+
+## Begin Workflow
+
+```{r}
+income_wf<-workflow()%>%
+  add_model(lm_fit)
+```
+
+
+## Set Formula
+```{r}
+income_formula<-as.formula("income_75~college_educ+perc_homeown+metro+region")
+```
+
+## Set Recipe
+```{r}
+income_rec<-recipe(income_formula,data=ad)%>%
+  step_dummy(metro,region)
+```
+
+## Add recipe to workflow
+```{r}
+income_wf<-income_wf%>%
+  add_recipe(income_rec)
+```
+
+
+## Fit to training data and look at coefficients and model fit
+```{r}
+lm_results<-fit(income_wf,ad_train)
+
+tidy(lm_results)
+
+pull_workflow_fit(lm_results)
+```
+
+
+## Predict on testing data and calculate rmse
+```{r}
+ad_test<-
+  predict(lm_results,ad_test)%>%
+  rename(pred2=.pred)%>%
+  bind_cols(ad_test)
+```
+
+## Calculate RMSE
+```{r}
+rmse_2<-ad_test%>%rmse(truth=income_75,estimate=pred2)  
+rmse_2
+```
+
+## Or get there the easy way
+```{r}
+lf<-last_fit(income_wf,split=split_data)
+lf$.metrics
+```
+
