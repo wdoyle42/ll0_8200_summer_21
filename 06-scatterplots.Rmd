@@ -149,7 +149,7 @@ As we add more variables to the model, it can get more difficult to plot relatio
 Now, using my estimates from model 2, I predict what would happen to these hypothetical individuals.  Once I've got my prediction, I transform it back out of the log scale into the "response" level of dollars. 
 
 ```{r}
-
+  
 hypo_data<-data_grid(els, byses1 = seq_range(byses1,n=100),bypared)  %>% add_predictions(mod_2)
 ```
 
@@ -161,22 +161,20 @@ Now we can plot the result, using the `geom_smooth` layer to give us lines for e
 g4<-ggplot(data=hypo_data,
            aes(x=byses1,
                y=pred,
-               color=fct_reorder(f=as.factor(bypared),-pred))) #notice color
+               color=fct_reorder(as.factor(bypared),-pred))) #notice color
 g4<-g4+geom_smooth(method=lm,se=FALSE)
 g4<-g4+theme(legend.position="bottom",legend.title = element_blank())
-g4<-g4+xlab("Income Rank")+ylab("Math Test Scores")
+g4<-g4+xlab("SES")+ylab("Math Test Scores")
 g4
 ```
 
-*Question: Based on our motivating example, where should we be advertising?*
 
 To show this in the data we can break it out for every type of parental education. 
 
 ```{r}
 ## Resort Parental Education for graphic
 
-els<-els%>%mutate(bypared=fct_reorder(f=bypared,-bynels2m))
-
+els<-els%>%mutate(bypared=fct_reorder(as.factor(bypared),-bynels2m))%>%na.omit()
 g5<-ggplot(els,aes(x=byses1,y=bynels2m, color=as.factor(bypared)))
 g5<-g5+geom_point(alpha=.5,size=.1)
 g5<-g5+geom_smooth(method="lm",color="black")
