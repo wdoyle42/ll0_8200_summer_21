@@ -1,0 +1,18 @@
+Assignment 5
+----------------
+
+
+```{r,echo=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(plotly)
+```
+
+
+```{r}
+ad<-readRDS("area_data.Rds")
+```
+
+1. Run a model which predicts the percent of the population as a function of the percent of the population that are insured. 
+
+2. 
