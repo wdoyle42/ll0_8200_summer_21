@@ -1,7 +1,9 @@
 ---
 title: "Web Scraping"
 author: "Will Doyle"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ## Introduction
@@ -28,16 +30,21 @@ We will use multiple new libraries today. Among the ones you'll need:
 
 * `rvest` for scraping websites
 
-* `acs` for accessing American Community Survey data via the census API
+* `tidycensus` for accessing American Community Survey data via the census API
+
+* `lubridate` for some date functions
+
+* `gridExtra` to combine graphs
+
 
 
 ```{r}
 library(tidyverse)
 library(rvest)
-library(acs)
-library(lubridate)
-library(noncensus)
 library(tigris)
+library(lubridate)
+library(gridExtra)
+library(tidycensus)
 ```
 
 
@@ -74,7 +81,7 @@ When we talk about "scraping" a web table, we're talking about pulling a table t
 marathon_wiki = "https://en.wikipedia.org/wiki/Marathon_world_record_progression"
 
 # Get the page, pull the tables via html_table
-marathon <- read_html(marathon_wiki)%>%html_table()
+marathon <- read_html(marathon_wiki)%>%html_table(fill=TRUE)
 
 
 #Men's is the first table
@@ -96,13 +103,16 @@ marathon$date<-mdy(marathon$Date)
 ## Progression of World Record Marathon Speed in Meters/Second
 ```{r}
 
-marathon<-marathon%>%mutate(Nationality=fct_reorder(f=as.factor(Nationality),x=-speed,fun = max))
+marathon<-marathon%>%
+  mutate(Nationality=fct_reorder(.f=as_factor(Nationality),
+                                 .x=-speed,
+                                 .fun = max))
 
 g1<-ggplot(data=marathon,
            aes(y=speed,x=date,
-               #Reorder nationality by fastest times
                color=Nationality)
            )  
+
 g1<-g1+geom_point()+
            xlab("Date")+
            ylab("Meters/Second")
@@ -121,133 +131,170 @@ Today, we'll be working with the American Community Survey from the census. Plea
 
 *YOU NEED TO PAY ATTENTION TO TERMS OF USE WHEN USING APIS. DO NOT VIOLATE THESE.*
 
-With these keys in hand, we can interact with these various databases. Let's say we have information on zip codes for students, and we want to know their likely income level. We can do this by using the American Community Survey API. 
+Next, we'll turn to the American Community Survey. This includes a large number of tables (available here in excel file form:  https://www.census.gov/programs-surveys/acs/technical-documentation/summary-file-documentation.html) that cover many demographic and other characteristics of the population, down to the level of zip codes. We'll use the `tidycensus` package to get two tables for the counties we're interested in: levels of education and income. We'll turn these tables into two variables: the proportion of the population with incomes above $75,000, and the proportion of the population with at least a bachelor's degree. 
 
-## Zip Code Level Data from the American Community Survey
+The first step is to get the table from ACS. You can look up these tables by using the `load_variables` command, then searching through the results using`View()` and filter. 
 
-The first step is to create a list of all zip codes in Davidson County. We can do this by using another dataset that includes a comprehensive listing of zip codes by county and city. 
-
-We start by using the lookup_code from the `tigris` package to get the fips codes for Davidson County in TN (Davidson is home to Vanderbilt).
 ```{r}
-## Look up fips code for county
-lookup_code("TN","Davidson") 
+library(tidycensus)
+library(tigris)
+library(gridExtra)
 
-state_fips<-"47"
-county_stub<-"037"
+## Looking for variables
+
+v18 <- load_variables(2018, "acs5", cache = TRUE)
+
+## put everything in lower case for ease of use
+
+v18<-v18%>%
+  mutate(name=str_to_lower(name))%>%
+  mutate(label=str_to_lower(label))%>%
+  mutate(concept=str_to_lower(concept))
+
+#View(v18)
+
+# b15003: education of pop over 25
+# b19001: household income over last 12 months
 ```
 
-Next, we'll combine the state and county fips into a single object
+You can also use search functions like `str_detect` to find what you're looking for
 
 ```{r}
-county_fips<-paste0(state_fips,county_stub)
+
+v18%>%
+  filter(str_detect(concept,"attainment"))%>%
+  filter(str_detect(label,"bachelor"))
+
 ```
 
+
+## Installing the API Key
+
+
+Below, I install my api Key. You'll need to add the key you received from the Census bureau below. 
 ```{r}
-# Get dataset that matches all zip codes to cities, counties and states. 
-county_to_zip<-read_csv("http://www2.census.gov/geo/docs/maps-data/data/rel/zcta_county_rel_10.txt")
-save(county_to_zip,file="county_to_zip.Rdata")
 
-#easier names to work with
-names(county_to_zip)<-tolower(names(county_to_zip))
-
-#Just zip codes in selected county
-county_to_zip<-county_to_zip%>%filter(state==state_fips,county==county_stub)%>%
-  select(zcta5,state,county)
-
-#list of zip codes
-ziplist<-county_to_zip$zcta5
-
-#City names
-data(zip_codes)
-
-city_zip<-zip_codes%>%filter(zip%in%ziplist)%>%select(zip,city)
-
-#Arrange in order
-city_zip<-city_zip%>%arrange(as.numeric(zip))
-```
-
-Next, we'll turn to the American Community Survey. This includes a large number of tables (available here in excel file form:  https://www.census.gov/programs-surveys/acs/technical-documentation/summary-file-documentation.html) that cover many demographic and other characteristics of the population, down to the level of zip codes. We'll use the `acs` package to get two tables for the zip codes we're interested in: levels of education and income. We'll turn these tables into two variables: the proportion of the population with incomes above $75,000, and the proportion of the population with at least a bachelor's degree. 
-
-The first step is to get the table from ACS. Below, I submit a request using my key to get table B15002, which contains information on education levels. 
-
-```{r}
 # Get your own key and save as my_acs_key.txt
 my_acs_key<-readLines("my_acs_key.txt",warn = FALSE)
 acs_key<-my_acs_key
 
-# Or just paste it here.
-#acs_key<-"<your_acs_key_here>"
 
-#List of tables: https://www.census.gov/programs-surveys/acs/technical-documentation/summary-file-documentation.html under, 1-year appendices
-# b15002: education of pop over 25, by sex 
-# b19001: household income over last 12 months
+census_api_key(acs_key,install=TRUE,overwrite = TRUE)
 
-api.key.install(acs_key, file = "key.rda")
-
-select_zip<-geo.make(zip.code=ziplist)
-
-county_educ=acs.fetch(geography=select_zip,
-                      endyear=2014,
-                      table.number="B15002",
-                      col.names="pretty",verbose=T)
-
-acs.colnames(county_educ)
+# OR just paste it here.
+acs_key<-"<your_acs_key_here>"
 ```
+
 
 ## Organizing ACS data
 
 The trick with ACS data is organizing it in a way that's going to make sense. For us to get the proportion of indivudals with a college degree or more, we're going to need to take the numbers of people who are in each of the various age levels for education, and then divide by the total number of people in the zip code. Below I include code to calculate the proportion of individuals in each zip code who have at least a bachelor's degree. 
 
+Below, I submit a request using my key to get table B15003, which contains information on education levels. 
 ```{r}
-## Proprtion of individuals at college or above=
-## number with college degree/
-## total number
-prop_coll_above<-divide.acs(numerator=(county_educ[,15]+
-                                      county_educ[,16]+
-                                      county_educ[,17]+
-                                      county_educ[,18]+
-                                      county_educ[,32]+
-                                      county_educ[,33]+
-                                      county_educ[,34]+
-                                      county_educ[,35]),
-                            denominator=county_educ[,1]
-)
+## Educ Characteristics by County for Texas
+
+educ_vars<-get_acs(geography = "county",state="TX",
+                    table="B15003",geometry = TRUE)
+
+save(educ_vars,file="educ_vars.Rdata")
+## IF THIS DIDN"T WORK FOR SOME REASON YOU CAN LOAD THE FILE
+load("educ_vars.Rdata")
+
+## Spread, so that each level of education gets its own column
+educ_vars<-educ_vars%>%
+  select(GEOID,NAME,variable,estimate)%>%
+  spread(key=variable,value = estimate)
+
+## rename to be all lower case 
+names(educ_vars)<-str_to_lower(names(educ_vars))
+
+## Calculate prop with at least bachelor's for every county
+educ_vars<-educ_vars%>%
+  mutate(prop_bach=(b15003_022+
+                    b15003_023+
+                    b15003_024+
+                    b15003_025)/b15003_001)
+
+## simplify to just proportion
+educ_vars<-educ_vars%>%
+  select(geoid,name,prop_bach,geometry)
+
+```
+
+```{r}
+
+## Income by County for Texas
+
+income_vars<-get_acs(geography = "county",state="TX",
+                    table="B19001",
+                    geometry=TRUE)
+
+save(income_vars,file="income_vars.Rdata")
+## IF THIS DIDN"T WORK FOR SOME REASON YOU CAN LOAD THE FILE
+load("income_vars.Rdata")
+
+## Spread, so that each level of education gets its own column
+income_vars<-income_vars%>%
+  select(GEOID,NAME,variable,estimate)%>%
+  spread(key=variable,value = estimate)
+
+## rename to be all lower case 
+names(income_vars)<-str_to_lower(names(income_vars))
+
+## Calculate prop with at least bachelor's for every county
+income_vars<-income_vars%>%
+  mutate(prop_75p=(b19001_013+
+                    b19001_014+
+                    b19001_015+
+                    b19001_016+
+                    b19001_017)/b19001_001)                      
+
+## simplify to just proportion
+income_vars<-income_vars%>%
+  select(geoid,name,prop_75p,geometry)
+
+```
+
+```{r}
+educ_vars_2<-educ_vars%>%as_tibble()%>%select(geoid,name,prop_bach)
+
+income_vars_2<-income_vars%>%as_tibble()%>%select(geoid,name,prop_75p)
+
+educ_income<-left_join(educ_vars_2,income_vars_2,by=c("geoid","name"))
+
 ```
 
 
-## Family Income Data
+
 ```{r}
-
-# 19001-- family income           
-county_income<-acs.fetch(geography=select_zip, 
-                        endyear = 2015,
-                        table.number="B19001", 
-                        col.names="pretty")
-
-acs.colnames(county_income)
-
-#Proportion above 75k-- 
-prop_above_75<-divide.acs(numerator=(county_income[,13]+
-                            county_income[,14]+
-                            county_income[,15]+
-                            county_income[,16]+
-                            county_income[,17]),
-                          denominator=county_income[,1]
-                          )
-                          
-# Convert to tibble
-county_df<-tibble(substr(geography(county_educ)[[1]],7,11),
-                       as.numeric(estimate(prop_coll_above)),
-                       as.numeric(estimate(prop_above_75))
-)
-
-# Give it easy to use names
-names(county_df)<-c("zip","college_educ","income_75")
-save(county_df,file="dav.RData")
-
-head(county_df)
+gg<-ggplot(educ_income,aes(y=prop_75p,x=prop_bach))
+gg<-gg+geom_point()
+gg<-gg+xlab("Proportion of Pop with a Bachelor's")+ylab("Proportion of Pop with Income over 75k")
+gg
 ```
 
-_Quick Exercise_ Pull table B23001 "Sex by Age by Employment Status for the Population 16 and over" from ACS. 
+
+```{r}
+gg1<-ggplot(educ_vars,aes(fill=prop_bach))
+gg1<-gg1+geom_sf(color=NA)
+gg1<- gg1+ scale_fill_viridis_c(option = "viridis") 
+gg1<-gg1+ggtitle("Proportion of Pop with a BA")
+gg1
+```
+
+```{r}
+gg2<-ggplot(income_vars,aes(fill=prop_75p))
+gg2<-gg2+geom_sf(color=NA)
+gg2<- gg2+ scale_fill_viridis_c(option = "viridis") 
+gg2<-gg2+ggtitle("Proportion of Pop with Income over 75k")
+gg2
+```
+
+```{r}
+gg_both<-grid.arrange(gg1,gg2)
+gg_both
+```
+
 
 This resource is amazingly helpful. It means that with a list of zip codes you can get a huge amount of information about the area where the individual resides, including education, housing, income, medical care and other topics. 
