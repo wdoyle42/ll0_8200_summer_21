@@ -19,9 +19,7 @@ library(tidymodels)
 library(plotly)
 ```
 
-
 ## The Data
-
 
 ```{r}
 ad<-readRDS("area_data.Rds")
