@@ -30,7 +30,17 @@ Please watch async on LMS for this week.
 
 In Class Work [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-flat-data-inclass.Rmd)
 
-5\. Analyzing Data: Linear Regression [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression.Rmd)
+5\. Analyzing Data: Linear Regression
+
+[Lecture Notes, part 1 , Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression.Rmd)
+[Lecture Notes, part 1 , HTML Version](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/05-regression.html)
+
+
+[Lecture Notes, part 2 , Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression-2.Rmd)
+[Lecture Notes, part 2 , HTML Version](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/05-regression-2.html)
+
+
+
 [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/area_data.Rds)
 
 Watch lecture 5.1: Introduction: From Conditional Means to Linear Regression on LMS
@@ -41,7 +51,9 @@ New lecture 5.3 & 5.4 : multiple regression [here](https://youtu.be/6s5__DICHDg)
 
 Watch lecture 5.5: Training and Testing on LMS
 
-In Class Work [.Rmd file](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression-inclass-1.Rmd)
+In Class Work, part 1 [.Rmd file](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression-inclass-1.Rmd)
+
+
 
 6\. Presenting Data: Scatterplots  [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-scatterplots.Rmd) 
 [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/els.Rdata)
