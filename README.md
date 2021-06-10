@@ -92,6 +92,8 @@ Watch lecture 7.5 on LMS
 
 [Assignment 4, Due Midnight June 8](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-assignment.Rmd)
 
+[Assignment 4 Key](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-assignment-key.Rmd)
+
 [Assignment 5, Due Midnight June 22](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-assignment.Rmd)
 
 Assignment 6, Due Midnight Jun 29
