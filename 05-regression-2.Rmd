@@ -154,16 +154,6 @@ We can also include categorical variables in our model using much the same proce
 income_formula<-as.formula("income_75~college_educ+perc_homeown+metro+region")
 ```
 
-
-## Set Formula
-
-To add a variable, the first thing we need to do is to set the formulat to include the new variable. 
-
-```{r}
-income_formula<-as.formula("income_75~college_educ+perc_homeown+metro+region")
-```
-
-
 ## Set Recipe
 
 Because our formula now includes two variables that are categorical, we need to change our recipe to reflect that. Below, `step_dummy` is applied to both the `metro` and `region` variables. 

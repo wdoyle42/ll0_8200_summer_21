@@ -49,10 +49,15 @@ New lecture 5.2: bivariate regression [here](https://youtu.be/8P5CLj5Vy70)
 
 New lecture 5.3 & 5.4 : multiple regression [here](https://youtu.be/6s5__DICHDg)
 
+New Lecture 5.4a: regression with binary independent variables [here](https://youtu.be/llfHYO_MujY)
+
+New Lecture 5.4b: regression with categorical independent variables [here](https://youtu.be/hm33VbjQZMY)
+
 Watch lecture 5.5: Training and Testing on LMS
 
 In Class Work, part 1 [.Rmd file](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression-inclass-1.Rmd)
 
+In Class Work, part 2[.Rmd file]
 
 
 6\. Presenting Data: Scatterplots  [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-scatterplots.Rmd) 

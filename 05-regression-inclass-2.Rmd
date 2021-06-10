@@ -1,0 +1,146 @@
+---
+title: "Regression: In Class Work"
+author: "Will Doyle"
+---
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(plotly)
+```
+
+```{r}
+ad<-read_rds("area_data.Rds")
+```
+
+
+1. Plot home ownership `perc_homeown` as a function of college education `college_educ` and comment on what you see.
+
+```{r}
+gg<-ad%>%
+  ggplot(aes(x=college_educ,y=perc_homeown,label=name))+
+  geom_point()+
+  geom_smooth(method="lm")
+
+  ggplotly(gg)
+```
+
+
+
+2. Run a regression of home ownership on college education (home ownership is the dependent variable, percent college educated is the independent variable). 
+
+
+## Training and Testing Data
+```{r}
+set.seed(35202)
+
+split_data<-ad%>%initial_split(prop=.5)
+
+ad_train<-training(split_data)
+
+ad_test<-testing(split_data)
+
+```
+
+
+```{r}
+homeown_formula<-as.formula("perc_homeown~college_educ")
+```
+
+
+
+
+```{r}
+lm_fit <- 
+  linear_reg() %>% 
+  set_engine("lm")%>%
+  set_mode("regression")
+```
+
+
+```{r}
+lm_results<-
+  lm_fit%>%
+  fit(homeown_formula,data=ad_train)
+```
+
+
+```{r}
+summary(lm_results$fit)
+```
+
+
+
+3. Summarize the relationship between home ownership and college education in a sentence.
+
+There is a modest, but statistically significant relationship between the percent of the population with a bachelor's degree and the  percent of the  population that own their  own homes. For every one percent increase in the percent of the population with a bachelor's degree, homeownership is predicted to decline by one tenth of a percent (or so). 
+
+
+4. Calculate a summary of the fit of the above model and comment on what it means.
+
+
+```{r}
+ad_test<-lm_results%>% ## start with the results
+  predict(new_data=ad_test)%>% ## create a prediction
+  rename(pred1=.pred)%>%  ## rename the prediction
+  bind_cols(ad_test) ## add the prediction to the testing dataset
+```
+
+## Calculate RMSE
+```{r}
+rmse_1<-rmse(ad_test,
+     truth=perc_homeown,
+     estimate=pred1)
+
+rmse_1
+```
+
+
+
+5. Add the variable for income to the above regression and repeat steps 1-4. 
+
+
+
+```{r}
+homeown_formula<-as.formula("perc_homeown~college_educ+income_75")
+```
+
+
+```{r}
+lm_fit <- 
+  linear_reg() %>% 
+  set_engine("lm")%>%
+  set_mode("regression")
+```
+
+
+```{r}
+lm_results<-
+  lm_fit%>%
+  fit(homeown_formula,data=ad_train)
+```
+
+
+```{r}
+summary(lm_results$fit)
+```
+
+
+
+```{r}
+ad_test<-lm_results%>% ## start with the results
+  predict(new_data=ad_test)%>% ## create a prediction
+  rename(pred2=.pred)%>%  ## rename the prediction
+  bind_cols(ad_test) ## add the prediction to the testing dataset
+```
+
+
+
+## Calculate RMSE
+```{r}
+rmse_1<-rmse(ad_test,
+     truth=perc_homeown,
+     estimate=`pred1...2`)
+
+rmse_1
+```
