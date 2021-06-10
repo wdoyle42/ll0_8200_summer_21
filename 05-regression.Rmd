@@ -20,8 +20,6 @@ library(plotly)
 ```
 
 
-
-
 ## The Data
 
 

@@ -260,11 +260,11 @@ Wednesday, July 21, 2021
 
 *Resources*
 
-James, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). An introduction to statistical
-learning (Vol. 6). New York, NY: Springer. Chapter 4 , Chapter 4 Lab R Code
+James, G., Witten, D., Hastie, T., & Tibshirani, R. (2013). [An introduction to statistical
+learning (Vol. 6). New York, NY: Springer. Chapter 4](https://static1.squarespace.com/static/5ff2adbe3fe4fe33db902812/t/6062a083acbfe82c7195b27d/1617076404560/ISLR%2BSeventh%2BPrinting.pdf) , [Chapter 4 Lab R Code](https://github.com/rghan/ISLR/raw/master/Chapter%204%20Lab.txt)
 
 
-Althoff, T., Danescu-Niculescu-Mizil, C., & Jurafsky, D. (2014, May). How to ask for a favor: A case study on the success of altruistic requests. In ICWSM. Available at http://www.aaai.org/ocs/index.php/ICWSM/ICWSM14/paper/download/8106/8101
+Althoff, T., Danescu-Niculescu-Mizil, C., & Jurafsky, D. (2014, May). How to ask for a favor: A case study on the success of altruistic requests. In ICWSM. Available at (http://www.aaai.org/ocs/index.php/ICWSM/ICWSM14/paper/download/8106/8101)
 
 *Lecture Notes*
 

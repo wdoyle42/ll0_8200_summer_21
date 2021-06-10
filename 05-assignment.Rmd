@@ -13,6 +13,17 @@ library(plotly)
 ad<-readRDS("area_data.Rds")
 ```
 
-1. Run a model which predicts the percent of the population as a function of the percent of the population that are insured. 
+1. Run a model on a training subset of the data which predicts the percent of the population in the labor force (dependent variable) as a function of the percent of the population that is insured (independent variable). 
 
-2. 
+2. Summarize the coefficient for percent of the population that is insured in a sentence or two. 
+
+3. Calculate the model fit by calculating the rmse in the *testing* data. 
+
+4. Add variables for the census division and the percent of the population with incomes above 30 minutes. Comment on the estimates for both of these variables. (*N.B: the census division is a categorical variable* ). 
+
+5. Calculate the model fit by examining the rmse in the testing data. Comment in a sentence on what the rmse means and how it compares to the rmese in step 3. 
+
+6. Create another model by adding at least two other variables. Answer the following questions in a sentence for each:
+  - What is the rmse from your new model? How does it compare to the rmse from the previous model? 
+  - Which predictors appear to be related to the outcome? How do you know?
+
