@@ -18,12 +18,80 @@ library(haven)
 1. Wine data. Save as file name `wine.Rds` 
 [http://archive.ics.uci.edu/ml/machine-learning-databases/wine/]()
 
+```{r}
+wine<-read_csv("http://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data",
+               col_names=FALSE)
+
+wine_names<-c("CLASS",
+  "Alcohol",
+ 	 "Malic acid",
+ 	 "Ash",
+	 "Alcalinity of ash",
+  "Magnesium",
+	 "Total phenols",
+  "Flavanoids",
+  "Nonflavanoid phenols",
+ 	 "Proanthocyanins",
+	"Color intensity",
+ "Hue",
+ "OD280/OD315 of diluted wines",
+ 	"Proline"  
+ 	)
+
+names(wine)<-wine_names
+head(wine)
+
+save(wine,file="wine.Rdata")
+
+write_csv(wine,"wine.csv")
+```
+
+
+
 2. 2016 Health Education District Data
 [https://www.cdc.gov/healthyyouth/data/shpps/data.htm]()
+
+
+```{r}
+he<-read_sav("https://www.cdc.gov/healthyyouth/data/shpps/files/spss/2016-spss/hlthedd2016.sav")
+
+save(he,file="health_district.Rdata")
+
+load("health_district.Rdata")
+
+write_csv(he,"health_district.csv")
+```
+
 
 3. County level replication file for "Political partisanship influences behavioral responses to governors’ recommendations for COVID-19 prevention in the United States"
 [https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/BT3LXD]()
 
+```{r}
+
+partisan<-read_dta("SG_county_data.dta")
+
+save(partisan,file="partisan.Rdata")
+
+```
+
+
 4. Airline dataset, [http://www.principlesofeconometrics.com/sas.htm]()
 
+```{r}
+airline<-read_sas('http://www.principlesofeconometrics.com/sas/airline.sas7bdat')
+
+save(airline,file="airline.Rdata")
+```
+
+
+
+
 5. King county births [http://courses.washington.edu/b517/Datasets/datasets.html]() 
+
+```{r}
+
+kc_births<-read_dta("http://courses.washington.edu/b517/Datasets/Birth_Data.dta")
+
+save(kc_births, file="kc_births.Rdata")
+```
+
