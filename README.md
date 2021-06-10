@@ -69,7 +69,7 @@ In Class Work, part 2[.Rmd file](https://github.com/wdoyle42/ll0_8200_summer_21/
 
 #### 6\. Presenting Data: Scatterplots
 
-[Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-scatterplots.Rmd) 
+[Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-scatterplots.Rmd)  and
 [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/els.Rdata)
 
 Please watch async on LMS for this week
