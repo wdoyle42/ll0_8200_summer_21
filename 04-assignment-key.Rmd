@@ -1,0 +1,30 @@
+---
+title: "Untitled"
+output: html_document
+---
+Assignment 4
+---------------
+
+For this assignment, you'll need to open up, clean and save the following datasets, using the tools we've gone over in class. For each dataset, make sure that when you're done you have a nice, neatly labeled dataset that would be easy for you or another analyst to open and analyze. Save the result in an `RData` file using the names provided. You need to turn in an R script named `04-assignment_<lastname>.Rmd` that cleanly creates all of the datasets requested (lower case only for your last name, please).  
+
+
+```{r}
+library(tidyverse)
+library(haven)
+```
+
+*PLEASE NOTE: YOU CAN'T JUST COPY THESE LINKS INTO YOUR CODE. YOU NEED TO FIGURE OUT THE FORMAT FOR THE DATA. TAKE A LOOK AT THE WEBSITE TO FIGURE OUT WHAT KIND OF DATA IS THERE, THEN YOU CAN DOWNLOAD THE DATASET AND USE THE APPROPRIATE CODE TO OPEN IT*
+
+
+1. Wine data. Save as file name `wine.Rds` 
+[http://archive.ics.uci.edu/ml/machine-learning-databases/wine/]()
+
+2. 2016 Health Education District Data
+[https://www.cdc.gov/healthyyouth/data/shpps/data.htm]()
+
+3. County level replication file for "Political partisanship influences behavioral responses to governors’ recommendations for COVID-19 prevention in the United States"
+[https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/BT3LXD]()
+
+4. Airline dataset, [http://www.principlesofeconometrics.com/sas.htm]()
+
+5. King county births [http://courses.washington.edu/b517/Datasets/datasets.html]() 
