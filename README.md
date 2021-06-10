@@ -8,9 +8,13 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 *To access lecture notes and/or data sets use ctrl+click on a mac or right click on a pc, then click "save link as" and save to the class directory on your computer.*
 
-1\. Welcome to Data Science: Tools of the Trade [Lecture Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-intro.Rmd)  
+#### 1\. Welcome to Data Science: Tools of the Trade
 
-2\. Analyzing Data: Conditional Means [Lecture Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/02-conditional_means.Rmd) and [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/sc_debt.Rds)  
+[Lecture Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/01-intro.Rmd)  
+
+#### 2\. Analyzing Data: Conditional Means
+
+[Lecture Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/02-conditional_means.Rmd) and [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/sc_debt.Rds)  
 
 [Updated Async Video Part 1](https://youtu.be/NQtvxw9CNCU)
 
@@ -18,19 +22,23 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 
 In Class Work: [html](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/02-conditional-means-inclass.html) [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/02-conditional-means-inclass.Rmd) [dataset](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/caschool.rdata)
 
-3\. Presenting Data: Descriptive Plots [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/03-plot_means.Rmd) [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/attrition.Rdata)  
+#### 3\. Presenting Data: Descriptive Plots
+
+[Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/03-plot_means.Rmd) and  [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/attrition.Rdata)  
 
 Please watch async on LMS for this week. 
 
 In Class Work: [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/03-plot-means-inclass.Rmd)
 
-4\. Getting Data: Flat Files and “Tidy Data”  [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-flat_data.Rmd) 
+#### 4\. Getting Data: Flat Files and “Tidy Data” 
+
+[Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-flat_data.Rmd) 
 
 Please watch async on LMS for this week. 
 
 In Class Work [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-flat-data-inclass.Rmd)
 
-5\. Analyzing Data: Linear Regression
+#### 5\. Analyzing Data: Linear Regression
 
 [Lecture Notes, part 1 , Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression.Rmd)
 [Lecture Notes, part 1 , HTML Version](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/05-regression.html)
@@ -40,32 +48,33 @@ In Class Work [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/mai
 [Lecture Notes, part 2 , HTML Version](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/05-regression-2.html)
 
 
-
 [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/area_data.Rds)
 
 Watch lecture 5.1: Introduction: From Conditional Means to Linear Regression on LMS
 
-New lecture 5.2: bivariate regression [here](https://youtu.be/8P5CLj5Vy70)
+New lecture 5.2: bivariate regression [here](https://youtu.be/8P5CLj5Vy70) *N.B. Use lecture notes part 1 for this video*
 
-New lecture 5.3 & 5.4 : multiple regression [here](https://youtu.be/6s5__DICHDg)
+New lecture 5.3 & 5.4 : multiple regression [here](https://youtu.be/6s5__DICHDg) *N.B. Use lecture notes part 1 for this video*
 
-New Lecture 5.4a: regression with binary independent variables [here](https://youtu.be/llfHYO_MujY)
+New Lecture 5.4a: regression with binary independent variables [here](https://youtu.be/llfHYO_MujY) *N.B. Use lecture notes part 2 for this video*
 
-New Lecture 5.4b: regression with categorical independent variables [here](https://youtu.be/hm33VbjQZMY)
+New Lecture 5.4b: regression with categorical independent variables [here](https://youtu.be/hm33VbjQZMY) *N.B. Use lecture notes part 2 for this video*
 
 Watch lecture 5.5: Training and Testing on LMS
 
 In Class Work, part 1 [.Rmd file](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression-inclass-1.Rmd)
 
-In Class Work, part 2[.Rmd file]
+In Class Work, part 2[.Rmd file](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression-inclass-2.Rmd)
 
 
-6\. Presenting Data: Scatterplots  [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-scatterplots.Rmd) 
+#### 6\. Presenting Data: Scatterplots
+
+[Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-scatterplots.Rmd) 
 [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/els.Rdata)
 
 Please watch async on LMS for this week
 
-7\. Getting Data: Web Sources 
+#### 7\. Getting Data: Web Sources 
 
 
 [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/07-webscraping.Rmd)
@@ -80,13 +89,13 @@ Watch lectures 7.1-7.3 Please watch on async.
 
 Watch lecture 7.5 on LMS
 
-8\. Analyzing Data: Classification  
+#### 8\. Analyzing Data: Classification  
 
 
-9\. Presenting Data: Plots and Tables for Classification  
+#### 9\. Presenting Data: Plots and Tables for Classification  
 
 
-10\. Cross Validation  
+#### 10\. Cross Validation  
 
 
 ### Assignments and Due Dates
