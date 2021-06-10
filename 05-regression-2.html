@@ -172,6 +172,8 @@ pre code {
 
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
+<p>In this section we’re going to continue fitting regression to the training data and testing the predictions against the testing data. We’re also going to add some new elements. We’ll be using independent variables or predictor variables that are binary or categorical. In addition, we’ll start using <code>workflows</code> that put the various steps of our modeling workflow together.</p>
+<p>We’ll need the same libraries as last week:</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.3     ✓ purrr   0.3.4
@@ -207,20 +209,12 @@ pre code {
 <pre><code>## The following object is masked from &#39;package:graphics&#39;:
 ## 
 ##     layout</code></pre>
+<p>And the same dataset, which includes data on a variety of metropolitan and micropolitan areas in the United States.</p>
 <pre class="r"><code>ad&lt;-readRDS(&quot;area_data.Rds&quot;)</code></pre>
-</div>
-<div id="regression-with-a-binary-variable" class="section level2">
-<h2>Regression with a binary variable</h2>
-<pre class="r"><code>ad%&gt;%group_by(metro)%&gt;%count()</code></pre>
-<pre><code>## # A tibble: 2 x 2
-## # Groups:   metro [2]
-##   metro     n
-##   &lt;chr&gt; &lt;int&gt;
-## 1 No      542
-## 2 Yes     384</code></pre>
 </div>
 <div id="training-and-testing-data" class="section level2">
 <h2>Training and Testing Data</h2>
+<p>As before, I’m going to split the data into training and testing versions.</p>
 <pre class="r"><code>set.seed(35202)
 
 
@@ -232,6 +226,7 @@ ad_test&lt;-testing(split_data)</code></pre>
 </div>
 <div id="set-model" class="section level2">
 <h2>Set Model</h2>
+<p>We’re going to use the same linear model as last time, so I’ll specify that here.</p>
 <pre class="r"><code>lm_fit &lt;- 
   linear_reg() %&gt;% 
   set_engine(&quot;lm&quot;)%&gt;%
@@ -239,28 +234,49 @@ ad_test&lt;-testing(split_data)</code></pre>
 </div>
 <div id="begin-workflow" class="section level2">
 <h2>Begin Workflow</h2>
+<p>Now I start my workflow. A workflow is pretty much what it sounds like. It’s a set of steps in a modeling process. To start with, let’s add our model as defined above to the workflow.</p>
 <pre class="r"><code>income_wf&lt;-workflow()%&gt;%
   add_model(lm_fit)</code></pre>
 </div>
+<div id="regression-with-a-binary-variable" class="section level2">
+<h2>Regression with a binary variable</h2>
+<p>The next variable I want to include is <code>metro</code>, which is a binary variable set to “Yes” if the area is a metropolitan area and “No” if it is not a metropolitan area. The code below shows the number and proprtion of metropolitan and non-metropolitan areas in the dataset.</p>
+<pre class="r"><code>ad%&gt;%
+  group_by(metro)%&gt;%
+  summarise(&quot;Number of Areas&quot;=n())%&gt;%
+  mutate(`Proportion`=`Number of Areas`/sum(`Number of Areas`))</code></pre>
+<pre><code>## # A tibble: 2 x 3
+##   metro `Number of Areas` Proportion
+##   &lt;chr&gt;             &lt;int&gt;      &lt;dbl&gt;
+## 1 No                  542      0.585
+## 2 Yes                 384      0.415</code></pre>
+<p>This shows that about 58% of areas are not metro areas, while 42% are metro areas.</p>
+</div>
 <div id="set-formula" class="section level2">
 <h2>Set Formula</h2>
+<p>Next, I add the variable <code>metro</code> to the formula.</p>
 <pre class="r"><code>income_formula&lt;-as.formula(&quot;income_75~college_educ+perc_homeown+metro&quot;)</code></pre>
+<p>The variable <code>metro</code> is now added to our formula. But we need to tell the model how to handle this variable, since it is a binary variable.</p>
 </div>
 <div id="set-recipe" class="section level2">
 <h2>Set Recipe</h2>
 <pre class="r"><code>income_rec&lt;-recipe(income_formula,data=ad)%&gt;%
   step_dummy(metro)</code></pre>
+<p>The <code>recipe</code> function allows us to get the data ready for analysis, a step that is called <a href="https://towardsdatascience.com/data-preprocessing-concepts-fa946d11c825">pre-processing</a>. In the code above, I create a recipe from the formula and the dataset, then add a pre-processing step, <code>step_dummy</code>. This tells R that I want the metro variable to be understood as 0/1 variable.</p>
 </div>
 <div id="add-recipe-to-workflow" class="section level2">
 <h2>Add recipe to workflow</h2>
+<p>We can now add the recipe to the previously existing workflow.</p>
 <pre class="r"><code>income_wf&lt;-income_wf%&gt;%
   add_recipe(income_rec)</code></pre>
 </div>
 <div id="fit-to-training-data" class="section level2">
 <h2>Fit to training data</h2>
+<p>Now we can fit the processed data to the training dataset and take a look at the results.</p>
 <pre class="r"><code>lm_results&lt;-fit(income_wf,ad_train)
 
-tidy(lm_results)</code></pre>
+lm_results%&gt;%
+  tidy()</code></pre>
 <pre><code>## # A tibble: 4 x 5
 ##   term         estimate std.error statistic  p.value
 ##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -268,9 +284,20 @@ tidy(lm_results)</code></pre>
 ## 2 college_educ    0.658    0.0325    20.3   1.12e-65
 ## 3 perc_homeown    0.221    0.0444     4.98  9.21e- 7
 ## 4 metro_Yes       2.99     0.610      4.90  1.35e- 6</code></pre>
+<pre class="r"><code>lm_results%&gt;%
+  pull_workflow_fit()%&gt;%
+  glance()</code></pre>
+<pre><code>## # A tibble: 1 x 12
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.547         0.544  5.95      185. 1.78e-78     3 -1481. 2972. 2992.
+## # … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+<p>The <code>tidy</code> command allows us to see the coefficients from the model fit to the training data.</p>
+<p>The results show that the percent of individuals with incomes about $75,000 is 2.99 percentage points higher in metro areas than non-metro areas. This is really important: we always interpret binary variables as a comparison between the group that is set to 1 (metropolitan areas in this case) and the group that is set to 0 (non-metropolitan areas).</p>
 </div>
 <div id="predict-on-testing-data-and-calculate-rmse" class="section level2">
 <h2>Predict on testing data and calculate rmse</h2>
+<p>We can add predictions to the testing dataset in the same way we did before.</p>
 <pre class="r"><code>ad_test&lt;-
   predict(lm_results,ad_test)%&gt;%
   rename(pred1=.pred)%&gt;%
@@ -278,44 +305,47 @@ tidy(lm_results)</code></pre>
 </div>
 <div id="calculate-rmse" class="section level2">
 <h2>Calculate RMSE</h2>
+<p>Calculating rmse works the same as well.</p>
 <pre class="r"><code>rmse_1&lt;-ad_test%&gt;%rmse(truth=income_75,estimate=pred1)  
 rmse_1</code></pre>
 <pre><code>## # A tibble: 1 x 3
 ##   .metric .estimator .estimate
 ##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
 ## 1 rmse    standard        5.60</code></pre>
+<p>So, what we’ve done at this point is to include a new kind of predictor– a binary variable– and include it in a workflow that has both pre-processing and model fitting.</p>
 </div>
 <div id="regression-with-a-categorical-variable" class="section level2">
 <h2>Regression with a categorical variable</h2>
+<p>We can also include categorical variables in our model using much the same process.</p>
 </div>
 <div id="set-formula-1" class="section level2">
 <h2>Set Formula</h2>
 <pre class="r"><code>income_formula&lt;-as.formula(&quot;income_75~college_educ+perc_homeown+metro+region&quot;)</code></pre>
 </div>
-<div id="begin-workflow-1" class="section level2">
-<h2>Begin Workflow</h2>
-<pre class="r"><code>income_wf&lt;-workflow()%&gt;%
-  add_model(lm_fit)</code></pre>
-</div>
 <div id="set-formula-2" class="section level2">
 <h2>Set Formula</h2>
+<p>To add a variable, the first thing we need to do is to set the formulat to include the new variable.</p>
 <pre class="r"><code>income_formula&lt;-as.formula(&quot;income_75~college_educ+perc_homeown+metro+region&quot;)</code></pre>
 </div>
 <div id="set-recipe-1" class="section level2">
 <h2>Set Recipe</h2>
+<p>Because our formula now includes two variables that are categorical, we need to change our recipe to reflect that. Below, <code>step_dummy</code> is applied to both the <code>metro</code> and <code>region</code> variables.</p>
 <pre class="r"><code>income_rec&lt;-recipe(income_formula,data=ad)%&gt;%
   step_dummy(metro,region)</code></pre>
 </div>
-<div id="add-recipe-to-workflow-1" class="section level2">
-<h2>Add recipe to workflow</h2>
+<div id="update-workflow-with-new-recipe" class="section level2">
+<h2>Update workflow with new recipe</h2>
+<p>Because we’ve already created the workflow <code>income_wf</code> we can update it with our new recipe, using the command <code>update_recipe</code>.</p>
 <pre class="r"><code>income_wf&lt;-income_wf%&gt;%
-  add_recipe(income_rec)</code></pre>
+  update_recipe(income_rec)</code></pre>
 </div>
 <div id="fit-to-training-data-and-look-at-coefficients-and-model-fit" class="section level2">
 <h2>Fit to training data and look at coefficients and model fit</h2>
+<p>Now we’re ready to fit our linear model. The fit command below tells it to fit the model, with results stored in the object <code>lm_results</code>. We can then pipe the lm_results to the <code>tidy</code> command to see the coefficients. To see measures of model fit we can use <code>pull_workflow_fit</code> and then pipe those results to the <code>glance</code> command.</p>
 <pre class="r"><code>lm_results&lt;-fit(income_wf,ad_train)
 
-tidy(lm_results)</code></pre>
+lm_results%&gt;%
+  tidy()</code></pre>
 <pre><code>## # A tibble: 7 x 5
 ##   term             estimate std.error statistic  p.value
 ##   &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -326,22 +356,19 @@ tidy(lm_results)</code></pre>
 ## 5 region_Northeast    0.692    0.959      0.721 4.71e- 1
 ## 6 region_South       -2.62     0.678     -3.86  1.29e- 4
 ## 7 region_West         3.05     0.793      3.85  1.35e- 4</code></pre>
-<pre class="r"><code>pull_workflow_fit(lm_results)</code></pre>
-<pre><code>## parsnip model object
-## 
-## Fit time:  2ms 
-## 
-## Call:
-## stats::lm(formula = ..y ~ ., data = data)
-## 
-## Coefficients:
-##      (Intercept)      college_educ      perc_homeown         metro_Yes  
-##           4.1357            0.5846            0.2171            3.1394  
-## region_Northeast      region_South       region_West  
-##           0.6915           -2.6188            3.0516</code></pre>
+<pre class="r"><code>lm_results%&gt;%
+  pull_workflow_fit()%&gt;%
+  glance()</code></pre>
+<pre><code>## # A tibble: 1 x 12
+##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.603         0.598  5.59      115. 3.64e-88     6 -1450. 2917. 2950.
+## # … with 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+<p>The results in this case show that the percent of individuals with incomes about $75,000 is 3.14 higher in metro areas than non-metro areas. The results for region include results for three of the four regions. One region is excluded– this is called the reference category. The way we interpret this is to say that the percent of individuals in the South with incomes above $75,000 is predicted to be 2.62 percentage points lower than incomes of individuals in the Midwest. Where did the Midwest come from? It’s the excluded category– so all comparisons are made relative to it. For instance we would also say that the percent of individuals with incomes about $75,000 is predicted to be 3.05 percentage points higher for individuals in the West as compared with the Midwest. This is the key thing to remember about including categorical variables– all comparisons are made relative to the reference category– the excluded category.</p>
 </div>
 <div id="predict-on-testing-data-and-calculate-rmse-1" class="section level2">
 <h2>Predict on testing data and calculate rmse</h2>
+<p>With our new variable included, we can do our normal steps of generating a prediction and adding it to the testing dataset.</p>
 <pre class="r"><code>ad_test&lt;-
   predict(lm_results,ad_test)%&gt;%
   rename(pred2=.pred)%&gt;%
@@ -349,6 +376,7 @@ tidy(lm_results)</code></pre>
 </div>
 <div id="calculate-rmse-1" class="section level2">
 <h2>Calculate RMSE</h2>
+<p>With the data in the testing dataset, we can then generate the RMSE from our new model.</p>
 <pre class="r"><code>rmse_2&lt;-ad_test%&gt;%rmse(truth=income_75,estimate=pred2)  
 rmse_2</code></pre>
 <pre><code>## # A tibble: 1 x 3
@@ -356,8 +384,9 @@ rmse_2</code></pre>
 ##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;
 ## 1 rmse    standard        5.32</code></pre>
 </div>
-<div id="or-get-there-the-easy-way" class="section level2">
-<h2>Or get there the easy way</h2>
+<div id="using-last_fit" class="section level2">
+<h2>Using <code>last_fit</code></h2>
+<p>The <code>tidymodels</code> package has a function that automates the steps of running the model, generating predictions in the testing dataset and then generating metrics of model fit from the testing dataset. It’s called <code>last_fit</code>. This accomplishes the same steps above, but does it all at once.</p>
 <pre class="r"><code>lf&lt;-last_fit(income_wf,split=split_data)</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;rlang&#39;</code></pre>
@@ -381,6 +410,11 @@ rmse_2</code></pre>
 ##   &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;               
 ## 1 rmse    standard       5.32  Preprocessor1_Model1
 ## 2 rsq     standard       0.574 Preprocessor1_Model1</code></pre>
+<p>As you can see we get the same RMSE from last fit as when we did it “by hand.”</p>
+</div>
+<div id="last-note" class="section level2">
+<h2>Last Note</h2>
+<p>Remember that we need to carefully distinguish between categorical variables and continuous variables when including them in our models. If we’re using categorical variables we’ll need to pre-process the data in order to let the model know that these variables should be included as categorical variables, with an excluded reference category.</p>
 </div>
 
 

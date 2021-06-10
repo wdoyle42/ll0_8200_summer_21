@@ -121,7 +121,7 @@ lm_results%>%
 
 The `tidy` command allows us to see the coefficients from the model fit to the training data. 
 
-The results show that the percent of individuals with incomes about $75,000 is `r tidy(lm_results)[4,2]` higher in metro areas than non-metro areas. This is really important: we always interpret binary variables as a comparison between the group that is set to 1 (metropolitan areas in this case) and the group that is set to 0 (non-metropolitan areas). 
+The results show that the percent of individuals with incomes about $75,000 is `r round(tidy(lm_results)[4,2],2)` percentage points higher in metro areas than non-metro areas. This is really important: we always interpret binary variables as a comparison between the group that is set to 1 (metropolitan areas in this case) and the group that is set to 0 (non-metropolitan areas). 
 
 ## Predict on testing data and calculate rmse
 
@@ -198,7 +198,7 @@ lm_results%>%
 
 ```
 
-The results in this case show that the percent of individuals with incomes about \$75,000 is `r tidy(lm_results)[4,2]` higher in metro areas than non-metro areas. The results for region include results for three of the four regions. One region is excluded-- this is called the reference category. The way we interpret this is to say that the percent of individuals in the South with incomes above \$75,000 is predicted to be `r tidy(lm_results)[6,2]` percentage points lower than incomes of individuals in the Midwest. Where did the Midwest come from? It's the excluded category-- so all comparisons are made relative to it. For instance we would also say that the percent of individuals with incomes about \$75,000 is predicted to  be `r tidy(lm_results)[7,2]` higher for individuals in the West as compared with the Midwest. This is the key thing to remember about including categorical variables-- all comparisons are made relative to the reference category-- the excluded category. 
+The results in this case show that the percent of individuals with incomes about \$75,000 is `r round(tidy(lm_results)[4,2],2)` higher in metro areas than non-metro areas. The results for region include results for three of the four regions. One region is excluded-- this is called the reference category. The way we interpret this is to say that the percent of individuals in the South with incomes above \$75,000 is predicted to be `r abs(round(tidy(lm_results)[6,2],2))` percentage points lower than incomes of individuals in the Midwest. Where did the Midwest come from? It's the excluded category-- so all comparisons are made relative to it. For instance we would also say that the percent of individuals with incomes about \$75,000 is predicted to  be `r round(tidy(lm_results)[7,2],2)` percentage points higher for individuals in the West as compared with the Midwest. This is the key thing to remember about including categorical variables-- all comparisons are made relative to the reference category-- the excluded category. 
 
 ## Predict on testing data and calculate rmse
 
