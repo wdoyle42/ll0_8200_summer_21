@@ -1,0 +1,365 @@
+---
+title: "Multiple Models"
+author: "Will Doyle"
+output: github_document
+---
+
+## Introduction
+
+The essence of prediction is discovering the extent to which our models can predict outcomes for data that does not come from our sample. Many times this process is temporal. We fit a model to data from one time period, then take predictors from a subsequent time period to come up with a prediction in the future. For instance, we might use data on team performance to predict the likely winners and losers for upcoming soccer games. 
+
+This process does not have to be temporal. We can also have data that is out of sample because it hadn't yet been collected when our first data was collected, or we can also have data that is out of sample because we designated it as out of sample.
+
+The data that is used to generate our predictions is known as 
+*training* data. The idea is that this is the data used to train our model, to let it know what the relationship is between our predictors and our outcome. So far, we have worked mostly with training data. 
+
+That data that is used to validate our predictions is known as *testing* data. With testing data, we take our trained model and see how good it is at predicting outcomes using out of sample data. 
+
+One very simple approach to this would be to cut our data in half. This is what we've done so far.  We could then train our model on half the data, then test it on the other half. This would tell us whether our measure of model fit (e.g. rmse, auc) is similar or different when we apply our model to out of sample data. 
+
+But this would only be a "one-shot" approach. It would be better to do this multiple times, cutting the data into two parts: training and testing, then fitting the model to the training data, and then checking its predictions against the testing data. That way, we could generate a large number of rmse's to see how well the model fits on lots of different possible out-of-sample predictions. 
+
+This process is called *cross-fold validation*, and it involves two important decisions: first, how will the data be cut, and how many times will the validation run. 
+
+```{r}
+library(tidyverse)
+library(modelr)
+library(tidymodels)
+library(glmnet)
+```
+
+Next we load the quickfacts data, which contains county-by-county information. We're going to create a simple model that predicts median home values in the county as a function of education, home ownership and income. 
+
+```{r}
+load("pd.Rdata")
+pd<-pd%>%
+  select(median_home_val,median_hh_inc,coll_grad_pc,homeown_rate,per_capita_inc,pop65p,retail_percap)%>%
+  mutate_all(.funs=list(as.numeric)) ## change all to numeric
+
+```
+
+A quick look at this outcome lets us know it needs to be logged. 
+```{r}
+pd%>%
+ggplot(aes(x=coll_grad_pc,y=median_home_val))+
+geom_point()
+```
+
+
+```{r}
+pd%>%
+ggplot(aes(x=coll_grad_pc,y=median_home_val))+
+geom_point()+
+scale_y_continuous(trans="log")
+```
+
+We can run this model on the full dataset, but we're not taking advantage of the idea of cross-validation. 
+
+```{r}
+## Define the model
+lm_formula<-as.formula("median_home_val~
+                        coll_grad_pc+
+                        per_capita_inc+
+                        homeown_rate+
+                        median_hh_inc")
+```
+
+## Define a recipe
+
+```{r}
+lm_rec <- recipe(lm_formula, data = pd) %>%
+  step_log(all_outcomes())%>%
+  step_zv(all_numeric()) %>% # drop any zero variance
+  step_naomit(all_predictors()) ## drop any missing data
+
+```
+
+## Prep the recipe
+```{r}
+lm_rec%>%
+  prep()
+```
+
+
+## Set the kind of model to run
+```{r}
+lm_fit <- 
+  linear_reg() %>% 
+  set_engine("lm")
+```
+
+## Specify the resampling: K fold resampling, K=10
+```{r}
+folds <- vfold_cv(pd, v = 10)
+```
+
+## Fit Model and Cross Validate
+```{r}
+lm_kfold<-
+  lm_fit%>%
+  fit_resamples(
+    lm_rec, ## Recipe: preps the data
+    folds, ##resampling plan
+    control=control_resamples(save_pred = TRUE)
+  )
+```
+
+```{r}
+lm_kfold%>%
+  collect_metrics()
+```
+
+```{r}
+lm_kfold%>%
+  unnest(.metrics)
+```
+
+```{r}
+lm_kfold%>%
+  unnest(.metrics)%>%
+  filter(.metric=="rmse")%>%
+  ggplot(aes(x=.estimate))+
+  geom_density()
+```
+
+
+## Use bootstrap
+
+
+## Specify the resampling: bootstrap resampling
+```{r}
+boot <- bootstraps(pd,times = 100) ##1000 is usual minimum
+```
+
+
+## Fit Bootstrap Reasmpling
+```{r}
+lm_boot<-
+  lm_fit%>%
+  fit_resamples(
+    lm_rec, ## Recipe: preps the data
+    boot, ##resampling plan
+    control=control_resamples(save_pred = TRUE)
+  )
+```
+
+## Get Metrics
+```{r}
+lm_boot%>%
+  collect_metrics()
+```
+
+
+## Plot bootsrap resampling results
+```{r}
+lm_boot%>%
+  unnest(.metrics)%>%
+  filter(.metric=="rmse")%>%
+  ggplot(aes(x=.estimate))+
+  geom_density()
+```
+
+
+## Feature Selection
+
+Of course, we can also just let the computer choose a model from a set of candidate variables. Below, I use lasso regression, which involves proposing candidate variables and evaluating their ability to lower RMSE, as the basis for choosing a "best" model. 
+
+## Set Lasso Formula
+```{r}
+lasso_formula<-as.formula("median_home_val~.")
+```
+
+## Set Lasso Recipe
+```{r}
+lasso_rec <- recipe(lasso_formula, data = pd) %>%
+  step_log(all_outcomes())%>%
+  step_zv(all_numeric()) %>% # drop any zero variance
+  step_naomit(all_predictors()) ## drop any missing data
+```
+
+
+## Specify Lasso Model
+```{r}
+
+penalty_spec<-.1
+mixture_spec<-1
+
+lasso_fit<- 
+  linear_reg(penalty=penalty_spec,
+             mixture=mixture_spec) %>% 
+  set_engine("glmnet")
+
+```
+
+
+## Fit Bootstrap Resamples from Lasso
+```{r}
+lasso_boot<-
+  lasso_fit%>%
+  fit_resamples(
+    lasso_rec, ## Recipe: preps the data
+    boot, ##resampling plan
+    control=control_resamples(save_pred = TRUE)
+  )
+
+```
+
+
+```{r}
+lasso_boot%>%
+  unnest(.metrics)%>%
+  filter(.metric=="rmse")%>%
+  ggplot(aes(x=.estimate))+
+  geom_density()
+```
+
+
+## Comparing Performance of Models
+
+```{r}
+lm_boot%>%
+  unnest(.metrics)%>%
+  mutate(model="lm")%>%
+  bind_rows(lasso_boot%>%
+              unnest(.metrics)%>%
+              mutate(model="lasso")
+              )%>%
+  filter(.metric=="rmse")%>%
+  ggplot(aes(x=.estimate,fill=model))+
+  geom_density(alpha=.5)
+```
+
+
+## Cross Validation for Classification
+
+```{r}
+load("za.RData")
+
+za<-za%>%
+  drop_na()%>%
+  mutate(got_pizza_f=fct_relevel(got_pizza_f,"Yes","No"))%>%
+  select(-got_pizza)
+```
+
+
+```{r}
+#  Model terms
+za_formula<-as.formula("got_pizza_f~
+             age+
+             karma+
+             total_posts+
+             raop_posts+
+             student+
+             grateful+
+             pop_request+
+             score")
+```
+
+## Prep Recipe
+```{r}
+logit_rec <- recipe(za_formula, data = za) %>%
+  step_zv(all_numeric()) %>% # drop any zero variance
+  step_dummy(all_nominal(),-all_outcomes())%>%
+  step_naomit(all_predictors(),all_outcomes()) 
+```
+
+
+## Specify Model
+```{r}
+logit_fit<-
+  logistic_reg(mode="classification")%>%
+  set_engine("glm")
+```
+
+
+## Set Resampling
+```{r}
+logit_boot_rs<-bootstraps(za,100)
+```
+
+
+```{r}
+logit_boot <- 
+  logit_fit%>%
+  fit_resamples(
+    logit_rec,
+    logit_boot_rs,
+    metrics = metric_set(roc_auc, sens, spec)
+  )
+```
+
+
+```{r}
+logit_boot%>%
+  collect_metrics()
+```
+
+
+## Plot distribution of AUC
+```{r}
+logit_boot%>%
+  unnest(.metrics)%>%
+  filter(.metric=="roc_auc")%>%
+  ggplot(aes(x=.estimate))+
+  geom_density()
+```
+
+
+## Set Lasso Formula
+```{r}
+lasso_logit_formula<-as.formula("got_pizza_f~.")
+```
+
+## Set Lasso Recipe
+```{r}
+lasso_logit_rec <- recipe(lasso_logit_formula, data = za) %>%
+  step_zv(all_numeric()) %>% # drop any zero variance
+  step_dummy(all_nominal(),-all_outcomes())%>%
+  step_naomit(all_predictors(),all_outcomes())
+```
+
+
+## Specify Lasso Model
+```{r}
+penalty_spec<-.1
+mixture_spec<-1
+
+lasso_logit_fit<- 
+  logistic_reg(mode="classification",
+             penalty=penalty_spec,
+             mixture=mixture_spec) %>% 
+  set_engine("glmnet")
+
+```
+
+## Fit Bootstrap Resamples from Lasso
+```{r}
+lasso_logit_boot<-
+  lasso_logit_fit%>%
+  fit_resamples(
+    lasso_logit_rec, ## Recipe: preps the data
+    logit_boot_rs, ##resampling plan
+        metrics = metric_set(roc_auc, sens, spec)
+  )
+```
+
+
+
+
+## Comparing Performance of Models
+
+```{r}
+logit_boot%>%
+  unnest(.metrics)%>%
+  mutate(model="logit")%>%
+  bind_rows(lasso_logit_boot%>%
+              unnest(.metrics)%>%
+              mutate(model="lasso")
+              )%>%
+  filter(.metric=="roc_auc")%>%
+  ggplot(aes(x=.estimate,fill=model))+
+  geom_density(alpha=.5)
+```
+
+
+In different situations we may care more about WHY something predicts an outcome, and in other situations we care more about WHETHER something predicts an outcome. The key is to be clear with yourself about what you're interested in. Model selection via stepwise regression or other algorithms is not a panacea. 
