@@ -76,7 +76,6 @@ Please watch async on LMS for this week
 
 #### 7\. Getting Data: Web Sources 
 
-
 [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/07-webscraping.Rmd)
 
 [Education Variables (if needed)](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/educ_vars.Rdata)
@@ -99,9 +98,11 @@ Updated Async 8.2 The Conditional Mean as a Classifier
 
 Updated Async 8.5 Logistic Regression As a Classifier
 
-Watch Lecture 8.4 Evaulating Classifiers: Sensitivity and Specificity on the LMS
+Watch Lecture 8.4 Evaluating Classifiers: Sensitivity and Specificity on the LMS
 
-Updated Async 8.6 The Area Under the Curve Measure and plotting logistic regression results
+Updated Async 8.6 Calculating Sensitivity and Specificity 
+
+Updated Async 8.7 The Area Under the Curve Measure and plotting logistic regression results
 
 
 #### 9\. Presenting Data: Plots and Tables for Classification  
@@ -137,8 +138,6 @@ Updated Async 8.6 The Area Under the Curve Measure and plotting logistic regress
 [Assignment 5, Due Midnight June 22](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-assignment.Rmd)
 
 [Assignment 6, Due Midnight Jun 29](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-assignment.Rmd)
-
-
 
 Assignment 7, Due Midnight July 13
 
