@@ -91,11 +91,25 @@ Watch lecture 7.5 on LMS
 
 #### 8\. Analyzing Data: Classification  
 
+[Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/08-classification.Rmd) and [Data Set ](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/za.Rdata)
+
+Watch Lecture 8.1 Introduction the Problem of Classification on the LMS
+
+Updated Async 8.2 The Conditional Mean as a Classifier
+
+Updated Async 8.5 Logistic Regression As a Classifier
+
+Watch Lecture 8.4 Evaulating Classifiers: Sensitivity and Specificity on the LMS
+
+Updated Async 8.6 The Area Under the Curve Measure and plotting logistic regression results
+
 
 #### 9\. Presenting Data: Plots and Tables for Classification  
 
 
+
 #### 10\. Cross Validation  
+
 
 
 ### Assignments and Due Dates
