@@ -12,3 +12,23 @@ library(plotly)
 ```{r}
 ad<-read_rds("area_data.Rds")
 ```
+
+
+1. Estimate a model that includes the census division (`division`)  of the area as the sole independent variable, and mobility `perc_moved in` as the dependent variable. Provide an interpretation of the results. 
+```{r}
+
+```
+
+
+2. Add both income and commute times to the above model and describe the coefficients for all of the variables
+```{r}
+
+```
+
+
+3. Which of the two models above fit the data better? How do you know?
+
+```{r}
+
+```
+
