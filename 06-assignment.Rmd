@@ -1,0 +1,21 @@
+---
+title: "Assignment 6"
+author: "Doyle"
+date: "3/11/2021"
+output: html_document
+---
+Assignment 6
+-----------------
+Complete the following steps using the `els.Rdata`  file. I want you to use the `ggplot` library and commands for all plots. 
+
+1.  Plot math scores as a function of a continuous independent variable.
+
+3. Add a line of best fit to your graphic. 
+
+4. Clean up the labeling and description of the graphic so that it could be presented to a broader audience. 
+
+5. Now, run a regression predicting your outcome as a function of at least two independent variables.
+
+6. Plot your predictions. Make this plot clearly labeled and easy to read.
+
+7. In your .Rmd file, include a few sentences describing what the graphic above shows. 
