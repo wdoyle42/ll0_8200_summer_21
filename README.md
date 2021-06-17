@@ -82,7 +82,7 @@ Please watch async on LMS for this week
 
 [Income Variables (if needed)](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/income_vars.Rdata)
 
-Watch lectures 7.1-7.3 Please watch on async. 
+Watch lectures 7.1-7.3 on LMS. 
 
 [Watch updated 7.4 here](https://www.youtube.com/watch?v=NHbs55PTb-g)
 
