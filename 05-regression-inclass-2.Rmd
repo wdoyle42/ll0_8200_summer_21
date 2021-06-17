@@ -13,7 +13,6 @@ library(plotly)
 ad<-read_rds("area_data.Rds")
 ```
 
-
 1. Estimate a model that includes the census division (`division`)  of the area as the sole independent variable, and mobility `perc_moved in` as the dependent variable. Provide an interpretation of the results. 
 ```{r}
 

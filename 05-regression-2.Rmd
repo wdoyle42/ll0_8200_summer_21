@@ -139,7 +139,7 @@ ad_test<-
 Calculating rmse works the same as well. 
 
 ```{r}
-rmse_1<-ad_test%>%rmse(truth=income_75,estimate=pred1)  
+rmse_1<-ad_test%>%yardstick::rmse(truth=income_75,estimate=pred1)  
 rmse_1
 ```
 
@@ -206,7 +206,7 @@ ad_test<-
 With the data in the testing dataset, we can then generate the RMSE from our new model.
 
 ```{r}
-rmse_2<-ad_test%>%rmse(truth=income_75,estimate=pred2)  
+rmse_2<-ad_test%>%yardstick::rmse(truth=income_75,estimate=pred2)  
 rmse_2
 ```
 

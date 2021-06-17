@@ -15,11 +15,63 @@ ad<-readRDS("area_data.Rds")
 
 1. Run a model on a training subset of the data which predicts the percent of the population in the labor force (dependent variable) as a function of the percent of the population that is insured (independent variable). 
 
+
+```{r}
+set.seed(35202)
+
+split_data<-ad%>%initial_split(prop=.5)
+
+ad_train<-training(split_data)
+
+ad_test<-testing(split_data)
+```
+
+## Specify the model 
+```{r}
+lm_fit <- 
+  linear_reg() %>% 
+  set_engine("lm")%>%
+  set_mode("regression")
+```
+
+
+## Specify the formula
+```{r}
+lf_formula<-as.formula("perc_in_labor_force~perc_insured")
+```
+
+## Specify the recipe
+```{r}
+lf_rec<-recipe(lf_formula,ad_train)
+```
+
+
+## Add the model and the recipe to the workflow
+```{r}
+lf_wf<-workflow()%>%
+  add_model(lm_fit)%>%
+  add_recipe(lf_rec)
+```
+
+
+##fit the model
+```{r}
+lf_results<-fit(lf_wf,ad_train)
+```
+
+## See the results
+
+```{r}
+lf_results%>%
+  tidy()
+```
+
+
 2. Summarize the coefficient for percent of the population that is insured in a sentence or two. 
 
 3. Calculate the model fit by calculating the rmse in the *testing* data. 
 
-4. Add variables for the census division and the percent of the population with incomes above 30 minutes. Comment on the estimates for both of these variables. (*N.B: the census division is a categorical variable* ). 
+4. Add variables for the census division and the percent of the population with commutes above 30 minutes. Comment on the estimates for both of these variables. (*N.B: the census division is a categorical variable* ). 
 
 5. Calculate the model fit by examining the rmse in the testing data. Comment in a sentence on what the rmse means and how it compares to the rmese in step 3. 
 
