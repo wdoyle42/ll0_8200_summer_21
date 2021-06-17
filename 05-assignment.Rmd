@@ -34,7 +34,6 @@ lm_fit <-
   set_mode("regression")
 ```
 
-
 ## Specify the formula
 ```{r}
 lf_formula<-as.formula("perc_in_labor_force~perc_insured")
@@ -42,9 +41,8 @@ lf_formula<-as.formula("perc_in_labor_force~perc_insured")
 
 ## Specify the recipe
 ```{r}
-lf_rec<-recipe(lf_formula,ad_train)
+lf_rec<-recipe(lf_formula,ad)
 ```
-
 
 ## Add the model and the recipe to the workflow
 ```{r}
@@ -54,7 +52,7 @@ lf_wf<-workflow()%>%
 ```
 
 
-##fit the model
+##Fit the model
 ```{r}
 lf_results<-fit(lf_wf,ad_train)
 ```
