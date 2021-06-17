@@ -8,6 +8,8 @@ output:
 
 ```{r setup,include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning=FALSE, results ='hide',include=TRUE)
+
+library(knitr)
 library(tidyverse)
 library(forcats)
 library(ggplot2)
@@ -55,7 +57,7 @@ we need to make sure that our advertising on every medium is targeted towards th
 
 ## The Data
 
-The data for this analysis come from the Consumer Expenditure Survey, a quarterly survey of a nationally represntative sample of American Families. 
+The data for this analysis come from the Consumer Expenditure Survey, a quarterly survey of a nationally representative sample of American Families. 
 
 The figure below shows the distribution of family spending on groceries. 
 
@@ -155,6 +157,7 @@ Our predictive model combines the insights above. First, we use a log transform 
 ## Accuracy of the Model
 ```{r}
 
+
 ```
 As it stands, we have only predicted 18 percent of the variance in grocery spending. Increase our budget and we will give you much better results.
 
@@ -179,7 +182,6 @@ gg
 
 ```
 
-
 ## Recommendations
 
 *Based on this analysis, we have the following findings:*
@@ -195,4 +197,10 @@ gg
 - Families with incomes above the 75th percentile
 
 - Families with children between 12 and 17 who are above the 25th percentile in income
+
+
+```{r}
+knitr::knit_exit()
+```
+
 
