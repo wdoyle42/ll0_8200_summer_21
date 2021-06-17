@@ -16,8 +16,8 @@ ad<-readRDS("area_data.Rds")
 1. Run a model on a training subset of the data which predicts the percent of the population in the labor force (dependent variable) as a function of the percent of the population that is insured (independent variable). 
 
 
+## Split the data between training and testing
 ```{r}
-set.seed(35202)
 
 split_data<-ad%>%initial_split(prop=.5)
 
