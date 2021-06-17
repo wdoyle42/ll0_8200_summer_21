@@ -20,7 +20,7 @@ ad<-read_rds("area_data.Rds")
 ```
 
 
-2. Add both income and commute times to the above model and describe the coefficients for all of the variables
+2. Add both income and commute times to the above model and describe the coefficients for all three  of the variables. 
 ```{r}
 
 ```
