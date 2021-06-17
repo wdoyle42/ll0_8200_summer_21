@@ -67,6 +67,11 @@ In Class Work, part 1 [.Rmd file](https://github.com/wdoyle42/ll0_8200_summer_21
 In Class Work, part 2 [.Rmd file](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression-inclass-2.Rmd)
 
 
+[Answers to Questions About Regression](https://docs.google.com/document/d/1oI0oGssiwMyBo9rRfnJn9OEbQdmhLr_SGXibpzqpWFM/edit
+
+[Workflows, Recipes, Models](https://docs.google.com/document/d/1sHU7i1eULDPc2FUSqJBaZFczoZ1Z6UqSsTNpNE0gzC4/edit?usp=sharing)
+
+
 #### 6\. Presenting Data: Scatterplots
 
 [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-scatterplots.Rmd)  and
