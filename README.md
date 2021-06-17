@@ -64,7 +64,7 @@ Watch lecture 5.5: Training and Testing on LMS
 
 In Class Work, part 1 [.Rmd file](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression-inclass-1.Rmd)
 
-In Class Work, part 2[.Rmd file](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression-inclass-2.Rmd)
+In Class Work, part 2 [.Rmd file](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-regression-inclass-2.Rmd)
 
 
 #### 6\. Presenting Data: Scatterplots
