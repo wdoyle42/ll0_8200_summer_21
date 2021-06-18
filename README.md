@@ -94,17 +94,17 @@ Watch lecture 7.5 on LMS
 
 #### 8\. Analyzing Data: Classification  
 
-[Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/08-classification.Rmd) and [Data Set ](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/za.Rdata) and [HTML Version of Notes]
+[Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/08-classification.Rmd) and [Data Set ](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/za.Rdata) and [HTML Version of Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/08-classification.html)
 
 *For First Class Session, July 14*
 
 Watch Lecture 8.1 Introduction the Problem of Classification on the LMS
 
-[Updated Async 8.2 The Conditional Mean as a Classifie](https://youtu.be/IIEvyvsVO7Q)
+[Updated Async 8.2 The Conditional Mean as a Classifier](https://youtu.be/IIEvyvsVO7Q)
 
 Watch Lecture 8.4 Evaluating Classifiers: Sensitivity and Specificity on the LMS
 
-[Updated Async 8.5 Logistic Regression As a Classifier, accuracy, sensitivity and specificty](https://youtu.be/KbmEJkslBeE)
+[Updated Async 8.5 Logistic Regression As a Classifier, accuracy, sensitivity and specificity](https://youtu.be/KbmEJkslBeE)
 
 *For Second Class Session, July 21*
 
