@@ -4,7 +4,23 @@ author: "Will Doyle"
 output: github_document
 ---
 
+Classification is the process of predicting group membership. Understanding which individuals are likely to be members of which 
+
+
+---
+---
+title: "Classification"
+author: "Will Doyle"
+output: github_document
+---
+
 Classification is the process of predicting group membership. Understanding which individuals are likely to be members of which groups is a key task for data scientists. For instance, most recommendation engines that are at the hear of consumer web sites are based on classification algorithms, predicting which consumers are likely to purchase which products. 
+
+## Pizza
+
+Today we'll be working with the pizza dataset, which comes from the subreddit random acts of pizza. Each line represents a post to this subreddit. We have various characteristics of these posts, along with the request text from the post itself. We'll use these characteristics of the posts to predict whether or not the poster received pizza. This lesson is inspired by [this article](http://www.aaai.org/ocs/index.php/ICWSM/ICWSM14/paper/download/8106/8101)
+
+groups is a key task for data scientists. For instance, most recommendation engines that are at the hear of consumer web sites are based on classification algorithms, predicting which consumers are likely to purchase which products. 
 
 ## Pizza
 
@@ -16,6 +32,7 @@ library(tidyverse)
 library(modelr)
 library(yardstick)
 library(tidymodels)
+library(probably)
 ```
 
 
@@ -145,7 +162,7 @@ Next we set up the terms of the model. Notice the use of a log function for tota
 za_formula<-as.formula("got_pizza_f~
              age+
              karma+
-             log(total_posts+1)+
+             total_posts+
              raop_posts+
              student+
              grateful+
@@ -154,19 +171,36 @@ za_formula<-as.formula("got_pizza_f~
 
 ```
 
+```{r}
+logit_rec<-recipe(za_formula, data=za)
+```
 
-Now we're going to run the model. This approach is a little different than what we've been using up until now. We're going to create a `logit_class` object by fitting a logistic regression to our outcome. The `set_engine` function says what particular kind of logistic regression we want to fit, and the fit argument sets out the formula and the data. 
+
+Now we're going to run the model. This approach is a little different than what we've been using up until now. We're going to create a `logit_mod` object by fitting a logistic regression to our outcome. The `set_engine` function says what particular kind of logistic regression we want to fit-- in this case we want to do classification
 
 ```{r}
-#Logistic model
-
-logit_class<-logistic_reg(mode="classification")%>%
+logit_mod <- 
+  logistic_reg() %>% 
   set_engine("glm")%>%
-  fit(za_formula,data=za_train)
+  set_mode("classification")
+```
 
-## Show coefficients
-logit_class$fit%>%summary()
 
+## Put the workflow together
+
+```{r}
+logit_wf<-workflow()%>%
+  add_recipe(logit_rec)%>%
+  add_model(logit_mod)
+```
+
+```{r}
+logit_results<-fit(logit_wf,data=za_train)
+```
+
+```{r}
+logit_results%>%
+  tidy()
 ```
 
 With these results in hand we can generate predicted classifications. 
@@ -175,7 +209,7 @@ We can convert the predictions to a binary variable by setting a "threshold" of 
 
 
 ```{r}
-logit_class%>%
+logit_results%>%
   predict(za_test)%>%
   bind_cols(za_test)%>%
   conf_mat(truth=got_pizza_f,estimate=.pred_class)
@@ -190,7 +224,7 @@ We're usually interested in three things: the overall accuracy of a classificati
 
 ## Accuracy: proportion correctly identifed
 ```{r}
-logit_class%>%
+logit_results%>%
   predict(za_test)%>%
   bind_cols(za_test)%>%
   metrics(truth=got_pizza_f,estimate=.pred_class)
@@ -198,8 +232,7 @@ logit_class%>%
 
 ## Sensitivity, probability of saying it's a Yes when it's really a yes
 ```{r}
-
-logit_class%>%
+logit_results%>%
   predict(za_test)%>%
   bind_cols(za_test)%>%
  sens(truth=got_pizza_f,estimate=.pred_class,event_level="second")
@@ -209,10 +242,10 @@ logit_class%>%
 ## Specificity, probability of saying it's a No when it's really a No
 ```{r}
 
-logit_class%>%
+logit_results%>%
   predict(za_test)%>%
   bind_cols(za_test)%>%
-  yardstick::spec(truth=got_pizza_f,estimate=.pred_class,event_level="second")
+  spec(truth=got_pizza_f,estimate=.pred_class,event_level="second")
 
 ```
 
@@ -228,10 +261,10 @@ As we vary the threshold from 0 to 1, the sensitivity will decrease, while the s
 
 ```{r}
 
-th<-logit_class%>%
+th<-logit_results%>%
   predict(za_test,type="prob")%>%
   bind_cols(za_test)%>%
- threshold_perf(truth=got_pizza_f,
+   threshold_perf(truth=got_pizza_f,
                  estimate=.pred_Yes,
                  thresholds=seq(0,1,by=.1),metrics=c("sens","spec"))
 
@@ -250,7 +283,7 @@ The area under the curve considers both the sensitivity (does the model accurate
 
 ```{r}
 
-logit_class%>%
+logit_results%>%
   predict(za_test,type="prob")%>%
   bind_cols(za_test)%>%
   roc_auc(truth=got_pizza_f,.estimate=.pred_Yes,event_level="second")
@@ -259,13 +292,22 @@ logit_class%>%
 
 
 ```{r}
-logit_class%>%
+logit_results%>%
   predict(za_test,type="prob")%>%
   bind_cols(za_test)%>%
   roc_curve(truth=got_pizza_f,.estimate=.pred_Yes,event_level="second")%>%
   autoplot()
 
 ```
+
+## Use "last fit" to get same results.
+```{r}
+logit_final<-last_fit(logit_wf,za_split)
+
+logit_final$.metrics
+```
+
+
 
 
 # Plotting results from logisitc regression
@@ -283,7 +325,7 @@ hypo_data<-za_train%>%data_grid(
   score=mean(score,na.rm=TRUE)
 )
 
-plot_data<-logit_class%>%
+plot_data<-logit_results%>%
   predict(hypo_data,type="prob")%>%
   bind_cols(hypo_data)%>%
   rename(`Post Includes "Student"`=student)
@@ -295,7 +337,5 @@ ggplot(aes(x=raop_posts,y=.pred_Yes,color=`Post Includes "Student"`))+
   ylab("Prob(Pizza)")
 
 ```
-
-
 
 
