@@ -67,6 +67,8 @@ lf_results%>%
 
 2. Summarize the coefficient for percent of the population that is insured in a sentence or two. 
 
+
+
 3. Calculate the model fit by calculating the rmse in the *testing* data. 
 
 4. Add variables for the census division and the percent of the population with commutes above 30 minutes. Comment on the estimates for both of these variables. (*N.B: the census division is a categorical variable* ). 
