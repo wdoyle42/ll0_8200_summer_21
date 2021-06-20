@@ -23,9 +23,9 @@ This process is called *cross-fold validation*, and it involves two important de
 
 ```{r}
 library(tidyverse)
-library(modelr)
 library(tidymodels)
 library(glmnet)
+library(modelr)
 ```
 
 Next we load the quickfacts data, which contains county-by-county information. We're going to create a simple model that predicts median home values in the county as a function of education, home ownership and income. 
@@ -56,29 +56,9 @@ scale_y_continuous(trans="log")
 We can run this model on the full dataset, but we're not taking advantage of the idea of cross-validation. 
 
 ```{r}
-## Define the model
-lm_formula<-as.formula("median_home_val~
-                        coll_grad_pc+
-                        per_capita_inc+
-                        homeown_rate+
-                        median_hh_inc")
+pd_split<-initial_split(pd)
 ```
 
-## Define a recipe
-
-```{r}
-lm_rec <- recipe(lm_formula, data = pd) %>%
-  step_log(all_outcomes())%>%
-  step_zv(all_numeric()) %>% # drop any zero variance
-  step_naomit(all_predictors()) ## drop any missing data
-
-```
-
-## Prep the recipe
-```{r}
-lm_rec%>%
-  prep()
-```
 
 
 ## Set the kind of model to run
@@ -88,34 +68,58 @@ lm_fit <-
   set_engine("lm")
 ```
 
+## Define the model
+```{r}
+lm_formula<-as.formula("median_home_val~
+                        coll_grad_pc+
+                        per_capita_inc+
+                        homeown_rate+
+                        median_hh_inc")
+```
+
+## Define a recipe
+```{r}
+lm_rec <- recipe(lm_formula, data = pd) %>%
+  step_log(all_outcomes())%>%
+  step_zv(all_numeric()) %>% # drop any zero variance
+  step_naomit(all_predictors()) ## drop any missing data
+
+```
+
 ## Specify the resampling: K fold resampling, K=10
 ```{r}
 folds <- vfold_cv(pd, v = 10)
 ```
 
+```{r}
+lm_workflow<-workflow()%>%
+  add_recipe(lm_rec)%>%
+  add_model(lm_fit)
+```
+
+
 ## Fit Model and Cross Validate
 ```{r}
-lm_kfold<-
-  lm_fit%>%
+lm_kfold_results<-
   fit_resamples(
-    lm_rec, ## Recipe: preps the data
+    lm_workflow, ## Recipe: preps the data
     folds, ##resampling plan
     control=control_resamples(save_pred = TRUE)
   )
 ```
 
 ```{r}
-lm_kfold%>%
+lm_kfold_results%>%
   collect_metrics()
 ```
 
 ```{r}
-lm_kfold%>%
+lm_kfold_results%>%
   unnest(.metrics)
 ```
 
 ```{r}
-lm_kfold%>%
+lm_kfold_results%>%
   unnest(.metrics)%>%
   filter(.metric=="rmse")%>%
   ggplot(aes(x=.estimate))+
@@ -132,10 +136,9 @@ pd_mc<-mc_cv (pd,times = 100) ##1000 is usual minimum
 
 ## Fit Monte Carlo Reasmpling
 ```{r}
-lm_mc<-
-  lm_fit%>%
+lm_mc_results<-
   fit_resamples(
-    lm_rec, ## Recipe: preps the data
+    lm_workflow,
     pd_mc, ##resampling plan
     control=control_resamples(save_pred = TRUE)
   )
@@ -143,14 +146,14 @@ lm_mc<-
 
 ## Get Metrics
 ```{r}
-lm_mc%>%
+lm_mc_results%>%
   collect_metrics()
 ```
 
 
 ## Plot bootsrap resampling results
 ```{r}
-lm_mc%>%
+lm_mc_results%>%
   unnest(.metrics)%>%
   filter(.metric=="rmse")%>%
   ggplot(aes(x=.estimate))+
@@ -178,7 +181,6 @@ lasso_rec <- recipe(lasso_formula, data = pd) %>%
 
 ## Specify Lasso Model
 ```{r}
-
 penalty_spec<-.1
 mixture_spec<-1
 
@@ -187,6 +189,11 @@ lasso_fit<-
              mixture=mixture_spec) %>% 
   set_engine("glmnet")
 
+```
+
+
+```{r}
+lass_workflow
 ```
 
 
