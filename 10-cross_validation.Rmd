@@ -130,7 +130,7 @@ lm_kfold_results%>%
 
 ## Specify the resampling: monte_carlo resampling
 ```{r}
-pd_mc<-mc_cv (pd,times = 100) ##1000 is usual minimum
+pd_mc_rs<-mc_cv (pd,times = 100) ##1000 is usual minimum
 ```
 
 
@@ -188,30 +188,29 @@ lasso_fit<-
   linear_reg(penalty=penalty_spec,
              mixture=mixture_spec) %>% 
   set_engine("glmnet")
-
 ```
 
 
 ```{r}
-lass_workflow
+lasso_wf<-workflow()%>%
+  add_recipe(lasso_rec)%>%
+  add_model(lasso_fit)
 ```
 
 
 ## Fit Bootstrap Resamples from Lasso
 ```{r}
-lasso_mc<-
-  lasso_fit%>%
+lasso_mc_results<-
   fit_resamples(
-    lasso_rec, ## Recipe: preps the data
+    lasso_wf, ## Recipe: preps the data
     pd_mc, ##resampling plan
     control=control_resamples(save_pred = TRUE)
   )
-
 ```
 
 
 ```{r}
-lasso_mc%>%
+lasso_mc_results%>%
   unnest(.metrics)%>%
   filter(.metric=="rmse")%>%
   ggplot(aes(x=.estimate))+
@@ -220,12 +219,11 @@ lasso_mc%>%
 
 
 ## Comparing Performance of Models
-
 ```{r}
-lm_mc%>%
+lm_mc_results%>%
   unnest(.metrics)%>%
   mutate(model="lm")%>%
-  bind_rows(lasso_boot%>%
+  bind_rows(lasso_mc_results%>%
               unnest(.metrics)%>%
               mutate(model="lasso")
               )%>%
@@ -276,24 +274,30 @@ logit_fit<-
   set_engine("glm")
 ```
 
-
 ## Set Resampling
 ```{r}
-logit_mc_rs<-bootstraps(za,100)
+logit_mc_rs<-mc_cv(za,times=100)
+```
+
+## Creat Workflow for Logit Model
+```{r}
+logit_wf<-workflow()%>%
+  add_recipe(logit_rec)%>%
+  add_model(logit_fit)
 ```
 
 
+## Fit Logit Model to Resampleld Data
 ```{r}
 logit_mc <- 
-  logit_fit%>%
   fit_resamples(
-    logit_rec,
+    logit_wf,
     logit_mc_rs,
     metrics = metric_set(roc_auc, sens, spec)
   )
 ```
 
-
+## Collect Metrics from Logit model
 ```{r}
 logit_mc%>%
   collect_metrics()
@@ -320,51 +324,67 @@ lasso_logit_formula<-as.formula("got_pizza_f~.")
 lasso_logit_rec <- recipe(lasso_logit_formula, data = za) %>%
   step_zv(all_numeric()) %>% # drop any zero variance
   step_dummy(all_nominal(),-all_outcomes())%>%
-  step_naomit(all_predictors(),all_outcomes())
+  step_naomit(all_predictors(),all_outcomes())%>%
+  step_log(total_posts,offset=1)%>%
+  step_scale(all_predictors())%>%
+  step_center(all_predictors())
 ```
 
 
-## Specify Lasso Model
+## Specify Elastic Net Model
 ```{r}
-penalty_spec<-.1
-mixture_spec<-1
-
 lasso_logit_fit<- 
   logistic_reg(mode="classification",
-             penalty=penalty_spec,
-             mixture=mixture_spec) %>% 
+             penalty=tune(),
+             mixture=tune()) %>% 
   set_engine("glmnet")
 
+## NB: tuning shows very low penalty, very high mixture
 ```
 
-## Fit Bootstrap Resamples from Lasso
+
+## Create Workflow for Lasso Logit Model
 ```{r}
-lasso_logit_boot<-
-  lasso_logit_fit%>%
-  fit_resamples(
-    lasso_logit_rec, ## Recipe: preps the data
-    logit_boot_rs, ##resampling plan
-        metrics = metric_set(roc_auc, sens, spec)
+lasso_logit_wf<-workflow()%>%
+  add_recipe(lasso_logit_rec)%>%
+  add_model(lasso_logit_fit)
+```
+
+
+## Fit Bootstrap Resamples from Elastic Net
+```{r}
+lasso_logit_mc<-
+  tune_grid(
+    lasso_logit_wf, 
+    resamples=logit_mc_rs, ##resampling plan
+    grid=grid_max_entropy(parameters(lasso_logit_fit,size=9)),
+    metrics = metric_set(roc_auc, sens, spec)
   )
 ```
 
 
+```{r}
+lasso_logit_mc%>%
+  collect_metrics()%>%
+  filter(.metric=="roc_auc")%>%
+  select(penalty, mixture,mean)%>%
+  arrange(-mean)
+```
 
 
 ## Comparing Performance of Models
-
 ```{r}
-logit_boot%>%
+lasso_logit_mc%>%
   unnest(.metrics)%>%
-  mutate(model="logit")%>%
-  bind_rows(lasso_logit_boot%>%
-              unnest(.metrics)%>%
-              mutate(model="lasso")
-              )%>%
   filter(.metric=="roc_auc")%>%
-  ggplot(aes(x=.estimate,fill=model))+
-  geom_density(alpha=.5)
+  mutate(tune_id=paste0("penalty=",prettyNum(penalty),
+                        ", mixture=",prettyNum(mixture))) %>%
+  select(tune_id,.estimate)%>%
+  rename(ROC=.estimate)%>%
+  ggplot(aes(x=ROC,color=tune_id,fill=tune_id))+
+  geom_density(alpha=.1)
 ```
-
+  
+  
 
 In different situations we may care more about WHY something predicts an outcome, and in other situations we care more about WHETHER something predicts an outcome. The key is to be clear with yourself about what you're interested in. Model selection via stepwise regression or other algorithms is not a panacea. 
