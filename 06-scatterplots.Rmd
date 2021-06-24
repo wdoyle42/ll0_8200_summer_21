@@ -166,6 +166,7 @@ g4<-ggplot(data=hypo_data,
            aes(x=byses1,
                y=pred,
                color=fct_reorder(as.factor(bypared),-pred))) #notice color
+
 g4<-g4+geom_smooth(method=lm,se=FALSE)
 g4<-g4+theme(legend.position="bottom",legend.title = element_blank())
 g4<-g4+xlab("SES")+ylab("Math Test Scores")

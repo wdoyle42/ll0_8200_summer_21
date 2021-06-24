@@ -69,6 +69,7 @@ cex%>%
 
 6. Run a regression that has (possibly transformed) dining out out as the dependent variable, with income and at least one other variable as predictors. What's the RMSE (log scale, if needed) from this model (relative to the testing dataset)? 
 
+
 7. Create new predictions from your model. 
 
 8. Create a plot showing predicted levels of dining out based on income and your other variable from the model in number 6. 
