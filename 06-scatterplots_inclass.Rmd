@@ -20,8 +20,7 @@ library(tidyverse)
 1. Plot dining out as a function of income percentile rank.
 
 ```{r}
-
-load("cex.Rdata")
+load("cex.RData")
 ```
 
 2. Add a line of best fit to the above graphic. 
