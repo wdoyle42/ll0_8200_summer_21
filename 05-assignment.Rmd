@@ -67,9 +67,22 @@ lf_results%>%
 
 2. Summarize the coefficient for percent of the population that is insured in a sentence or two. 
 
+The coefficient for percent insured is .0293, but it is not statistically significant. There's no observable relationship between the percent of the population insured and the percent of the population in the labor force. 
 
 
-3. Calculate the model fit by calculating the rmse in the *testing* data. 
+3. Calculate the model fit by calculating the rmse in the *testing* data.
+
+```{r}
+ad_test<-
+  predict(lm_results,ad_test)%>%
+  rename(pred1=.pred)%>%
+  bind_cols(ad_test)
+```
+
+```{r}
+
+```
+
 
 4. Add variables for the census division and the percent of the population with commutes above 30 minutes. Comment on the estimates for both of these variables. (*N.B: the census division is a categorical variable* ). 
 

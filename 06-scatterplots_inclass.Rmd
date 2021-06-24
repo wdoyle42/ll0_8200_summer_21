@@ -22,14 +22,48 @@ library(tidyverse)
 load("cex.RData")
 ```
 
+```{r}
+cex%>%
+  ggplot(aes(x=dine_out))+
+  geom_density()+
+  scale_x_continuous(trans="log")
+```
+
+```{r}
+cex%>%
+  ggplot(aes(x=inc_rank,y=dine_out))+
+  geom_point(size=.1,alpha=.5)+
+  scale_y_continuous(trans="log")
+```
+
+
+
 2. Add a line of best fit to the above graphic. 
+
+
+```{r}
+cex%>%
+  ggplot(aes(x=inc_rank,y=(dine_out+1)))+
+  geom_point(size=.1,alpha=.5) +
+  scale_y_continuous(trans="log")+
+  geom_smooth(method="lm")
+```
+
 
 3. Now create a plot with a scale appropriate to dining out as the dependent variable. 
 
+
 4. Add a line of best fit to your new graphic.
 
-
 5. Create another plot with dining out on the y axis, income percentile rank on the x axis, and a categorical (factor) variable that differentiates the points. 
+
+```{r}
+cex%>%
+  ggplot(aes(x=inc_rank,y=(dine_out+1),color=sex_ref ))+
+  geom_point(size=.1,alpha=.5) +
+  scale_y_continuous(trans="log")+
+  geom_smooth(method="lm")
+```
 
 
 
