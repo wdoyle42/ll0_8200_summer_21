@@ -86,7 +86,7 @@ Office Hours: [Please Use My Booking Page](https://outlook.office365.com/owa/cal
 
 *Schedule*
 
-## Week 1. Welcome to Data Science: Tools of the Trade
+## Topic 1. Welcome to Data Science: Tools of the Trade
 
 Wednesday, May 12, 2021
 
@@ -108,7 +108,7 @@ Chapter 1, Introduction: [01-intro.Rmd](https://raw.githack.com/wdoyle42/ll0_820
 
 Synchronous Session: R basics, "verbs" of data wrangling
 
-## Week 2. Analyzing Data: Conditional Means
+## Topic 2. Analyzing Data: Conditional Means
 
 Wednesday, May 19, 2021
 

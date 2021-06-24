@@ -78,6 +78,9 @@ In Class Work, part 2 [.Rmd file](https://github.com/wdoyle42/ll0_8200_summer_21
 
 Please watch async on LMS for this week
 
+[In class work](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-scatterplots_inclass.Rmd) and 
+[Data set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/cex.RData)
+
 #### 7\. Getting Data: Web Sources 
 
 [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/07-webscraping.Rmd)
@@ -115,6 +118,7 @@ Updated Async 8.6 The Area Under the Curve Measure and plotting logistic regress
 
 
 
+
 #### 10\. Cross Validation  
 
 
@@ -142,6 +146,8 @@ Updated Async 8.6 The Area Under the Curve Measure and plotting logistic regress
 [Assignment 4 Key](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-assignment-key.Rmd)
 
 [Assignment 5, Due Midnight June 22](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-assignment.Rmd)
+
+[Assignment 4 Key](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/05-assignment-key.Rmd)
 
 [Assignment 6, Due Midnight Jun 29](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-assignment.Rmd)
 

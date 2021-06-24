@@ -151,8 +151,7 @@ g3
 As we add more variables to the model, it can get more difficult to plot relationships. One very good option is to plot lines based on a hypothetical set of data. Below, I create a hypothetical set of data that include values of SES across the range of SES, and includes values for every level of `bypared`. I then run predictions from this hypothetical data to get a prediction line for every level of parental education. 
 
 
-Now, using my estimates from model 2, I predict what would happen to these hypothetical individuals.  Once I've got my prediction, I transform it back out of the log scale into the "response" level of dollars. 
-
+Now, using my estimates from model 2, I predict what would happen to these hypothetical individuals.
 ```{r}
   
 hypo_data<-data_grid(els, byses1 = seq_range(byses1,n=100),bypared)  %>% add_predictions(mod_2)

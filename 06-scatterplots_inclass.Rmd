@@ -16,7 +16,6 @@ Complete the following steps using the `cex.Rdata` file:
 library(tidyverse)
 ```
 
-
 1. Plot dining out as a function of income percentile rank.
 
 ```{r}
