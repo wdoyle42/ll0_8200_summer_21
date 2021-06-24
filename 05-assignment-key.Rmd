@@ -1,0 +1,199 @@
+Assignment 5
+----------------
+
+
+```{r,echo=FALSE}
+library(tidyverse)
+library(tidymodels)
+library(plotly)
+```
+
+
+```{r}
+ad<-readRDS("area_data.Rds")
+```
+
+1. Run a model on a training subset of the data which predicts the percent of the population in the labor force (dependent variable) as a function of the percent of the population that is insured (independent variable). 
+
+
+## Split the data between training and testing
+```{r}
+
+split_data<-ad%>%initial_split(prop=.5)
+
+ad_train<-training(split_data)
+
+ad_test<-testing(split_data)
+```
+
+## Specify the model 
+```{r}
+lm_fit <- 
+  linear_reg() %>% 
+  set_engine("lm")%>%
+  set_mode("regression")
+```
+
+## Specify the formula
+```{r}
+lf_formula<-as.formula("perc_in_labor_force~perc_insured")
+```
+
+## Specify the recipe
+```{r}
+lf_rec<-recipe(lf_formula,ad)
+```
+
+## Add the model and the recipe to the workflow
+```{r}
+lf_wf<-workflow()%>%
+  add_model(lm_fit)%>%
+  add_recipe(lf_rec)
+```
+
+
+##Fit the model
+```{r}
+lf_results<-fit(lf_wf,ad_train)
+```
+
+## See the results
+
+```{r}
+lf_results%>%
+  tidy()
+```
+
+
+2. Summarize the coefficient for percent of the population that is insured in a sentence or two. 
+
+The coefficient for percent insured is .0293, but it is not statistically significant. There's no observable relationship between the percent of the population insured and the percent of the population in the labor force. 
+
+
+3. Calculate the model fit by calculating the rmse in the *testing* data.
+
+```{r}
+ad_test<-
+  predict(lf_results,ad_test)%>%
+  rename(pred1=.pred)%>%
+  bind_cols(ad_test)
+```
+
+```{r}
+rmse_1<-ad_test%>%yardstick::rmse(truth=perc_in_labor_force,estimate=pred1)  
+rmse_1
+```
+
+
+
+4. Add variables for the census division and the percent of the population with commutes above 30 minutes. Comment on the estimates for both of these variables. (*N.B: the census division is a categorical variable* ). 
+
+```{r}
+lf_formula<-as.formula("perc_in_labor_force~perc_insured+
+                       division+
+                       perc_commute_30p")
+```
+
+
+
+## Specify the recipe
+```{r}
+lf_rec<-recipe(lf_formula,ad)%>%
+  step_dummy(division)
+```
+
+## How do we know which is the 'reference' category
+```{r}
+ad%>%group_by(division)%>%count()
+```
+
+
+```{r}
+lf_wf<-lf_wf%>%
+  update_recipe(lf_rec)
+```
+
+```{r}
+lf_results<-fit(lf_wf,ad_train)
+```
+
+```{r}
+lf_results%>%tidy()
+```
+
+
+```{r}
+ad_test<-
+  predict(lf_results,ad_test)%>%
+  rename(pred2=.pred)%>%
+  bind_cols(ad_test)
+```
+
+
+5. Calculate the model fit by examining the rmse in the testing data. Comment in a sentence on what the rmse means and how it compares to the rmese in step 3. 
+
+
+```{r}
+rmse_2<-ad_test%>%yardstick::rmse(truth=perc_in_labor_force,estimate=pred2)  
+rmse_2
+```
+
+The rmse decreased from `r round(rmse_1,2)` to   `r round(rmse_2,2)`,indicating that the second model fits the testing data better.  
+
+6. Create another model by adding at least two other variables. Answer the following questions in a sentence for each:
+
+
+```{r}
+lf_formula<-as.formula("perc_in_labor_force~perc_insured+
+                       division+
+                       perc_commute_30p+
+                       college_educ+
+                       perc_moved_in")
+```
+
+
+
+## Specify the recipe
+```{r}
+lf_rec<-recipe(lf_formula,ad)%>%
+  step_dummy(division)
+```
+
+
+```{r}
+lf_wf<-lf_wf%>%
+  update_recipe(lf_rec)
+```
+
+```{r}
+lf_results<-fit(lf_wf,ad_train)
+```
+
+```{r}
+lf_results%>%tidy()
+```
+
+
+```{r}
+ad_test<-
+  predict(lf_results,ad_test)%>%
+  rename(pred3=.pred)%>%
+  bind_cols(ad_test)
+```
+
+```{r}
+
+rmse_3<-ad_test%>%
+  rmse(truth=perc_in_labor_force,estimate=pred3)  
+rmse_3
+```
+
+  - What is the rmse from your new model? How does it compare to the rmse from the previous model? 
+  
+  The rmse from the third model is `r round(rmse_3)`. This indicates that or predictions are off, on average, by about 5 percentage points. This is an improvement from our first model. 
+  
+  
+  - Which predictors appear to be related to the outcome? How do you know?
+
+The percent of the population that has a college education is positively related to the percent of the population in the labor force. For each additional percent of the population with a bachelor's degree, the percent of the population in the workforce is predicted to increase by .3 percentage points. This result is statistically significant. There are significant differences in the percent of the population in the labor force across census divisons. 
+
