@@ -2,7 +2,9 @@
 title: "LLO 8200 Syllabus"
 author: "Will Doyle"
 date: "5/12/2021"
-output: html_document
+output:
+  word_document: default
+  html_document: default
 ---
 
 ## Introduction to Data Science

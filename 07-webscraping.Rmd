@@ -157,7 +157,7 @@ v18<-v18%>%
 # b19001: household income over last 12 months
 ```
 
-You can also use search functions like `str_detect` to find what you're looking for
+You can also use search functions like `str_detect` to find what you're looking for.
 
 ```{r}
 
