@@ -151,6 +151,9 @@ Updated Async 8.6 The Area Under the Curve Measure and plotting logistic regress
 
 [Assignment 6, Due Midnight Jun 29](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-assignment.Rmd)
 
+[Assignment 6 Key](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-assignment-key.Rmd)
+
+
 [Assignment 7, Due Midnight July 13](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/07-assignment.Rmd)
 
 [Assignment 8, Due Midnight July 27](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/08-assignment.Rmd)
