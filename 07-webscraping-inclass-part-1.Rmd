@@ -3,6 +3,9 @@ title: "In Class Work: Webscraping"
 output: html_document  
 ---
 
+
+
+
 ## Complete the following steps
 
 1. Using the `acs` package, download data on mean transportation time ("MEANS OF TRANSPORTATION TO WORK BY TRAVEL TIME TO WORK FOR WORKPLACE GEOGRAPHY") by county for individuals who live in California.  
@@ -11,8 +14,34 @@ output: html_document
 
 2. Calculate the proportion of individuals who have commutes of more than one hour.
 
-
 3. Plot the results by county, ordered from highest proportion to lowest. 
 
 4. Plot the proportion of individuals with commutes of more than an hour as a function of the proportion of the population with a bachelor's degree. 
+
+## Worked example from class
+
+
+## Download data on owner-occupied housing
+```{r}
+housing_vars<-get_acs(geography = "county",state="CA",
+                    table="B25008")
+```
+
+```{r}
+housing_vars<-housing_vars%>%
+  select(GEOID,NAME,variable,estimate)%>%
+  spread(key=variable,value = estimate)
+```
+
+```{r}
+housing_vars<-housing_vars%>%
+  mutate(prop_owner_occupied=B25008_002/B25008_001)
+```
+
+```{r}
+housing_vars%>%
+  ggplot(aes(y=prop_owner_occupied,x=fct_reorder(NAME,prop_owner_occupied)))+
+  geom_point()+
+  coord_flip()
+```
 
