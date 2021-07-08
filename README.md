@@ -113,7 +113,7 @@ Watch Lecture 8.4 Evaluating Classifiers: Sensitivity and Specificity on the LMS
 
 *For Second Class Session, July 21*
 
-Updated Async 8.6 The Area Under the Curve Measure and plotting logistic regression results
+[Updated Async 8.6 The Area Under the Curve Measure and plotting logistic regression results](https://youtu.be/IhCJOZJv_O8)
 
 
 #### 9\. Presenting Data: Plots and Tables for Classification  
