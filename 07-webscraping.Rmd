@@ -85,7 +85,7 @@ marathon <- read_html(marathon_wiki)%>%html_table(fill=TRUE)
 
 
 #Men's is the first table
-marathon<-tbl_df(data.frame(marathon[[1]]))
+marathon<-tbl_df(data.frame(marathon[[2]]))
 
 #Convert time to seconds
 marathon<-marathon%>%

@@ -8,14 +8,101 @@ Assignment 6
 -----------------
 Complete the following steps using the `els.Rdata`  file. I want you to use the `ggplot` library and commands for all plots. 
 
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(modelr)
+```
+
+
+```{r}
+load("els.Rdata")
+```
+
+```{r}
+els<-els%>%
+  mutate(`Parental Education`=recode_factor(bypared,
+                      `1`="Less than HS",
+                      `2`="HS",
+                      `3`="Some College",
+                      `4`="Some College",
+                      `5`="Some College",
+                      `6`= "BA",
+                      `7`="Graduate Degree",
+                      `8`="Graduate Degree",
+                      .default = "Other",
+                      ))%>%
+  mutate(`Parental Education`=fct_relevel(`Parental Education`,
+                                          c("Less than HS",
+                                            "HS",
+                                            "Some College",
+                                            "BA",
+                                            "Graduate Degree"
+                                            )  ))
+```
+
+
 1.  Plot math scores as a function of a continuous independent variable.
+
+```{r}
+els%>%
+  ggplot(aes(x=bynels2r,y=bynels2m))+
+  geom_point(size=.2,alpha=.2,color="blue")
+```
+
 
 3. Add a line of best fit to your graphic. 
 
+```{r}
+els%>%
+  ggplot(aes(x=bynels2r,y=bynels2m))+
+  geom_point(size=.2,alpha=.2,color="blue")+
+  geom_smooth(method="lm",color="orange")
+```
+
+
 4. Clean up the labeling and description of the graphic so that it could be presented to a broader audience. 
+
+## Math Scores as a Function of Reading Scores
+```{r}
+els%>%
+  ggplot(aes(x=bynels2r,y=bynels2m))+
+  geom_point(size=.2,alpha=.2,color="blue")+
+  geom_smooth(method="lm",color="orange")+
+  xlab("Reading Scores")+ylab("Math Scores")+
+  theme_minimal()
+```
+```
+
 
 5. Now, run a regression predicting your outcome as a function of at least two independent variables.
 
+```{r}
+
+lm1<-lm(bynels2m~bynels2r+as.factor(`Parental Education`),data=els)
+
+```
+
+
 6. Plot your predictions. Make this plot clearly labeled and easy to read.
+
+```{r}
+
+hypo_data<-data_grid(els, 
+                    bynels2r=seq_range(bynels2r,n=100),
+                    `Parental Education`) %>% 
+                    add_predictions(lm1)%>%
+                    rename(`Predicted Math Score`=pred)
+hypo_data%>%
+  ggplot(aes(x=bynels2r,y=`Predicted Math Score`,color=`Parental Education`))+
+  geom_line()+
+  xlab("Math Scores")+
+  theme_minimal()
+  
+  
+                    
+```
+
+Math scores are predicted to increase as a function of reading scores. In addition, students whose parents have higher levels of education are predicted to have higher math scores, even after controlling for reading scores. 
 
 7. In your .Rmd file, include a few sentences describing what the graphic above shows. 

@@ -7,12 +7,12 @@ output: html_document
 
 1. Using the `acs` package, download data on mean transportation time ("MEANS OF TRANSPORTATION TO WORK BY TRAVEL TIME TO WORK FOR WORKPLACE GEOGRAPHY") by county for individuals who live in California.  
 
-
-
-(you can find table information here: https://www.census.gov/programs-surveys/acs/technical-documentation/table-shells.html
-)
+(you can find table information here: https://www.census.gov/programs-surveys/acs/technical-documentation/table-shells.html)
 
 2. Calculate the proportion of individuals who have commutes of more than one hour.
 
 
 3. Plot the results by county, ordered from highest proportion to lowest. 
+
+4. Plot the proportion of individuals with commutes of more than an hour as a function of the proportion of the population with a bachelor's degree. 
+
