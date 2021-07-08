@@ -47,7 +47,6 @@ library(gridExtra)
 library(tidycensus)
 ```
 
-
 ## API keys
 
 You will also need an API key. 
@@ -151,7 +150,7 @@ v18<-v18%>%
   mutate(label=str_to_lower(label))%>%
   mutate(concept=str_to_lower(concept))
 
-#View(v18)
+View(v18)
 
 # b15003: education of pop over 25
 # b19001: household income over last 12 months
@@ -163,26 +162,27 @@ You can also use search functions like `str_detect` to find what you're looking 
 
 v18%>%
   filter(str_detect(concept,"attainment"))%>%
-  filter(str_detect(label,"bachelor"))
+  filter(str_detect(label,"bachelor"))%>%
+  View()
 
 ```
 
 
 ## Installing the API Key
 
-
 Below, I install my api Key. You'll need to add the key you received from the Census bureau below. 
 ```{r}
 
 # Get your own key and save as my_acs_key.txt
-my_acs_key<-readLines("my_acs_key.txt",warn = FALSE)
-acs_key<-my_acs_key
+#my_acs_key<-readLines("my_acs_key.txt",warn = FALSE)
+#acs_key<-my_acs_key
 
+acs_key<-"b27a265fe0dc7c49bd9281d6bc778637f10685e3"
 
-census_api_key(acs_key,install=TRUE,overwrite = TRUE)
+census_api_key(acs_key,install=FALSE,overwrite =TRUE)
 
 # OR just paste it here.
-acs_key<-"<your_acs_key_here>"
+
 ```
 
 

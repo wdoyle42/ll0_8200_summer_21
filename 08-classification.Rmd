@@ -237,7 +237,6 @@ logit_results%>%
 ```
 
 
-
 *Question: how do you get perfect specificity? How do you get 
 perfect sensitivity?*
 

@@ -53,13 +53,6 @@ geom_point()+
 scale_y_continuous(trans="log")
 ```
 
-We can run this model on the full dataset, but we're not taking advantage of the idea of cross-validation. 
-
-```{r}
-pd_split<-initial_split(pd)
-```
-
-
 
 ## Set the kind of model to run
 ```{r}
@@ -126,8 +119,6 @@ lm_kfold_results%>%
   geom_density()
 ```
 
-## Use 
-
 ## Specify the resampling: monte_carlo resampling
 ```{r}
 pd_mc_rs<-mc_cv (pd,times = 100) ##1000 is usual minimum
@@ -139,7 +130,7 @@ pd_mc_rs<-mc_cv (pd,times = 100) ##1000 is usual minimum
 lm_mc_results<-
   fit_resamples(
     lm_workflow,
-    pd_mc, ##resampling plan
+    pd_mc_rs, ##resampling plan
     control=control_resamples(save_pred = TRUE)
   )
 ```
@@ -149,7 +140,6 @@ lm_mc_results<-
 lm_mc_results%>%
   collect_metrics()
 ```
-
 
 ## Plot bootsrap resampling results
 ```{r}
