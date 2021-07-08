@@ -1,0 +1,26 @@
+---
+title: "Assignment 7"
+author: "Doyle"
+date: "3/25/2021"
+output: html_document
+---
+
+Assignment 7 (alternate)
+---
+
+For this assignment, I want you to use the Census ACS API to download and plot data. Complete the following steps:
+
+1. Scrape the data on GDP per capita by country from wikipedia here: https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(PPP)_per_capita
+Turn this data into a data frame. 
+
+2. Download the data on tertiary education in 2019 (first table) by country from wikipedia here:
+https://en.wikipedia.org/wiki/List_of_countries_by_tertiary_education_attainment
+Turn this data into a data frame.
+
+3. Join the two data frames you created.
+
+4. Plot gdp per capita (CIA version) as a function of the percent of the population aged 25-64 with a tertiary education. 
+
+5. Model gdp per capita (using a linear model) as a function of the percent of the population aged 25-64 with a tertiary education. 
+
+
