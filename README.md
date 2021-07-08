@@ -118,11 +118,13 @@ Watch Lecture 8.4 Evaluating Classifiers: Sensitivity and Specificity on the LMS
 
 #### 9\. Presenting Data: Plots and Tables for Classification  
 
+Watch the LMS lectures for section 9 for this week. 
 
+[Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/09-plots_classification.Rmd) and [Data Set](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/za.Rdata)
 
 
 #### 10\. Cross Validation  
-
+[Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/10-cross_validation.Rmd) 
 
 
 ### Assignments and Due Dates
@@ -164,7 +166,7 @@ Assignment 9, Due Midnight August 3
 
 
 
-Assignment 10, Due Midnight August 10
+[Assignment 10, Due Midnight August 10](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/10-assignment.Rmd)
 
 ### Final Project Information
 
