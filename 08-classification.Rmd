@@ -22,7 +22,7 @@ library(probably)
 
 
 ```{r}
-load("za.Rdata")
+load("za.RData")
 ```
 
 | name  | Description   |
