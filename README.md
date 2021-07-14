@@ -99,7 +99,7 @@ Watch lecture 7.5 on LMS
 
 #### 8\. Analyzing Data: Classification  
 
-[Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/08-classification.Rmd) and [Data Set ](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/za.Rdata) and [HTML Version of Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/08-classification.html)
+[Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/08-classification.Rmd) and [Data Set ](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/za.RData) and [HTML Version of Notes](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/08-classification.html)
 
 *For First Class Session, July 14*
 
