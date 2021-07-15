@@ -1,0 +1,60 @@
+---
+title: "Assignment 7"
+author: "Doyle"
+date: "3/25/2021"
+output: html_document
+---
+
+Assignment 7
+---
+
+For this assignment, I want you to use the Census ACS API to download and plot data. Complete the following steps:
+
+1. Download data for all of the counties in Georgia on education levels. 
+2. Compute the proportion of the population in each county that has a bachelor's degree or above by county.
+3. Download data for all of counties in Georgia for family income. 
+4. Compute the proportion of the population in each county that has family income above 75,000. 
+
+5. Download data for all of the counties in Georgia on health insurance coverage status.
+
+c27001a_001
+
+```{r}
+
+acs_key<-"b27a265fe0dc7c49bd9281d6bc778637f10685e3"
+
+census_api_key(acs_key,install=FALSE,overwrite =TRUE)
+```
+
+
+```{r}
+
+insurance_vars<-get_acs(geography = "county",state="GA",
+                    table="C27001A",geometry = TRUE)
+
+## Spread, so that each level of education gets its own column
+insurance_vars<-insurance_vars%>%
+  select(GEOID,NAME,variable,estimate)%>%
+  spread(key=variable,value = estimate)
+
+## rename to be all lower case 
+names(insurance_vars)<-str_to_lower(names(insurance_vars))
+
+## Calculate prop with at least bachelor's for every county
+insurance_vars<-insurance_vars%>%
+  mutate(prop_no_health_ins=((c27001a_004+
+                              c27001a_007+   
+                              c27001a_010)/c27001a_001))
+## simplify to just proportion
+insurance_vars<-insurance_vars%>%
+  select(geoid,name,prop_no_health_ins,geometry)
+
+
+```
+
+
+6. Calculate the proportion of the population in each county that does not have health insurance. 
+
+7. Plot the proportion uninsured as a function of education, and then as a function of income. 
+
+8. Model the proportion uninsured as a function of education and income.
