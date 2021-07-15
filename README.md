@@ -115,6 +115,7 @@ Watch Lecture 8.4 Evaluating Classifiers: Sensitivity and Specificity on the LMS
 
 [Updated Async 8.6 The Area Under the Curve Measure and plotting logistic regression results](https://youtu.be/IhCJOZJv_O8)
 
+[In Class Work](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/08-classification-inclass.Rmd)
 
 #### 9\. Presenting Data: Plots and Tables for Classification  
 
@@ -158,7 +159,12 @@ Watch the LMS lectures for section 9 for this week.
 [Assignment 6 Key](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/06-assignment-key.Rmd)
 
 [Assignment 7, Due Midnight July 13](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/07-assignment.Rmd)
+
+[Assignment 7 Key]((https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/07-assignment-key.Rmd)
+
 [Alternate Assignment 7](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/07-assignment-alternate.Rmd)
+
+[Alternate Assignment 7 Key](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/07-assignment-alternate-key.Rmd)
 
 [Assignment 8, Due Midnight July 27](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/08-assignment.Rmd)
 
