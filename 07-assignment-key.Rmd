@@ -32,24 +32,6 @@ census_api_key(acs_key,install=FALSE,overwrite =TRUE)
 insurance_vars<-get_acs(geography = "county",state="GA",
                     table="C27001A",geometry = TRUE)
 
-## Spread, so that each level of education gets its own column
-insurance_vars<-insurance_vars%>%
-  select(GEOID,NAME,variable,estimate)%>%
-  spread(key=variable,value = estimate)
-
-## rename to be all lower case 
-names(insurance_vars)<-str_to_lower(names(insurance_vars))
-
-## Calculate prop with at least bachelor's for every county
-insurance_vars<-insurance_vars%>%
-  mutate(prop_no_health_ins=((c27001a_004+
-                              c27001a_007+   
-                              c27001a_010)/c27001a_001))
-## simplify to just proportion
-insurance_vars<-insurance_vars%>%
-  select(geoid,name,prop_no_health_ins,geometry)
-
-
 ```
 
 
