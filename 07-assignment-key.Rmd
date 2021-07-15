@@ -10,33 +10,172 @@ Assignment 7
 
 For this assignment, I want you to use the Census ACS API to download and plot data. Complete the following steps:
 
+```{r}
+library(tidyverse)
+library(tidycensus)
+```
+
+
 1. Download data for all of the counties in Georgia on education levels. 
-2. Compute the proportion of the population in each county that has a bachelor's degree or above by county.
-3. Download data for all of counties in Georgia for family income. 
-4. Compute the proportion of the population in each county that has family income above 75,000. 
-
-5. Download data for all of the counties in Georgia on health insurance coverage status.
-
-c27001a_001
 
 ```{r}
+
+# Get your own key and save as my_acs_key.txt
+#my_acs_key<-readLines("my_acs_key.txt",warn = FALSE)
+#acs_key<-my_acs_key
 
 acs_key<-"b27a265fe0dc7c49bd9281d6bc778637f10685e3"
 
 census_api_key(acs_key,install=FALSE,overwrite =TRUE)
+
+# OR just paste it here.
+
+```
+
+
+
+2. Compute the proportion of the population in each county that has a bachelor's degree or above by county.
+
+```{r}
+## Educ Characteristics by County for Texas
+
+educ_vars<-get_acs(geography = "county",state="GA",
+                    table="B15003",geometry = TRUE)
+
+
+## Spread, so that each level of education gets its own column
+educ_vars<-educ_vars%>%
+  select(GEOID,NAME,variable,estimate)%>%
+  spread(key=variable,value = estimate)
+
+## rename to be all lower case 
+names(educ_vars)<-str_to_lower(names(educ_vars))
+
+## Calculate prop with at least bachelor's for every county
+educ_vars<-educ_vars%>%
+  mutate(prop_bach=(b15003_022+
+                    b15003_023+
+                    b15003_024+
+                    b15003_025)/b15003_001)
+
+## simplify to just proportion
+educ_vars<-educ_vars%>%
+  select(geoid,name,prop_bach)
+```
+
+
+3. Download data for all of counties in Georgia for family income. 
+
+4. Compute the proportion of the population in each county that has family income above 75,000. 
+
+
+```{r}
+
+## Income by County for Georgia
+
+income_vars<-get_acs(geography = "county",state="GA",
+                    table="B19001",
+                    geometry=TRUE)
+
+## Spread, so that each level of education gets its own column
+income_vars<-income_vars%>%
+  select(GEOID,NAME,variable,estimate)%>%
+  spread(key=variable,value = estimate)
+
+## rename to be all lower case 
+names(income_vars)<-str_to_lower(names(income_vars))
+
+## Calculate prop with at least bachelor's for every county
+income_vars<-income_vars%>%
+  mutate(prop_75p=(b19001_013+
+                    b19001_014+
+                    b19001_015+
+                    b19001_016+
+                    b19001_017)/b19001_001)                      
+
+## simplify to just proportion
+income_vars<-income_vars%>%
+  select(geoid,name,prop_75p)
+
+```
+
+
+5. Download data for all of the counties in Georgia on health insurance coverage status.
+6. Calculate the proportion of the population in each county that does not have health insurance. 
+
+
+
+```{r}
+
+v18 <- load_variables(2018, "acs5", cache = TRUE)
+
 ```
 
 
 ```{r}
 
 insurance_vars<-get_acs(geography = "county",state="GA",
-                    table="C27001A",geometry = TRUE)
+                    table="B27010",geometry = TRUE)
+
+## Spread, so that each level of education gets its own column
+insurance_vars<-insurance_vars%>%
+  select(GEOID,NAME,variable,estimate)%>%
+  spread(key=variable,value = estimate)
+
+## Calculate prop with at least bachelor's for every county
+insurance_vars<-insurance_vars%>%
+  mutate(prop_without_health_ins=((B27010_017+
+                                  B27010_033+
+                                  B27010_050+
+                                  B27010_066)/B27010_001))
+
+## rename to be all lower case 
+names(insurance_vars)<-str_to_lower(names(insurance_vars))
+
+## simplify to just proportion
+insurance_vars<-insurance_vars%>%
+  select(geoid,name,prop_without_health_ins)
+
 
 ```
 
 
-6. Calculate the proportion of the population in each county that does not have health insurance. 
+
 
 7. Plot the proportion uninsured as a function of education, and then as a function of income. 
 
+```{r}
+
+educ_vars_2<-educ_vars%>%as_tibble()%>%select(geoid,name,prop_bach)
+
+income_vars_2<-income_vars%>%as_tibble()%>%select(geoid,name,prop_75p)
+
+insurance_vars_2<-insurance_vars%>%as_tibble()%>%select(geoid,name,prop_without_health_ins)
+
+combined<-left_join(educ_vars_2,income_vars_2,by=c("geoid","name"))
+
+combined<-left_join(combined,insurance_vars_2,by=c("geoid","name"))
+```
+
+```{r}
+combined%>%
+  ggplot(aes(x=prop_bach,y=prop_without_health_ins))+
+  geom_point()
+```
+
+
+```{r}
+combined%>%
+  ggplot(aes(x=prop_75p,y=prop_without_health_ins))+
+  geom_point()
+```
+
+
+
 8. Model the proportion uninsured as a function of education and income.
+
+
+```{r}
+mod1<-lm(prop_without_health_ins~prop_bach+prop_75p,data=combined)
+summary(mod1)
+```
