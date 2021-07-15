@@ -14,19 +14,71 @@ For this assignment, I want you to use the Census ACS API to download and plot d
 1. Scrape the data on GDP per capita by country from wikipedia here: https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(PPP)_per_capita
 Turn this data into a data frame. 
 
+```{r}
+
+gdp_wiki<-"https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(PPP)_per_capita"
+
+gdp_percap<-read_html(gdp_wiki)%>%html_table()
+
+gdp_percap<-gdp_percap[[2]]
+
+gdp_percap<-
+  gdp_percap%>%
+  select(1,8)%>%
+  rename(country=1,gdp_percap=2)%>%
+  slice(-1)%>%
+  mutate(gdp_percap=parse_number(gdp_percap))%>%
+  mutate(country=str_remove(country, fixed("(more)")))%>%
+  mutate(country=str_trim(country))
+
+
+```
+
+
 2. Download the data on tertiary education in 2019 (first table) by country from wikipedia here:
 https://en.wikipedia.org/wiki/List_of_countries_by_tertiary_education_attainment
 
 Turn this data into a data frame.
+```{r}
+
+educ_wiki<-"https://en.wikipedia.org/wiki/List_of_countries_by_tertiary_education_attainment"
+
+educ<-read_html(educ_wiki)%>%html_table()
+
+educ<-educ[[1]]
+
+educ<-educ%>%
+  select(1,2)%>%
+  rename(country=1,educ_level=2)%>%
+  slice(-1)%>%
+  mutate(educ_level=parse_number(educ_level))
+
+```
 
 
 3. Join the two data frames you created.
 
+```{r}
+combined<-left_join(educ,gdp_percap,by="country")
+```
+
 
 4. Plot gdp per capita (CIA version) as a function of the percent of the population aged 25-64 with a tertiary education. 
 
+```{r}
+gg<-combined%>%
+  ggplot(aes(x=educ_level,y=gdp_percap,label=country))+
+  geom_point()
+
+ggplotly(gg)
+```
 
 
 
 5. Model gdp per capita (using a linear model) as a function of the percent of the population aged 25-64 with a tertiary education. 
+
+```{r}
+mod1<-lm(gdp_percap~educ_level,data=combined)
+summary(mod1)
+```
 

@@ -171,9 +171,7 @@ combined%>%
 ```
 
 
-
 8. Model the proportion uninsured as a function of education and income.
-
 
 ```{r}
 mod1<-lm(prop_without_health_ins~prop_bach+prop_75p,data=combined)
