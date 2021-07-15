@@ -162,7 +162,7 @@ Watch the LMS lectures for section 9 for this week.
 
 [Assignment 7, Due Midnight July 13](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/07-assignment.Rmd)
 
-[Assignment 7 Key]((https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/07-assignment-key.Rmd)
+[Assignment 7 Key](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/07-assignment-key.Rmd)
 
 [Alternate Assignment 7](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/07-assignment-alternate.Rmd)
 
