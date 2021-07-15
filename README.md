@@ -117,6 +117,8 @@ Watch Lecture 8.4 Evaluating Classifiers: Sensitivity and Specificity on the LMS
 
 [In Class Work](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/08-classification-inclass.Rmd)
 
+[Notes from Class, Classification](https://docs.google.com/document/d/1I1hgj-Pn4keldsdcx84Z46z9kkXkB8N6jvhfD8NI7uE/edit?usp=sharing)
+
 #### 9\. Presenting Data: Plots and Tables for Classification  
 
 Watch the LMS lectures for section 9 for this week. 
