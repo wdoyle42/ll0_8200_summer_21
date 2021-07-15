@@ -1,0 +1,15 @@
+---
+title: "In Class Work: Classification"
+---
+
+We'll be again working on a Kaggle-style competition to predict who gets pizza. Using the pizza dataset, find the best fit to the data. However, to qualify as a winner, you need to do the following: 
+
+1. Fit a model using logistic regression using the training dataset.
+
+2. Compute the predictions from your model from the testing dataset.
+
+3. Calculate the AUC (from the Receiver Operating Characteristic) for the predictions from your model from the testing dataset.
+
+4. Find a way to plot the predictions from your model. 
+
+For some ideas, see: http://cs.stanford.edu/~althoff/raop-dataset/altruistic_requests_icwsm.pdf.

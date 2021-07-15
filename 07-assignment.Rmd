@@ -14,7 +14,28 @@ For this assignment, I want you to use the Census ACS API to download and plot d
 2. Compute the proportion of the population in each county that has a bachelor's degree or above by county.
 3. Download data for all of counties in Georgia for family income. 
 4. Compute the proportion of the population in each county that has family income above 75,000. 
+
 5. Download data for all of the counties in Georgia on health insurance coverage status.
+
+
+```{r}
+
+acs_key<-"b27a265fe0dc7c49bd9281d6bc778637f10685e3"
+
+census_api_key(acs_key,install=FALSE,overwrite =TRUE)
+```
+
+
+```{r}
+
+insurance_vars<-get_acs(geography = "county",state="GA",
+                    table="C27001A",geometry = TRUE)
+
+```
+
+
 6. Calculate the proportion of the population in each county that does not have health insurance. 
+
 7. Plot the proportion uninsured as a function of education, and then as a function of income. 
+
 8. Model the proportion uninsured as a function of education and income.

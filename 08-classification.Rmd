@@ -294,9 +294,7 @@ logit_final$.metrics
 ```
 
 
-
-
-# Plotting results from logisitc regression
+# Plotting results from logistic regression
 
 Because individual coefficients are so hard to understand, most of the time we convert the results to predicited probabilities, using a range of hypothetical values, as in the code below. 
 ```{r}

@@ -135,9 +135,7 @@ Next, we'll turn to the American Community Survey. This includes a large number 
 The first step is to get the table from ACS. You can look up these tables by using the `load_variables` command, then searching through the results using`View()` and filter. 
 
 ```{r}
-library(tidycensus)
-library(tigris)
-library(gridExtra)
+
 
 ## Looking for variables
 
