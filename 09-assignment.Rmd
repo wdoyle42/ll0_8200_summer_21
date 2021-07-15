@@ -3,8 +3,6 @@ title: "Assignment 9"
 author: "Will Doyle"
 ---
 
-
-
 For this assignment, you'll be using the lemons dataset, which is a subset of the dataset used for a Kaggle competition described here: 
 https://www.kaggle.com/c/DontGetKicked/data. 
 Complete the following steps:
