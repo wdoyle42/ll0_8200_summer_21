@@ -19,5 +19,10 @@ Complete the following steps.
 2. Calculate the proportion of lemons by Make. 
 3. Now, predict the probability of being a lemon using a logistic regression, using covariates of your choosing.  
 4. Make predictions from the logit model. Make sure these are probabilities.
-5. Calculate the accuracy, sensitivity and specificty of your model using a threshold of .5.
+5. Calculate the accuracy, sensitivity and specificity of your model using a threshold of .5.
 5. Calculate the AUC for the predictions from the ROC based on the logit model. 
+
+```{r}
+df<-df%>%sample_frac(.25)
+```
+

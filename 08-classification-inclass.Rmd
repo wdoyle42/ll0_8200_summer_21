@@ -6,9 +6,117 @@ We'll be again working on a Kaggle-style competition to predict who gets pizza. 
 
 1. Fit a model using logistic regression using the training dataset.
 
+
 2. Compute the predictions from your model from the testing dataset.
 
-3. Calculate the AUC (from the Receiver Operating Characteristic) for the predictions from your model from the testing dataset.
+3. Calculate the AUC (from the Receiver Operating Characteristic) for the predictions from your model from the testing dataset. Compare your results to the artice linked below. 
+
+
+
+```{r libraries}
+library(knitr)
+library(tidyverse)
+library(modelr)
+library(yardstick)
+library(tidymodels)
+library(probably)
+```
+
+
+```{r}
+load("za.RData")
+```
+
+
+```{r}
+# Training and testing datasets
+
+za_split<-initial_split(za,prop=.5)
+
+za_train<-training(za_split)
+
+za_test<-testing(za_split)
+
+```
+
+
+
+```{r linear_model}
+#  Model terms
+
+za_formula<-as.formula("got_pizza_f~
+             age+
+             karma+
+             total_posts+
+             raop_posts+
+             student+
+             grateful+
+             pop_request+
+             score+
+             prev_raop_post+
+             words+
+             activity")
+
+```
+
+
+```{r}
+za%>%
+  ggplot(aes(x=log(activity+1)))+
+  geom_density()
+```
+
+
+```{r}
+logit_rec<-recipe(za_formula, data=za)%>%
+  step_log(total_posts,offset = 1)%>%
+  step_log(activity,offset=1)
+```
+
+
+
+```{r}
+logit_mod <- 
+  logistic_reg() %>% 
+  set_engine("glm")%>%
+  set_mode("classification")
+```
+
+
+## Put the workflow together
+
+```{r}
+logit_wf<-workflow()%>%
+  add_recipe(logit_rec)%>%
+  add_model(logit_mod)
+```
+
+```{r}
+logit_results<-fit(logit_wf,data=za_train)
+```
+
+```{r}
+logit_results%>%
+  tidy()
+```
+
+```{r}
+logit_final<-last_fit(logit_wf,za_split)
+
+logit_final$.metrics
+```
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+
 
 4. Find a way to plot the predictions from your model. 
 
