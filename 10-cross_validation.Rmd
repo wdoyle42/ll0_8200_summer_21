@@ -46,6 +46,8 @@ geom_point()
 ```
 
 
+Plotting the variable with a log transformation shows that it has a more symmetric distribution using this transformation. 
+
 ```{r}
 pd%>%
 ggplot(aes(x=coll_grad_pc,y=median_home_val))+
@@ -55,6 +57,9 @@ scale_y_continuous(trans="log")
 
 
 ## Set the kind of model to run
+
+We're going to follow the `tidymodels` approach and set the elements of our workflow. First up is the type of model-- a linear regression. 
+
 ```{r}
 lm_fit <- 
   linear_reg() %>% 
@@ -62,6 +67,8 @@ lm_fit <-
 ```
 
 ## Define the model
+
+Next we'll define the terms in the model. We'll use education homeownership rate and income to predict the median home value in a county. 
 ```{r}
 lm_formula<-as.formula("median_home_val~
                         coll_grad_pc+
@@ -71,6 +78,9 @@ lm_formula<-as.formula("median_home_val~
 ```
 
 ## Define a recipe
+
+For the recipe we're going to include a few steps. `step_log` will log transform the outcome, `step_zv` will remove any variable that are zero variance (constants) and `step_naomit` will drop any missing data. 
+
 ```{r}
 lm_rec <- recipe(lm_formula, data = pd) %>%
   step_log(all_outcomes())%>%
@@ -79,10 +89,9 @@ lm_rec <- recipe(lm_formula, data = pd) %>%
 
 ```
 
-## Specify the resampling: K fold resampling, K=10
-```{r}
-folds <- vfold_cv(pd, v = 10)
-```
+## Define Workflow
+
+Now we can put the recipe and the model together into the workflow. 
 
 ```{r}
 lm_workflow<-workflow()%>%
@@ -91,7 +100,19 @@ lm_workflow<-workflow()%>%
 ```
 
 
+
+## Specify the resampling: K fold resampling, K=10
+
+Now we're at the new part. Notice that we didn't spli the data testing and training this time. Instead we're going to specify that we want to spit the data using into 10 different folds. Each fold wil split the data with 9/10 training and 1/10 testing. 
+```{r}
+folds <- vfold_cv(pd, v = 10)
+```
+
+
 ## Fit Model and Cross Validate
+
+To fit the model to the data, we use `fit_resample`. We need to specify the workflow, the resampled data (which we created above) and the control function, which tells R what to save. In this case, the `control_resamples` tells R to save the predictions from the model. 
+
 ```{r}
 lm_kfold_results<-
   fit_resamples(
@@ -101,15 +122,28 @@ lm_kfold_results<-
   )
 ```
 
+
+## Assessing Accuracy
+
+Now we can pull the results using `collect_metrics`. Instead of a single rmse, we will have 10 rmses, one for each fold. 
+
 ```{r}
 lm_kfold_results%>%
   collect_metrics()
 ```
 
+The next step "unnests" the data so we can work with it. 
+
 ```{r}
 lm_kfold_results%>%
   unnest(.metrics)
 ```
+
+
+
+Now we can plot the results.
+
+## RMSE from 10 fold cross-validation
 
 ```{r}
 lm_kfold_results%>%
@@ -119,11 +153,17 @@ lm_kfold_results%>%
   geom_density()
 ```
 
+This shows that in our 10-fold cross validation, the rmse went from a minimum of abourt .27 to a maximum of about .32.
+
 ## Specify the resampling: monte_carlo resampling
+
+To change to mont carlo (or random partition) resampling, we need only change how the resampling is specified. The code below creates 100 datasets, with 8/10 set aside for training in each resample, and 2/10 (`prop=.2`) set aside for testing. 
+
 ```{r}
-pd_mc_rs<-mc_cv (pd,times = 100) ##1000 is usual minimum
+pd_mc_rs<-mc_cv (pd,times = 100,prop = .2) ##1000 is usual minimum
 ```
 
+Nothing else needs to change, we'll just fit our previously specified workflow to the data that's set up for monte carlo resampling. 
 
 ## Fit Monte Carlo Reasmpling
 ```{r}
@@ -135,13 +175,17 @@ lm_mc_results<-
   )
 ```
 
+The same process willll happpen below-- we can plot the results from the 100 different applications to the testing datasets to see what the accuracy of the model is under a variety of different testing/training splits. 
+
 ## Get Metrics
 ```{r}
 lm_mc_results%>%
   collect_metrics()
 ```
 
-## Plot bootsrap resampling results
+The overall average rmse is .294, and the average $r^2$ is .606. 
+
+## Plot Monte Carlo resampling results
 ```{r}
 lm_mc_results%>%
   unnest(.metrics)%>%
@@ -150,17 +194,23 @@ lm_mc_results%>%
   geom_density()
 ```
 
+With more resamples, we can see that the minimum rmse is still about .27 and the maximum is about .32. 
 
 ## Feature Selection
 
 Of course, we can also just let the computer choose a model from a set of candidate variables. Below, I use lasso regression, which involves proposing candidate variables and evaluating their ability to lower RMSE, as the basis for choosing a "best" model. 
 
 ## Set Lasso Formula
+
+The formula for this model will be `y~.` which means run the model wuth ALL of the variables in the dataset. 
+
 ```{r}
 lasso_formula<-as.formula("median_home_val~.")
 ```
 
 ## Set Lasso Recipe
+
+I'll use the same recipe as above to process this data. 
 ```{r}
 lasso_rec <- recipe(lasso_formula, data = pd) %>%
   step_log(all_outcomes())%>%
@@ -170,6 +220,9 @@ lasso_rec <- recipe(lasso_formula, data = pd) %>%
 
 
 ## Specify Lasso Model
+
+We're going to use a different model, which needs to have two parameters set. These are the penalty and the mixture. I'm going to use a standard value of .1 for the penalty and 1 for the mixture (this makes it a lasso model). Notice that the engine is now "glmnet."
+
 ```{r}
 penalty_spec<-.1
 mixture_spec<-1
@@ -181,6 +234,7 @@ lasso_fit<-
 ```
 
 
+Next I put the recipe and model into the workflow. 
 ```{r}
 lasso_wf<-workflow()%>%
   add_recipe(lasso_rec)%>%
@@ -188,16 +242,19 @@ lasso_wf<-workflow()%>%
 ```
 
 
-## Fit Bootstrap Resamples from Lasso
+## Fit Monte Carlo Resamples from Lasso
+
+I don't need to respecify the sampling plan, because we'll use the monte carlo set up again.
 ```{r}
 lasso_mc_results<-
   fit_resamples(
     lasso_wf, ## Recipe: preps the data
-    pd_mc, ##resampling plan
+    pd_mc_rs, ##resampling plan
     control=control_resamples(save_pred = TRUE)
   )
 ```
 
+Once we've run the model we can plot the accuracy of the rmses from the 100 different resamples. 
 
 ```{r}
 lasso_mc_results%>%
@@ -209,6 +266,8 @@ lasso_mc_results%>%
 
 
 ## Comparing Performance of Models
+
+At this point we've fit a model using a standard linear regression and a model that allowed R to use all of the variables in the dataset. Let's figure out which one worked better. I'm going to combine the metrics from both datasets into a single dataset, then plot the results.
 ```{r}
 lm_mc_results%>%
   unnest(.metrics)%>%
@@ -222,6 +281,7 @@ lm_mc_results%>%
   geom_density(alpha=.5)
 ```
 
+In this case our nice simple linear model outperformed the more complex model, and would be preferred. This happens! 
 
 ## Cross Validation for Classification
 
@@ -329,7 +389,6 @@ lasso_logit_fit<-
              mixture=tune()) %>% 
   set_engine("glmnet")
 
-## NB: tuning shows very low penalty, very high mixture
 ```
 
 
@@ -347,7 +406,7 @@ lasso_logit_mc<-
   tune_grid(
     lasso_logit_wf, 
     resamples=logit_mc_rs, ##resampling plan
-    grid=grid_max_entropy(parameters(lasso_logit_fit,size=9)),
+    grid=grid_regular(parameters(lasso_logit_fit,size=9)),
     metrics = metric_set(roc_auc, sens, spec)
   )
 ```
