@@ -1,7 +1,7 @@
 ---
 title: "Cross Validation"
 author: "Will Doyle"
-output: github_document
+output: html_document
 ---
 
 ## Introduction
@@ -160,7 +160,7 @@ This shows that in our 10-fold cross validation, the rmse went from a minimum of
 To change to mont carlo (or random partition) resampling, we need only change how the resampling is specified. The code below creates 100 datasets, with 8/10 set aside for training in each resample, and 2/10 (`prop=.2`) set aside for testing. 
 
 ```{r}
-pd_mc_rs<-mc_cv (pd,times = 100,prop = .2) ##1000 is usual minimum
+pd_mc_rs<-mc_cv(pd,times = 100,prop = .8) ##1000 is usual minimum
 ```
 
 Nothing else needs to change, we'll just fit our previously specified workflow to the data that's set up for monte carlo resampling. 
@@ -175,7 +175,7 @@ lm_mc_results<-
   )
 ```
 
-The same process willll happpen below-- we can plot the results from the 100 different applications to the testing datasets to see what the accuracy of the model is under a variety of different testing/training splits. 
+The same process will happen below-- we can plot the results from the 100 different applications to the testing datasets to see what the accuracy of the model is under a variety of different testing/training splits. 
 
 ## Get Metrics
 ```{r}
