@@ -135,9 +135,9 @@ Updated Lecture 10.2 Cross Validation for Linear Regression [Part 1](https://you
 
 Updated Lecture 10.3 Cross Validation for Linear Regression with Feature Selection [Here](https://youtu.be/pdikKDWiLY8)
 
-Updated Lecture 10.4 Cross Validation for Logistic Regression Here
+Updated Lecture 10.4 Cross Validation for Logistic Regression [Here](https://youtu.be/hfZ_Jcz99mk)
 
-Updated Lecture 10.5 Cross Validation for Logistic Regression with Feature Selection and Model Tuning Here
+Updated Lecture 10.5 Cross Validation for Logistic Regression with Feature Selection and Model Tuning [Here](https://youtu.be/B1JpLvCXhUQ)
 
 Watch Lecture 10.6 on LMS
 
