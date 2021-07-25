@@ -15,6 +15,24 @@ https://www.kaggle.com/c/DontGetKicked/data. Your job is to predict which cars a
 
 Complete the following steps.
 
+```{r}
+library(tidyverse)
+library(tidymodels)
+```
+
+## Read just the first 100k rows
+```{r}
+df<-read_csv("training.csv",n_max=1e5)
+```
+
+```{r}
+df<-df%>%
+  mutate(isbadbuy_f=fct_recode(as.factor(IsBadBuy),"Yes"="1","No"="0"))
+  
+```
+
+
+
 1. Calculate the proportion of lemons in the training dataset using the `IsBadBuy` variable. 
 2. Calculate the proportion of lemons by Make. 
 3. Now, predict the probability of being a lemon using a logistic regression, using covariates of your choosing.  
@@ -22,7 +40,4 @@ Complete the following steps.
 5. Calculate the accuracy, sensitivity and specificity of your model using a threshold of .5.
 5. Calculate the AUC for the predictions from the ROC based on the logit model. 
 
-```{r}
-df<-df%>%sample_frac(.25)
-```
 
