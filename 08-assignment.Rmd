@@ -25,10 +25,10 @@ library(tidymodels)
 df<-read_csv("training.csv",n_max=1e5)
 ```
 
+## Recode isbadbuy to be a factor, required for `recipe` command and others. 
 ```{r}
 df<-df%>%
   mutate(isbadbuy_f=fct_recode(as.factor(IsBadBuy),"Yes"="1","No"="0"))
-  
 ```
 
 
