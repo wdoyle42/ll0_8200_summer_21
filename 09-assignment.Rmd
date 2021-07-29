@@ -7,7 +7,34 @@ For this assignment, you'll be using the lemons dataset, which is a subset of th
 https://www.kaggle.com/c/DontGetKicked/data. 
 Complete the following steps:
 
+```{r}
+library(tidyverse)
+library(knitr)
+library(modelr)
+```
+
+```{r}
+df<-read_csv("training.csv",n_max=1e6)
+```
+
+
 1. Using the lemons dataset, plot the probability of a car being a bad buy by make.
+
+```{r}
+
+df%>%
+  group_by(Make)%>%
+  summarize(mean_isbadbuy=mean(IsBadBuy,na.rm=TRUE))%>%
+  mutate(Make=fct_reorder(Make,mean_isbadbuy))%>%
+  ggplot(aes(y=mean_isbadbuy ,x=Make) )+
+  geom_col()+
+  coord_flip()+
+  ylab("Pr(Is Bad Buy)")+
+  xlab("")
+  
+```
+
+
 2. Create a table that shows the probability of a car being a bad buy by make.
-3. Create a heatmap of the probability of a car being a bad buy by make and acquisition type. 
+3. Create a heatmap of the probability of a car being a bad buy by make and vehicle age. 
 4. Create a plot of your choosing that shows the probability of a car being a bad buy by year and make. 
