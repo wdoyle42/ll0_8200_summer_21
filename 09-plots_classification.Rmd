@@ -61,18 +61,19 @@ To format the data for barcharts, we make use of the concept of conditional mean
 ```{r}
 za_sum<-za%>%
   group_by(poor,student)%>%
-  summarize(prob_pizza=mean(got_pizza,na.rm=TRUE))
+  summarize(prob_pizza=mean(got_pizza,na.rm=TRUE))%>%
+  mutate(perc_pizza=prob_pizza*100)
 ```
 
 Then we can plot this using our familiar ggplot commands:
 
 ```{r}
-gg1<-ggplot(za_sum,aes(y=prob_pizza,x=student,fill=poor))
+gg1<-ggplot(za_sum,aes(y=perc_pizza,x=student,fill=poor))
 gg1<-gg1+geom_bar(stat="identity",position="dodge")
 gg1<-gg1+xlab("Student Status")+ylab("Pr(Pizza)")
 gg1<-gg1+theme(legend.title=element_blank())
 
-gg1<-gg1+geom_text(aes(label=round(prob_pizza,2)),
+gg1<-gg1+geom_text(aes(label=round(perc_pizza,1)),
                    position=position_dodge(width=.9),
                    vjust=-.25)
 gg1
@@ -88,7 +89,7 @@ za<-za%>%mutate(score_quintile=ntile(score,5),
                 karma_quintile=ntile(karma,5))
 ```
 
-Then we'll create a summary dataset that shows the probabilitie of the outcome across all of the combined categories of the two independent variables. 
+Then we'll create a summary dataset that shows the probabilities of the outcome across all of the combined categories of the two independent variables. 
 
 ```{R}
 za_sum<-za%>%group_by(score_quintile,karma_quintile)%>%
@@ -114,7 +115,6 @@ gg<-gg+xlab("Emotional Valence")+ylab("Reddit Karma")
 gg<-gg+theme(legend.title=element_blank())
 gg
 ```
-
 
 
 ## Plotting by probabilities from models

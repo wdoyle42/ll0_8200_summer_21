@@ -285,7 +285,7 @@ In this case our nice simple linear model outperformed the more complex model, a
 
 ## Cross Validation for Classification
 
-The process of cross validatin in classification is VERY similar. We need to specify our resampling plan then fit the model to the resample data. 
+The process of cross validation in classification is VERY similar. We need to specify our resampling plan then fit the model to the resampled data. 
 
 We'll use the pizza data again and make sure to have the dependent variable structured as a factor. I'm going to drop the original version of the `got_pizza` variable as it wil obviously perfectly predict the outcome. 
 
