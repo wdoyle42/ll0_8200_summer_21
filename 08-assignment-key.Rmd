@@ -1,0 +1,209 @@
+---
+title: "08-assignment"
+author: "Doyle"
+date: "4/6/2021"
+output: html_document
+---
+
+Assignment 8
+---
+
+"When life gives you lemons, don’t make lemonade. Make life take the lemons back! Get mad!" -Cave Johnson
+
+For this assignment, you'll be using the lemons dataset, which is a subset of the dataset used for a Kaggle competition described here: 
+https://www.kaggle.com/c/DontGetKicked/data. Your job is to predict which cars are most likely to be lemons. Please note
+
+Complete the following steps.
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(knitr)
+```
+
+## Read just the first 100k rows
+```{r}
+df<-read_csv("training.csv",n_max=1e6)
+```
+
+## Recode isbadbuy to be a factor, required for `recipe` command and others. 
+```{r}
+df<-df%>%
+  mutate(isbadbuy_f=fct_recode(as.factor(IsBadBuy),"Yes"="1","No"="0"))
+```
+
+
+1. Calculate the proportion of lemons in the training dataset using the `IsBadBuy` variable. 
+
+```{r}
+df%>%
+  summarize(mean(IsBadBuy,na.rm=TRUE))
+```
+
+
+2. Calculate the proportion of lemons by Make. 
+
+```{r}
+df%>%
+  group_by(Make)%>%
+    summarize(mean_isbabduy=mean(IsBadBuy,na.rm=TRUE))%>%
+    arrange(-mean_isbabduy)%>%
+    kable()
+```
+
+
+
+3. Now, predict the probability of being a lemon using a logistic regression, using covariates of your choosing.  
+
+```{r}
+
+lemon_split<-initial_split(df)
+
+lemon_train<-training(lemon_split)
+
+lemon_test<-testing(lemon_split)
+
+```
+
+
+```{r}
+lemon_formula<-as.formula("isbadbuy_f~
+                          VehicleAge+
+                          Make+
+                          Color+
+                          Transmission+
+                          VNST+
+                          VehBCost+
+                          VehOdo")
+
+```
+
+```{r}
+lemon_recipe<-recipe(lemon_formula,lemon_train)%>%
+  step_dummy(all_nominal(),-all_outcomes())%>%
+  step_log(VehBCost,VehOdo)%>%
+  step_naomit()%>%
+  step_other(Make,threshold = .1)
+  
+```
+
+
+```{r}
+lemon_model<-
+  logistic_reg()%>%
+  set_engine("glm")%>%
+  set_mode("classification")
+
+```
+
+```{r}
+lemon_wf<-workflow()%>%
+  add_recipe(lemon_recipe)%>%
+  add_model(lemon_model)
+```
+
+```{r}
+lemon_results<-fit(lemon_wf,lemon_train)
+```
+
+
+```{r}
+lemon_results%>%tidy()%>%kable()
+```
+
+
+4. Make predictions from the logit model. Make sure these are probabilities.
+
+```{r}
+lemon_results%>%
+  predict(lemon_test)%>%
+  bind_cols(lemon_test)
+```
+
+
+
+5. Calculate the accuracy, sensitivity and specificity of your model using a threshold of .5.
+
+```{r}
+lemon_results%>%
+  predict(lemon_test)%>%
+  bind_cols(lemon_test)%>%
+   metrics(truth=isbadbuy_f,estimate=.pred_class)
+```
+
+```{r}
+lemon_results%>%
+  predict(lemon_test)%>%
+  bind_cols(lemon_test)%>%
+  sens(truth=isbadbuy_f,estimate=.pred_class,event_level="second")
+```
+
+```{r}
+lemon_results%>%
+  predict(lemon_test)%>%
+  bind_cols(lemon_test)%>%
+  spec(truth=isbadbuy_f,estimate=.pred_class,event_level="second")
+```
+
+
+
+
+5. Calculate the AUC for the predictions from the ROC based on the logit model. 
+
+```{r}
+lemon_results%>%
+  predict(lemon_test,type="prob")%>%
+  bind_cols(lemon_test)%>%
+  roc_auc(truth=isbadbuy_f,estimate=.pred_Yes,event_level="second")
+
+```
+
+```{r}
+lemon_results%>%
+  predict(lemon_test,type="prob")%>%
+  bind_cols(lemon_test)%>%
+  threshold_perf(truth=isbadbuy_f,
+                 estimate=.pred_Yes,
+                 thresholds=.12,metrics=c("sens","spec"))
+```
+
+
+
+
+```{r}
+th<-lemon_results%>%
+  predict(lemon_test,type="prob")%>%
+  bind_cols(lemon_test)%>%
+   threshold_perf(truth=isbadbuy_f,
+                 estimate=.pred_Yes,
+                 thresholds=seq(0,1,by=.1),metrics=c("sens","spec"))
+
+ggplot(filter(th,.metric%in%c("sens","spec")),
+       aes(x=.threshold,y=.estimate,color=.metric))+
+  geom_line()
+  
+
+```
+
+```{r}
+lemon_mod<-extract_model(lemon_results)
+
+lemon_data<-lemon_recipe%>%
+  prep()%>%
+  juice()
+
+hypo_data<-
+  data_grid(
+            data=lemon_data,
+            .model=lemon_mod,
+            VehicleAge=seq_range(VehicleAge,n=10)
+  )%>%
+  add_predictions(lemon_mod,type="response")
+  
+hypo_data%>%
+  ggplot(aes(x=VehicleAge,y=pred))+
+  geom_smooth()
+
+```
+
+
