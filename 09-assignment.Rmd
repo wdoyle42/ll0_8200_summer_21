@@ -36,5 +36,7 @@ df%>%
 
 
 2. Create a table that shows the probability of a car being a bad buy by make.
+
 3. Create a heatmap of the probability of a car being a bad buy by make and vehicle age. 
+
 4. Create a plot of your choosing that shows the probability of a car being a bad buy by year and make. 
