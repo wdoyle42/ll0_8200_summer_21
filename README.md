@@ -207,3 +207,6 @@ Watch Lecture 10.6 on LMS
 
 Example Final Project [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/example_report.Rmd)  ["Knitted" Report](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/example_report.html)
 
+Student Exemplar Project [.Rmd File](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/final_project_melody.Rmd)
+["Knitted" Report](https://raw.githack.com/wdoyle42/ll0_8200_summer_21/main/final_project_melody.html)
+
