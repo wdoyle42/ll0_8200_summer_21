@@ -315,7 +315,7 @@ Problem Sets
 Problem Set 9 due 24 hours before first Week 10 live session 
 
 *Final Project*
-[Fourth progress report](https://raw.githubusercontent.com/wdoyle42/ll0_8200_summer_21/main/04-progress-report.Rmd) due  before Topic 10 first live session
+[Fourth progress report](https://raw.githubusercontent.com/wdoyle42/ll0_8200_summer_21/main/04-progress-report.Rmd) due before Topic 10 first live session
 
 Problem Set 10 due 24 hours before second Topic 10 live session
 
