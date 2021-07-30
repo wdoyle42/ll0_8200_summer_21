@@ -36,5 +36,8 @@ dontgetkicked.csv
 training.csv
 LLO-8200-Syllabus.docx
 08-assignment.html
+<<<<<<< HEAD
 08-classification_files
 10-cross_validation_files
+=======
+>>>>>>> 45f80f1a2bd6928feea01dc6b2158246dedd0a67
