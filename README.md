@@ -205,9 +205,10 @@ Watch Lecture 10.6 on LMS
 
 [Progress Report 4: Due Midnight, August 4](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-progress-report.Rmd)
 
-*Final Project Rubric and Examples*: 
 
-Final Project Due Midnight August 18
+#Final Project Due Midnight August 18
+
+*Final Project Rubric and Examples*
 
 [Rubric for Final Project](https://github.com/wdoyle42/ll0_8200_summer_21/blob/main/final_project_rubric.md)
 
