@@ -189,6 +189,8 @@ Watch Lecture 10.6 on LMS
 
 [Assignment 9, Due Midnight August 3](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/09-assignment.Rmd)
 
+
+
 [Assignment 10, Due Midnight August 10](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/10-assignment.Rmd)
 
 ### Final Project Information
@@ -204,6 +206,8 @@ Watch Lecture 10.6 on LMS
 [Progress Report 4: Due Midnight, August 4](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/04-progress-report.Rmd)
 
 *Final Project Rubric and Examples*: 
+
+Final Project Due Midnight August 18
 
 [Rubric for Final Project](https://github.com/wdoyle42/ll0_8200_summer_21/blob/main/final_project_rubric.md)
 
