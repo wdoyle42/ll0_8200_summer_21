@@ -185,6 +185,8 @@ Watch Lecture 10.6 on LMS
 
 [Assignment 8, Due Midnight July 27](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/08-assignment.Rmd)
 
+[Assignment 8 Key](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/08-assignment-key.Rmd)
+
 [Assignment 9, Due Midnight August 3](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/09-assignment.Rmd)
 
 [Assignment 10, Due Midnight August 10](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/10-assignment.Rmd)
