@@ -89,6 +89,13 @@ lm_rec <- recipe(lm_formula, data = pd) %>%
 
 ```
 
+```{r}
+pd%>%ggplot(aes(x=median_home_val))+geom_density()
+
+pd%>%ggplot(aes(x=coll_grad_pc))+geom_density()
+
+```
+
 ## Define Workflow
 
 Now we can put the recipe and the model together into the workflow. 
@@ -138,7 +145,6 @@ The next step "unnests" the data so we can work with it.
 lm_kfold_results%>%
   unnest(.metrics)
 ```
-
 
 
 Now we can plot the results.
