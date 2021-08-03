@@ -19,6 +19,8 @@ Complete the following steps.
 library(tidyverse)
 library(tidymodels)
 library(knitr)
+library(probably)
+library(modelr)
 ```
 
 ## Read just the first 100k rows
@@ -75,16 +77,14 @@ lemon_formula<-as.formula("isbadbuy_f~
                           VNST+
                           VehBCost+
                           VehOdo")
-
 ```
 
 ```{r}
 lemon_recipe<-recipe(lemon_formula,lemon_train)%>%
+    step_other(Make,threshold = .1)
   step_dummy(all_nominal(),-all_outcomes())%>%
   step_log(VehBCost,VehOdo)%>%
-  step_naomit()%>%
-  step_other(Make,threshold = .1)
-  
+  step_naomit(all_predictors())
 ```
 
 
