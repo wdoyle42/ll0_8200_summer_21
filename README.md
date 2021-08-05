@@ -129,6 +129,8 @@ Watch the LMS lectures for section 9 for this week.
 #### 10\. Cross Validation  
 [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/10-cross_validation.Rmd) 
 
+[Lecture Notes, minimalist version](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/10-cv-justwhatyouneed.Rmd)
+
 Watch Lecture 10. 1 on LMS
 
 Updated Lecture 10.2 Cross Validation for Linear Regression [Part 1](https://youtu.be/Q78A2M226z4) [Part 2](https://youtu.be/i1wi9DhC9Jc)
