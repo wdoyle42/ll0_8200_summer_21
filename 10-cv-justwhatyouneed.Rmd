@@ -1,0 +1,93 @@
+---
+title: "Just what you need"
+author: "Will Doyle"
+date: "8/4/2021"
+output: html_document
+---
+
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(glmnet)
+library(modelr)
+```
+
+
+```{r}
+load("pd.Rdata")
+pd<-pd%>%
+  select(median_home_val,median_hh_inc,coll_grad_pc,homeown_rate,per_capita_inc,pop65p,retail_percap)%>%
+  mutate_all(.funs=list(as.numeric)) ## change all to numeric
+
+```
+
+```{r}
+lm_fit <- 
+  linear_reg() %>% 
+  set_engine("lm")
+```
+
+## Define the model
+
+Next we'll define the terms in the model. We'll use education homeownership rate and income to predict the median home value in a county. 
+```{r}
+lm_formula<-as.formula("median_home_val~
+                        coll_grad_pc+
+                        per_capita_inc+
+                        homeown_rate+
+                        median_hh_inc")
+```
+
+## Define a recipe
+
+For the recipe we're going to include a few steps. `step_log` will log transform the outcome, `step_zv` will remove any variable that are zero variance (constants) and `step_naomit` will drop any missing data. 
+
+```{r}
+lm_rec <- recipe(lm_formula, data = pd) %>%
+  step_log(all_outcomes())%>%
+  step_zv(all_numeric()) %>% # drop any zero variance
+  step_naomit(all_predictors()) ## drop any missing data
+
+```
+
+```{r}
+lm_workflow<-workflow()%>%
+  add_recipe(lm_rec)%>%
+  add_model(lm_fit)
+```
+
+
+```{r}
+pd_mc_rs<-mc_cv(pd,times = 100,prop = .8) ##1000 is usual minimum
+```
+
+
+## Fit Monte Carlo Resampling
+```{r}
+lm_mc_results<-
+  fit_resamples(
+    lm_workflow,
+    pd_mc_rs, ##resampling plan
+    control=control_resamples(save_pred = TRUE)
+  )
+```
+
+
+```{r}
+lm_mc_results%>%
+  collect_metrics()
+```
+
+```{r}
+
+lm_mc_results%>%
+  unnest(.metrics)%>%
+  filter(.metric=="rmse")%>%
+  ggplot(aes(x=.estimate))+
+  geom_density()
+
+```
+
+The average RMSE from the cross validation is .291. The minimum observed RMSE is about .27, while the maximum is about .32. The distribution of the RMSE from the full cross validation is symmetric, without any extreme outliers.
+
