@@ -1,0 +1,90 @@
+---
+title: "Assignment 9"
+author: "Will Doyle"
+---
+
+For this assignment, you'll be using the lemons dataset, which is a subset of the dataset used for a Kaggle competition described here: 
+https://www.kaggle.com/c/DontGetKicked/data. 
+Complete the following steps:
+
+```{r}
+library(tidyverse)
+library(knitr)
+library(modelr)
+```
+
+```{r}
+df<-read_csv("training.csv",n_max=1e6)
+```
+
+
+1. Using the lemons dataset, plot the probability of a car being a bad buy by make.
+
+```{r}
+
+df%>%
+  mutate(Make=fct_lump_prop(Make,prop=.01,other_level = "Other"))%>%
+  group_by(Make)%>%
+  summarize(mean_isbadbuy=mean(IsBadBuy,na.rm=TRUE))%>%
+  mutate(Make=fct_reorder(Make,mean_isbadbuy))%>%
+  ggplot(aes(y=mean_isbadbuy ,x=Make) )+
+  geom_col()+
+  coord_flip()+
+  ylab("Pr(Is Bad Buy)")+
+  xlab("")
+  
+```
+
+
+2. Create a table that shows the probability of a car being a bad buy by make.
+
+```{r}
+df%>%
+  mutate(Make=fct_lump_prop(Make,prop=.01,other_level = "Other"))%>%
+  group_by(Make)%>%
+  summarize(mean_isbadbuy=mean(IsBadBuy,na.rm=TRUE))%>%
+  arrange(-mean_isbadbuy)%>%
+  mutate(mean_isbadbuy=round(mean_isbadbuy,2))%>%
+  rename(`Pr(Bad Buy)`=mean_isbadbuy)%>%
+  kable()
+```
+
+
+3. Create a heatmap of the probability of a car being a bad buy by make and vehicle age. 
+
+```{r}
+df%>%
+  mutate(Make=fct_lump_prop(Make,prop=.01,other_level = "Other"))%>%
+  group_by(Make,VehicleAge)%>%
+ summarize(mean_isbadbuy=mean(IsBadBuy,na.rm=TRUE))%>%
+  rename(`Pr(Bad Buy)`=mean_isbadbuy)%>%
+ drop_na()%>%
+ filter(VehicleAge>0)%>%  
+ggplot(
+           aes(y=as.factor(Make),
+               x=as.factor(VehicleAge),fill=`Pr(Bad Buy)`))+
+ geom_tile()+
+ scale_fill_gradient(low="white",high="red")+
+  xlab("Vehicle Age in Years")+ylab("")
+  
+```
+
+
+4. Create a plot of your choosing that shows the probability of a car being a bad buy by year and make. 
+
+```{r}
+df%>%
+  mutate(Make=fct_lump_prop(Make,prop=.01,other_level = "Other"))%>%
+  group_by(Make,VehYear)%>%
+  summarize(mean_isbadbuy=mean(IsBadBuy,na.rm=TRUE))%>%
+  mutate(Make=fct_reorder(Make,mean_isbadbuy))%>%
+  rename(`Pr(Bad Buy)`=mean_isbadbuy)%>%
+  drop_na()%>%
+  filter(VehYear!=2010)%>% 
+  ggplot(aes(x=VehYear,y=`Pr(Bad Buy)`,color=Make))+
+  geom_point()+
+  facet_wrap(~Make)+
+  theme(legend.position = "none")+xlab("")
+
+```
+
