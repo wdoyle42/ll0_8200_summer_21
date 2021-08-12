@@ -141,14 +141,14 @@ gg
 
 ## Predictive Model
 
-```{r model}
+```{r model,results='asis'}
 mod<-lm(log(grocery_food+1)~
           inc_rank+
           childage,
         data=cex
 )
 
-stargazer(mod)        
+stargazer(mod,type="html")        
 ```
 
 
