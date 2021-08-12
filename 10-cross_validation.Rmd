@@ -26,6 +26,7 @@ library(tidyverse)
 library(tidymodels)
 library(glmnet)
 library(modelr)
+library(modelsummary)
 ```
 
 Next we load the quickfacts data, which contains county-by-county information. We're going to create a simple model that predicts median home values in the county as a function of education, home ownership and income. 
@@ -201,6 +202,24 @@ lm_mc_results%>%
 ```
 
 With more resamples, we can see that the minimum rmse is still about .27 and the maximum is about .32. 
+
+
+## Last Fit
+
+If we're happy with the model at this point, we can output the result like so
+
+
+```{r,results='asis'}
+## Fit to FULL dataset
+lm_final_results<-
+  fit(lm_workflow,pd)
+
+## Extract model object
+lm_final_est<-extract_model(lm_final_results)
+
+modelsummary(lm_final_est)
+```
+
 
 ## Feature Selection
 
