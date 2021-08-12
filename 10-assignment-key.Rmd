@@ -1,0 +1,127 @@
+---
+title: "Assignment 10"
+author: "Will Doyle"
+output: html_document
+---
+
+Complete the following steps:
+
+1. Using the counties dataset (`pd.Rdata`), create a model that predicts median household income (`median_hh_inc`).
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(glmnet)
+```
+
+```{r}
+load("pd.RData")
+
+pd<-pd%>%
+  select(median_home_val,median_hh_inc,coll_grad_pc,homeown_rate,per_capita_inc,pop65p,retail_percap)%>%
+  mutate_all(.funs=list(as.numeric))
+```
+
+```{r}
+pd%>%
+  ggplot(aes(x=median_hh_inc))+
+  geom_density()
+
+```
+
+```{r}
+lm_fit <- 
+  linear_reg() %>% 
+  set_engine("lm")
+```
+
+```{r}
+lm_formula<-as.formula("median_hh_inc~.")
+```
+
+```{r}
+lm_rec <- recipe(lm_formula, data = pd) %>%
+  step_log(all_outcomes(),offset=1)%>%
+  step_zv(all_numeric()) %>% # drop any zero variance
+  step_naomit(all_predictors())
+```
+
+```{r}
+lm_workflow<-workflow()%>%
+  add_recipe(lm_rec)%>%
+  add_model(lm_fit)
+```
+
+
+2. Provide the results of a 10-fold cross validation of your model. Describe what the results mean in a few clear sentences. Plot the results. 
+
+```{r}
+pd_kfold_rs<-vfold_cv(pd,v=10)
+```
+
+```{r}
+lm_mc_results<-
+  fit_resamples(
+    lm_workflow,
+    pd_kfold_rs, ##resampling plan
+    control=control_resamples(save_pred = TRUE)
+  )
+```
+
+
+```{r}
+lm_mc_results%>%
+  collect_metrics()
+```
+
+```{r}
+lm_mc_results%>%
+  unnest(.metrics)%>%
+  filter(.metric=="rmse")%>%
+  ggplot(aes(x=.estimate))+
+  geom_density()
+```
+
+
+3. Provide the results of a 1000 repetition monte carlo validation with 10 percent (`prop=.9`) leave out rate for the random partition. Describe what the results mean in a few clear sentences. Plot the results. 
+
+```{r}
+pd_mc_rs<-mc_cv(pd,times = 100,prop = .9) ##1000 is usual minimum
+```
+
+
+## Fit Monte Carlo Resampling
+```{r}
+lm_mc_results<-
+  fit_resamples(
+    lm_workflow,
+    pd_mc_rs, ##resampling plan
+    control=control_resamples(save_pred = TRUE)
+  )
+```
+
+
+
+```{r}
+lm_mc_results%>%
+  collect_metrics()
+```
+
+```{r}
+lm_mc_results%>%
+  unnest(.metrics)%>%
+  filter(.metric=="rmse")%>%
+  ggplot(aes(x=.estimate))+
+  geom_density()
+```
+
+```{r}
+df_split<-initial_split(df,prop=.8)
+```
+
+
+```{r}
+last<-lm_workflow%>%last_fit()
+```
+
+
+
