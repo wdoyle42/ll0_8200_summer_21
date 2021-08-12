@@ -99,6 +99,12 @@ The average karma is `r prettyNum(karma_mean[1],big.mark=",",digits=0)`
 
 ## Plot distribution of AUC
 
+Bulleted list
+
+1. Element 1
+1. Element 2 
+1. Element 3
+
 Above we plotted the distribution of rmse for the repeated fitting of the linear model. As this is a model for classification, we'll use the AUC instead.
 
 ```{r}

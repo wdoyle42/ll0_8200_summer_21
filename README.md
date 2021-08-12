@@ -5,7 +5,7 @@ Please find the syllabus (updated frequently) [at this link](https://raw.githack
 ### Code for Each Topic 
 
 *Note: When new async videos are available, they will be linked under the appropriate week.*
-
+x
 *To access lecture notes and/or data sets use ctrl+click on a mac or right click on a pc, then click "save link as" and save to the class directory on your computer.*
 
 #### 1\. Welcome to Data Science: Tools of the Trade
@@ -196,6 +196,9 @@ Watch Lecture 10.6 on LMS
 
 
 [Assignment 10, Due Midnight August 10](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/10-assignment.Rmd)
+
+[Assignment 9 Key](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/10-assignment-key.Rmd)
+
 
 ### Final Project Information
 

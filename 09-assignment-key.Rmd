@@ -53,19 +53,21 @@ df%>%
 3. Create a heatmap of the probability of a car being a bad buy by make and vehicle age. 
 
 ```{r}
-df%>%
-  mutate(Make=fct_lump_prop(Make,prop=.01,other_level = "Other"))%>%
-  group_by(Make,VehicleAge)%>%
- summarize(mean_isbadbuy=mean(IsBadBuy,na.rm=TRUE))%>%
-  rename(`Pr(Bad Buy)`=mean_isbadbuy)%>%
- drop_na()%>%
- filter(VehicleAge>0)%>%  
-ggplot(
-           aes(y=as.factor(Make),
-               x=as.factor(VehicleAge),fill=`Pr(Bad Buy)`))+
- geom_tile()+
- scale_fill_gradient(low="white",high="red")+
-  xlab("Vehicle Age in Years")+ylab("")
+df %>%
+  mutate(Make = fct_lump_prop(Make, prop = .01, other_level = "Other"))%>%
+  group_by(Make, VehicleAge) %>%
+  summarize(mean_isbadbuy = mean(IsBadBuy, na.rm = TRUE)) %>%
+  rename(`Pr(Bad Buy)` = mean_isbadbuy) %>%
+  drop_na() %>%
+  filter(VehicleAge > 0) %>%
+  ggplot(aes(
+    y = as.factor(Make),
+    x = as.factor(VehicleAge),
+    fill = `Pr(Bad Buy)`
+  )) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "red") +
+  xlab("Vehicle Age in Years") + ylab("")
   
 ```
 
