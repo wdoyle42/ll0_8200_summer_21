@@ -129,7 +129,9 @@ Watch the LMS lectures for section 9 for this week.
 #### 10\. Cross Validation  
 [Lecture Notes](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/10-cross_validation.Rmd) 
 
-[Lecture Notes, minimalist version](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/10-cv-justwhatyouneed.Rmd)
+[Lecture Notes, minimalist version, linear regression](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/10-cv-justwhatyouneed.Rmd)
+
+[Lecture Notes, minimalist version, logistic regression](https://github.com/wdoyle42/ll0_8200_summer_21/raw/main/10-cv-logistic-minimal.Rmd)
 
 Watch Lecture 10. 1 on LMS
 
